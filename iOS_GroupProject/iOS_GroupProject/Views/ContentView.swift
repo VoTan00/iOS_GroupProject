@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import FirebaseStorage
 
 struct ContentView: View {
     @State private var restaurant: String = ""
+    @State var showImagePicker = false
+    @State var image: UIImage?
+    @State var selectedImage: UIImage?
         
         // our movie view model object
         @StateObject private var restaurantViewModel = RestaurantViewModel()
@@ -20,6 +24,7 @@ struct ContentView: View {
                     .padding()
                     .border(.black)
                     .frame(width: 230, height: 40, alignment: .leading)
+                    .padding()
                     .padding()
 
 
@@ -46,9 +51,64 @@ struct ContentView: View {
                     }
                     .navigationTitle("All Movies")
                 }
+                
+                Button {
+                    showImagePicker.toggle()
+                } label: {
+                    
+                    VStack{
+                        if let image = self.image {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 64, height: 64)
+                                .cornerRadius(32)
+                        } else {
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 64))
+                                .padding()
+                        }
+                            
+                    }.overlay(RoundedRectangle(cornerRadius: 64)
+                        .stroke(Color.black, lineWidth: 3))
+                    
+
+                }
+                
+                if image != nil {
+                    Button{
+                        uploadImg()
+                    } label: {
+                        Text("Upload")
+                    }
+                }
+            }.fullScreenCover(isPresented: $showImagePicker, onDismiss: nil){
+                ImagePicker(image: $image)
             }
 
         }
+    
+    func uploadImg() {
+        guard image != nil else {
+            return
+        }
+        
+        let storageRef = Storage.storage().reference()
+        
+        let imageData = image!.jpegData(compressionQuality: 0.8)
+        
+        guard imageData != nil else {
+            return
+        }
+        
+        let fileRef = storageRef.child("images/\(UUID().uuidString).jpg")
+        
+        let uploadTask = fileRef.putData(imageData!, metadata: nil) {metadata, error in
+            if error == nil && metadata != nil {
+                
+            }
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -56,3 +116,6 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+

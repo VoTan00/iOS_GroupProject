@@ -44,8 +44,8 @@ class RestaurantViewModel: ObservableObject {
     func addNewRestaurant(curName: String, curAddress: String, curHours: String, curPhone: String) {
             // add a new restaurant to "restaurants" document
             db.collection("restaurants").addDocument(data: ["name": curName, "address": curAddress, "hours": curHours, "phone": curPhone])
-            
-
     }
+    
+    
 
 }
