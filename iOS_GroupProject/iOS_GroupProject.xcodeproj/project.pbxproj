@@ -22,6 +22,9 @@
 		A33B63062AAB67E2007A8753 /* iOS_GroupProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B63052AAB67E2007A8753 /* iOS_GroupProjectApp.swift */; };
 		A33B630A2AAB67E5007A8753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A33B63092AAB67E5007A8753 /* Assets.xcassets */; };
 		A33B630D2AAB67E5007A8753 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A33B630C2AAB67E5007A8753 /* Preview Assets.xcassets */; };
+		A3A60F142AB6163300BD8083 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A60F132AB6163200BD8083 /* UserView.swift */; };
+		A3A60F172AB6164600BD8083 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A60F152AB6164600BD8083 /* SignUpView.swift */; };
+		A3A60F182AB6164600BD8083 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A60F162AB6164600BD8083 /* LogInView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,9 @@
 		A33B63052AAB67E2007A8753 /* iOS_GroupProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_GroupProjectApp.swift; sourceTree = "<group>"; };
 		A33B63092AAB67E5007A8753 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A33B630C2AAB67E5007A8753 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A3A60F132AB6163200BD8083 /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		A3A60F152AB6164600BD8083 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		A3A60F162AB6164600BD8083 /* LogInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +71,8 @@
 		18211F002AB4495400004F3E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A3A60F162AB6164600BD8083 /* LogInView.swift */,
+				A3A60F152AB6164600BD8083 /* SignUpView.swift */,
 				18211F0D2AB4737800004F3E /* ContentView.swift */,
 			);
 			path = Views;
@@ -82,6 +90,7 @@
 		18211F082AB466CD00004F3E /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
+				A3A60F132AB6163200BD8083 /* UserView.swift */,
 				18211F092AB466E800004F3E /* ImagePicker.swift */,
 			);
 			path = ViewComponents;
@@ -212,8 +221,11 @@
 				18211F0E2AB4737800004F3E /* ContentView.swift in Sources */,
 				18211F072AB454B900004F3E /* RestaurantViewModel.swift in Sources */,
 				18211F0A2AB466E800004F3E /* ImagePicker.swift in Sources */,
+				A3A60F172AB6164600BD8083 /* SignUpView.swift in Sources */,
 				A33B63062AAB67E2007A8753 /* iOS_GroupProjectApp.swift in Sources */,
+				A3A60F182AB6164600BD8083 /* LogInView.swift in Sources */,
 				18211F032AB4523000004F3E /* Restaurant.swift in Sources */,
+				A3A60F142AB6163300BD8083 /* UserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

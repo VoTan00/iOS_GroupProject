@@ -38,15 +38,15 @@ struct SignUpView: View {
                         }
                         VStack (spacing: 20){
                             VStack (spacing: 20){
-                                CustomTextField(placeHolder: "Name", imageName: "person", bColor: "textColor2", tOpacity: 0.8, value: $name)
-                                CustomTextField(placeHolder: "Email", imageName: "envelope", bColor: "textColor2", tOpacity: 0.8, value: $email)
-                                CustomTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor2", tOpacity: 0.8, value: $password)
-                                CustomTextField(placeHolder: "Confirm Password", imageName: "lock", bColor: "textColor2", tOpacity: 0.8, value: $cpassword)
+                                UserTextField(placeHolder: "Name", imageName: "person", bColor: "textColor2", tOpacity: 0.8, value: $name)
+                                UserTextField(placeHolder: "Email", imageName: "envelope", bColor: "textColor2", tOpacity: 0.8, value: $email)
+                                UserTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor2", tOpacity: 0.8, value: $password)
+                                UserTextField(placeHolder: "Confirm Password", imageName: "lock", bColor: "textColor2", tOpacity: 0.8, value: $cpassword)
                             }
                             
                             VStack (alignment: .trailing){
                                 Button(action: {}, label: {
-                                    CustomButton(title: "SIGN UP", bgColor: "Color2", textColor: "textColor1")
+                                    UserButton(title: "SIGN UP", bgColor: "Color2", textColor: "textColor1")
                                 })
                             }.padding(.horizontal, 20)
                             HStack {

@@ -41,8 +41,8 @@ struct LogInView: View {
                         }
                         VStack (spacing: 30){
                             VStack (spacing: 30){
-                                CustomTextField(placeHolder: "Email", imageName: "envelope", bColor: "textColor1", tOpacity: 0.6, value: $email)
-                                CustomTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor1", tOpacity: 0.6, value: $password)
+                                UserTextField(placeHolder: "Email", imageName: "envelope", bColor: "textColor1", tOpacity: 0.6, value: $email)
+                                UserTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor1", tOpacity: 0.6, value: $password)
                             }
                             
                             VStack (alignment: .trailing){
@@ -52,7 +52,7 @@ struct LogInView: View {
                                     Button(action: {
                                         self.isLinkActive = true
                                     }, label: {
-                                        CustomButton(title: "SIGN IN", bgColor: "Color1",textColor: "textColor2")
+                                        UserButton(title: "SIGN IN", bgColor: "Color1",textColor: "textColor2")
                                     })
                                 }
                             }.padding(.horizontal, 20)

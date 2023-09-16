@@ -1,5 +1,5 @@
 //
-//  CustomView.swift
+//  UserView.swift
 //  User Editor
 //
 //  Created by Tan on 15/09/2023.
@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct CustomView: View {
+struct UserView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct CustomView_Previews: PreviewProvider {
+struct UserView_Previews: PreviewProvider {
     static var previews: some View {
         TopBarView()
     }
 }
 
-struct CustomTextField: View {
+struct UserTextField: View {
     var placeHolder : String
     var imageName: String
     var bColor: String
@@ -75,7 +75,7 @@ struct CustomTextField: View {
     }
 }
 
-struct CustomButton: View {
+struct UserButton: View {
     var title: String
     var bgColor: String
     var textColor: String
