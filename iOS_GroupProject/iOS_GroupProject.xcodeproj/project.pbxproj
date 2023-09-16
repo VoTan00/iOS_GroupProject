@@ -25,6 +25,8 @@
 		A3A60F142AB6163300BD8083 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A60F132AB6163200BD8083 /* UserView.swift */; };
 		A3A60F172AB6164600BD8083 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A60F152AB6164600BD8083 /* SignUpView.swift */; };
 		A3A60F182AB6164600BD8083 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A60F162AB6164600BD8083 /* LogInView.swift */; };
+		A3A60F1D2AB62A7200BD8083 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A60F1C2AB62A7200BD8083 /* ImageView.swift */; };
+		A3A60F1F2AB62A8400BD8083 /* RestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A60F1E2AB62A8400BD8083 /* RestaurantView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		A3A60F132AB6163200BD8083 /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		A3A60F152AB6164600BD8083 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		A3A60F162AB6164600BD8083 /* LogInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		A3A60F1C2AB62A7200BD8083 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		A3A60F1E2AB62A8400BD8083 /* RestaurantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,7 @@
 		18211F002AB4495400004F3E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A3A60F1B2AB62A5400BD8083 /* TestViews */,
 				A3A60F162AB6164600BD8083 /* LogInView.swift */,
 				A3A60F152AB6164600BD8083 /* SignUpView.swift */,
 				18211F0D2AB4737800004F3E /* ContentView.swift */,
@@ -133,6 +138,15 @@
 				A33B630C2AAB67E5007A8753 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A3A60F1B2AB62A5400BD8083 /* TestViews */ = {
+			isa = PBXGroup;
+			children = (
+				A3A60F1C2AB62A7200BD8083 /* ImageView.swift */,
+				A3A60F1E2AB62A8400BD8083 /* RestaurantView.swift */,
+			);
+			path = TestViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,7 +231,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3A60F1D2AB62A7200BD8083 /* ImageView.swift in Sources */,
 				18211F052AB4538200004F3E /* Review.swift in Sources */,
+				A3A60F1F2AB62A8400BD8083 /* RestaurantView.swift in Sources */,
 				18211F0E2AB4737800004F3E /* ContentView.swift in Sources */,
 				18211F072AB454B900004F3E /* RestaurantViewModel.swift in Sources */,
 				18211F0A2AB466E800004F3E /* ImagePicker.swift in Sources */,
