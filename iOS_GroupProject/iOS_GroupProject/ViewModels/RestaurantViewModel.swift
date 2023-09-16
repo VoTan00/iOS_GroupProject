@@ -20,14 +20,14 @@ class RestaurantViewModel: ObservableObject {
     
     func getAllRestaurantData() {
         
-        // Retrieve the "movies" document
+        // Retrieve the "restaurants" document
         db.collection("restaurants").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
             }
             
-            // Loop to get the "name" field inside each movie document
+            // Loop to get the "name" field inside each restaurant document
             self.restaurants = documents.map { (queryDocumentSnapshot) -> Restaurant in
                 let data = queryDocumentSnapshot.data()
                 let name = data["name"] as? String ?? ""

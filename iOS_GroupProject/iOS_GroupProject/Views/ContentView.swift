@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseStorage
+import FirebaseFirestore
 
 struct ContentView: View {
     @State private var restaurant: String = ""
@@ -14,13 +15,13 @@ struct ContentView: View {
     @State var image: UIImage?
     @State var selectedImage: UIImage?
         
-        // our movie view model object
+        // our restaurant view model object
         @StateObject private var restaurantViewModel = RestaurantViewModel()
 
         var body: some View {
             VStack{
-                // input field for a movie name
-                TextField("Enter a movie name...", text: $restaurant)
+                // input field for a restaurant name
+                TextField("Enter a restaurant name...", text: $restaurant)
                     .padding()
                     .border(.black)
                     .frame(width: 230, height: 40, alignment: .leading)
@@ -29,17 +30,17 @@ struct ContentView: View {
 
 
 
-                // button to add a movie
+                // button to add a restaurant
                 Button {
                     self.restaurantViewModel.addNewRestaurant(curName: restaurant, curAddress: "test 1", curHours: "test 1", curPhone: "test 1")
                 } label: {
-                    Text("Add Movies")
+                    Text("Add restaurants")
                     .padding()
                     .foregroundColor(.white)
                     .background(Color.black)
                 }
                 
-                // List of all movies name fetched from firestore
+                // List of all restaurants name fetched from firestore
                 NavigationView {
                     List {
                         ForEach(restaurantViewModel.restaurants, id: \.id) { restaurant in
@@ -49,7 +50,7 @@ struct ContentView: View {
                             Text(restaurant.phone ?? "")
                         }
                     }
-                    .navigationTitle("All Movies")
+                    .navigationTitle("All restaurants")
                 }
                 
                 Button {
@@ -93,19 +94,26 @@ struct ContentView: View {
             return
         }
         
+        // create storage reference
         let storageRef = Storage.storage().reference()
         
+        // turn img into data
         let imageData = image!.jpegData(compressionQuality: 0.8)
         
         guard imageData != nil else {
             return
         }
         
-        let fileRef = storageRef.child("images/\(UUID().uuidString).jpg")
+        // specify the file path and name
+        let path = "images/\(UUID().uuidString).jpg"
+        let fileRef = storageRef.child(path)
         
+        // upload data
         let uploadTask = fileRef.putData(imageData!, metadata: nil) {metadata, error in
             if error == nil && metadata != nil {
                 
+                let db = Firestore.firestore()
+                db.collection("images").document().setData(["url":path])
             }
         }
     }
