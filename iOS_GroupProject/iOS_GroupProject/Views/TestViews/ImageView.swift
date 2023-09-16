@@ -13,9 +13,11 @@ struct ImageView: View {
     @State var showImagePicker = false
     @State var image: UIImage?
     @State var selectedImage: UIImage?
+    @State var retrievedImages = [UIImage]()
     
     var body: some View {
         VStack{
+            // MARK: CHOOSE IMAGE BUTTON
             Button {
                 showImagePicker.toggle()
             } label: {
@@ -39,19 +41,38 @@ struct ImageView: View {
                 
             }
             
+            // MARK: UPLOAD IMAGE BUTTON
             if image != nil {
                 Button{
-                    uploadImg()
+                    uploadImage()
                 } label: {
-                    Text("Upload")
+                    Text("Upload to cloud")
                 }
             }
+            
+            Divider()
+            
+            // MARK: DISPLAY IMAGES
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(retrievedImages, id: \.self) { image in
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 200, height: 200)
+                    }
+                }
+            }
+            
         }.fullScreenCover(isPresented: $showImagePicker, onDismiss: nil){
             ImagePicker(image: $image)
         }
+        .onAppear{
+            retrieveImages()
+        }
     }
     
-    func uploadImg() {
+    // MARK: UPLOAD IMAGE FUNC
+    func uploadImage() {
         guard image != nil else {
             return
         }
@@ -59,7 +80,7 @@ struct ImageView: View {
         // create storage reference
         let storageRef = Storage.storage().reference()
         
-        // turn img into data
+        // turn image into data
         let imageData = image!.jpegData(compressionQuality: 0.8)
         
         guard imageData != nil else {
@@ -71,21 +92,63 @@ struct ImageView: View {
         let fileRef = storageRef.child(path)
         
         // upload data
-        let uploadTask = fileRef.putData(imageData!, metadata: nil) {metadata, error in
+        fileRef.putData(imageData!, metadata: nil) {metadata, error in
             if error == nil && metadata != nil {
                 
                 let db = Firestore.firestore()
-                db.collection("images").document().setData(["url":path])
+                db.collection("images").document().setData(["url":path]) { error in
+                    if error == nil {
+                        DispatchQueue.main.async {
+                            // add uploaded images to the list of images for display
+                            self.retrievedImages.append(self.image!)
+                        }
+                    }
+                }
             }
         }
     }
     
-    func retrieveImgs() {
+    // MARK: RETRIEVE IMAGES FUNC
+    func retrieveImages() {
         // get data from DB
+        let db = Firestore.firestore()
         
-        // get img data in storage for each img ref
+        db.collection("images").getDocuments { snapshot, error in
+            
+            if error == nil && snapshot != nil {
+                
+                var paths = [String]()
+                
+                for doc in snapshot!.documents {
+                    // extract the file path
+                    paths.append(doc["url"] as! String)
+                }
+                
+                // fetch data from storage
+                for path in paths {
+                    let storageRef = Storage.storage().reference()
+                    
+                    let  fileRef = storageRef.child(path)
+                    
+                    fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                        
+                        if error == nil && data != nil {
+                            
+                            if let image = UIImage(data: data!) {
+                                DispatchQueue.main.async {
+                                    retrievedImages.append(image)
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
         
-        // display img
+        // get image data in storage for each image ref
+        
+        // display image
         
     }
 }
