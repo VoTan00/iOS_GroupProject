@@ -19,6 +19,9 @@
 		18211F072AB454B900004F3E /* RestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18211F062AB454B900004F3E /* RestaurantViewModel.swift */; };
 		18211F0A2AB466E800004F3E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18211F092AB466E800004F3E /* ImagePicker.swift */; };
 		18211F0E2AB4737800004F3E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18211F0D2AB4737800004F3E /* ContentView.swift */; };
+		64A137DE2AB8398800D798F4 /* RatingStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A137DB2AB8398800D798F4 /* RatingStarView.swift */; };
+		64A137DF2AB8398800D798F4 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A137DC2AB8398800D798F4 /* ListView.swift */; };
+		64A137E02AB8398800D798F4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A137DD2AB8398800D798F4 /* MainView.swift */; };
 		64B09E742AB6332400C99904 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B09E722AB6332400C99904 /* MapView.swift */; };
 		64B09E752AB6332400C99904 /* RestaurantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B09E732AB6332400C99904 /* RestaurantDetailView.swift */; };
 		A33B63062AAB67E2007A8753 /* iOS_GroupProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B63052AAB67E2007A8753 /* iOS_GroupProjectApp.swift */; };
@@ -42,6 +45,9 @@
 		18211F062AB454B900004F3E /* RestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewModel.swift; sourceTree = "<group>"; };
 		18211F092AB466E800004F3E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		18211F0D2AB4737800004F3E /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		64A137DB2AB8398800D798F4 /* RatingStarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingStarView.swift; path = "../../../../../iOS_GroupProject-main/iOS_GroupProject/iOS_GroupProject/Views/RatingStarView.swift"; sourceTree = "<group>"; };
+		64A137DC2AB8398800D798F4 /* ListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListView.swift; path = "../../../../../iOS_GroupProject-main/iOS_GroupProject/iOS_GroupProject/Views/ListView.swift"; sourceTree = "<group>"; };
+		64A137DD2AB8398800D798F4 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainView.swift; path = "../../../../../iOS_GroupProject-main/iOS_GroupProject/iOS_GroupProject/Views/MainView.swift"; sourceTree = "<group>"; };
 		64B09E722AB6332400C99904 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		64B09E732AB6332400C99904 /* RestaurantDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailView.swift; sourceTree = "<group>"; };
 		A33B63022AAB67E2007A8753 /* iOS_GroupProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_GroupProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +93,9 @@
 		18211F002AB4495400004F3E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				64A137DC2AB8398800D798F4 /* ListView.swift */,
+				64A137DD2AB8398800D798F4 /* MainView.swift */,
+				64A137DB2AB8398800D798F4 /* RatingStarView.swift */,
 				64B09E722AB6332400C99904 /* MapView.swift */,
 				64B09E732AB6332400C99904 /* RestaurantDetailView.swift */,
 				A3A60F1B2AB62A5400BD8083 /* TestViews */,
@@ -250,8 +259,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3A60F1D2AB62A7200BD8083 /* ImageView.swift in Sources */,
+				64A137DF2AB8398800D798F4 /* ListView.swift in Sources */,
 				64B09E742AB6332400C99904 /* MapView.swift in Sources */,
 				18211F052AB4538200004F3E /* Review.swift in Sources */,
+				64A137DE2AB8398800D798F4 /* RatingStarView.swift in Sources */,
 				64B09E752AB6332400C99904 /* RestaurantDetailView.swift in Sources */,
 				A3A60F1F2AB62A8400BD8083 /* RestaurantView.swift in Sources */,
 				18211F0E2AB4737800004F3E /* ContentView.swift in Sources */,
@@ -260,6 +271,7 @@
 				AE0641452AB6D09900079E23 /* CategoryView.swift in Sources */,
 				A3A60F172AB6164600BD8083 /* SignUpView.swift in Sources */,
 				AE0641472AB6D0D600079E23 /* FilterOptionView.swift in Sources */,
+				64A137E02AB8398800D798F4 /* MainView.swift in Sources */,
 				A33B63062AAB67E2007A8753 /* iOS_GroupProjectApp.swift in Sources */,
 				AE0641492AB6D0DD00079E23 /* SearchView.swift in Sources */,
 				A3A60F182AB6164600BD8083 /* LogInView.swift in Sources */,
