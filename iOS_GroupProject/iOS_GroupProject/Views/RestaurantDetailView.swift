@@ -65,8 +65,8 @@ struct RestaurantDetailView: View{
                 }
             
             RatingStarsView(rating: $rating)
-            Text(restaurant.reviews?.content ?? "")
-                .padding()
+//            Text(restaurant.reviews?.content ?? "")
+//                .padding()
             
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
