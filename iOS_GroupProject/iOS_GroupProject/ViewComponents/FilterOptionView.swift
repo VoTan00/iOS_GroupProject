@@ -9,41 +9,84 @@ import SwiftUI
 
 struct FilterOptionView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var selectedButton = false
+    @ObservedObject var restaurantViewModel : RestaurantViewModel
+    @State private var selectedButton = "none"
     var body: some View {
         ZStack {
             Color("Color2")
                 .ignoresSafeArea()
             
             VStack(alignment: .leading) {
-                Text("Categories")
+//                Text("Categories")
+//                    .font(.title)
+//                    .fontWeight(.bold)
+//
+//                HStack (alignment: .top) {
+//                    Spacer()
+//
+//                    Button(action: {selectedButton.toggle()}) {
+//                        Text("Break fast")
+//                            .font(.title3)
+//                            .fontWeight(.semibold)
+//                            .padding()
+//                            .padding(.horizontal, 6)
+//                            .foregroundColor(selectedButton ? Color.white : Color("Color1"))
+//                            .background(selectedButton ? Color("Color1") : Color.white)
+//                            .cornerRadius(10.0)
+//                    }
+//
+//                    Spacer()
+//
+//                    Button(action: {selectedButton.toggle()}) {
+//                        Text("Diner")
+//                            .font(.title3)
+//                            .fontWeight(.semibold)
+//                            .padding()
+//                            .padding(.horizontal, 6)
+//                            .foregroundColor(selectedButton ? Color.white : Color("Color1"))
+//                            .background(selectedButton ? Color("Color1") : Color.white)
+//                            .cornerRadius(10.0)
+//                    }
+//
+//                    Spacer()
+//                }
+//                .padding(.vertical)
+                
+                Text("Sort By")
                     .font(.title)
                     .fontWeight(.bold)
                 
                 HStack (alignment: .top) {
                     Spacer()
                     
-                    Button(action: {selectedButton.toggle()}) {
-                        Text("Break fast")
+                    Button(action: {
+                        restaurantViewModel.selectedSort = "Newest"
+                        restaurantViewModel.filteredArray = restaurantViewModel.getSortedRestaurants(selectedSort: restaurantViewModel.selectedSort)
+                    }) {
+                        Text("Newest")
                             .font(.title3)
                             .fontWeight(.semibold)
                             .padding()
                             .padding(.horizontal, 6)
-                            .foregroundColor(selectedButton ? Color.white : Color("Color1"))
-                            .background(selectedButton ? Color("Color1") : Color.white)
+                            .foregroundColor(restaurantViewModel.selectedSort == "Newest" ? Color.white : Color("Color1"))
+                            .background(restaurantViewModel.selectedSort == "Newest" ? Color("Color1") : Color.white)
                             .cornerRadius(10.0)
                     }
+                        
                     
                     Spacer()
                     
-                    Button(action: {selectedButton.toggle()}) {
-                        Text("Diner")
+                    Button(action: {
+                        restaurantViewModel.selectedSort = "Oldest"
+                        restaurantViewModel.filteredArray = restaurantViewModel.getSortedRestaurants(selectedSort: restaurantViewModel.selectedSort)
+                    }) {
+                        Text("Oldest")
                             .font(.title3)
                             .fontWeight(.semibold)
                             .padding()
                             .padding(.horizontal, 6)
-                            .foregroundColor(selectedButton ? Color.white : Color("Color1"))
-                            .background(selectedButton ? Color("Color1") : Color.white)
+                            .foregroundColor(restaurantViewModel.selectedSort == "Oldest" ? Color.white : Color("Color1"))
+                            .background(restaurantViewModel.selectedSort == "Oldest" ? Color("Color1") : Color.white)
                             .cornerRadius(10.0)
                     }
                     
@@ -51,35 +94,37 @@ struct FilterOptionView: View {
                 }
                 .padding(.vertical)
                 
-                Text("Filter By")
-                    .font(.title)
-                    .fontWeight(.bold)
-                
                 HStack (alignment: .top) {
                     Spacer()
                     
-                    Button(action: {selectedButton.toggle()}) {
-                        Text("Favourite")
+                    Button(action: {
+                        restaurantViewModel.selectedSort = "Least Ratings"
+                        restaurantViewModel.filteredArray = restaurantViewModel.getSortedRestaurants(selectedSort: restaurantViewModel.selectedSort)
+                    }) {
+                        Text("Least Ratings")
                             .font(.title3)
                             .fontWeight(.semibold)
                             .padding()
                             .padding(.horizontal, 6)
-                            .foregroundColor(selectedButton ? Color.white : Color("Color1"))
-                            .background(selectedButton ? Color("Color1") : Color.white)
+                            .foregroundColor(restaurantViewModel.selectedSort == "Least Ratings" ? Color.white : Color("Color1"))
+                            .background(restaurantViewModel.selectedSort == "Least Ratings" ? Color("Color1") : Color.white)
                             .cornerRadius(10.0)
                     }
                         
                     
                     Spacer()
                     
-                    Button(action: {selectedButton.toggle()}) {
-                        Text("Most Popular")
+                    Button(action: {
+                        restaurantViewModel.selectedSort = "Most Ratings"
+                        restaurantViewModel.filteredArray = restaurantViewModel.getSortedRestaurants(selectedSort: restaurantViewModel.selectedSort)
+                    }) {
+                        Text("Most Ratings")
                             .font(.title3)
                             .fontWeight(.semibold)
                             .padding()
                             .padding(.horizontal, 6)
-                            .foregroundColor(selectedButton ? Color.white : Color("Color1"))
-                            .background(selectedButton ? Color("Color1") : Color.white)
+                            .foregroundColor(restaurantViewModel.selectedSort == "Most Ratings" ? Color.white : Color("Color1"))
+                            .background(restaurantViewModel.selectedSort == "Most Ratings" ? Color("Color1") : Color.white)
                             .cornerRadius(10.0)
                     }
                     
@@ -93,24 +138,31 @@ struct FilterOptionView: View {
             
             HStack {
                 Spacer()
-                Text("Reset")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color.white)
-                    .padding()
-                    .padding(.horizontal, 8)
-                    .background(Color("Color1"))
-                    .cornerRadius(10.0)
+                Button {
+                    restaurantViewModel.selectedSort = "none"
+                } label: {
+                    Text("Reset")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color.white)
+                        .padding()
+                        .padding(.horizontal, 8)
+                        .background(Color("Color1"))
+                        .cornerRadius(10.0)
+                }
                 
-                Text("Apply")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color.white)
-                    .padding()
-                    .padding(.horizontal, 8)
-                    .background(Color("Color1"))
-                    .cornerRadius(10.0)
-                
+//                Button {
+//                    restaurantViewModel.filteredArray = restaurantViewModel.getSortedRestaurants(selectedSort: restaurantViewModel.selectedSort)
+//                } label: {
+//                    Text("Apply")
+//                        .font(.title3)
+//                        .fontWeight(.semibold)
+//                        .foregroundColor(Color.white)
+//                        .padding()
+//                        .padding(.horizontal, 8)
+//                        .background(Color("Color1"))
+//                        .cornerRadius(10.0)
+//                }
             }
             .padding()
             .padding(.horizontal)
@@ -125,7 +177,9 @@ struct FilterOptionView: View {
 
 struct FilterOptionView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterOptionView()
+        let restaurantViewModel = RestaurantViewModel()
+        
+        FilterOptionView(restaurantViewModel: restaurantViewModel)
     }
 }
 

@@ -12,13 +12,14 @@ struct HomeView: View {
     
     @State private var search: String = ""
     @State private var selectedIndex: Int = 1
+    @State private var selectedCate: String = "All"
     private let categories = ["All", "Chinese", "Mexican", "Vietnamese", "Italian", "French", "Thai", "Indian", "International", "Japanese", "Korean"]
     var sorts = ["Worst Rate", "Best Rate"]
     var column = [GridItem(.adaptive(minimum: 160), spacing: 20)]
     
-    private var res: [Restaurant] {
-        restaurantViewModel.filteredArray.isEmpty ? restaurantViewModel.filteredArray : restaurantViewModel.filteredArray
-    }
+//    private var res: [Restaurant] {
+//        restaurantViewModel.filteredArray.isEmpty ? restaurantViewModel.filteredArray : restaurantViewModel.filteredArray
+//    }
     
     var body: some View {
         NavigationView {
@@ -38,7 +39,7 @@ struct HomeView: View {
                             .foregroundColor(Color("Color4"))
                         
                         // MARK: SEARCH VIEW
-                        SearchView(search: $search)
+                        SearchView(restaurantViewModel: restaurantViewModel, search: $search)
                             .onChange(of: search, perform: restaurantViewModel.performSearch)
                         
                         ScrollView (.horizontal, showsIndicators: false) {
@@ -47,7 +48,7 @@ struct HomeView: View {
                                     Button(action: {
                                         selectedIndex = i
                                         restaurantViewModel.selectedCate = categories[i]
-                                        restaurantViewModel.updateFilterRestaurants()
+                                        restaurantViewModel.filteredArray = restaurantViewModel.getFilteredRestaurants(selectedCategory: restaurantViewModel.selectedCate)
                                     }) {
                                         CategoryView(isActive: selectedIndex == i, text: categories[i])
                                     }
@@ -56,9 +57,8 @@ struct HomeView: View {
                                     selectedIndex = 0
                                     restaurantViewModel.selectedCate = categories[0]
                                 }
-                                .onChange(of: search) { newValue in
-                                    selectedIndex = 0
-                                    restaurantViewModel.selectedCate = categories[0]
+                                .onChange(of: restaurantViewModel.selectedCate) { newValue in
+                                    search = ""
                                 }
                             }
                             .padding()
@@ -82,8 +82,8 @@ struct HomeView: View {
                         
                         ScrollView{
                             LazyVGrid(columns: column, spacing: 20) {
-                                ForEach(res, id: \.id) {restaurant in
-                                    NavigationLink(destination: RestaurantDetailView(restaurant: Restaurant(ratings: 4))) {
+                                ForEach(restaurantViewModel.filteredArray, id: \.id) {restaurant in
+                                    NavigationLink(destination: RestaurantDetailView(restaurant: Restaurant())) {
                                         RestaurantCardView(restaurant: restaurant)
                                     }
                                     .buttonStyle(.plain)
@@ -96,6 +96,7 @@ struct HomeView: View {
                 }
             }
         }
+        .onAppear{restaurantViewModel.filteredArray = restaurantViewModel.restaurants}
     }
 }
 

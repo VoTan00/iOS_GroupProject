@@ -18,7 +18,7 @@ struct CategoryView: View {
                 .fontWeight(.medium)
                 .foregroundColor(isActive ? Color("Color1") : Color.black.opacity(0.5))
             if (isActive) { Color("Color1")
-                .frame(width: 30, height: 2)
+                .frame(width: 20, height: 2)
                 .clipShape(Capsule())
             }
         }

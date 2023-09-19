@@ -19,6 +19,12 @@ class RestaurantViewModel: ObservableObject {
     
     @Published var newestRes = [Restaurant]()
     @Published var olderRes = [Restaurant]()
+    @Published var leastRate = [Restaurant]()
+    @Published var mostRate = [Restaurant]()
+    
+    @Published var selectedCate = "All"
+    @Published var selectedSort = "None"
+    @Published var filteredArray = [Restaurant]()
     
     
     private var db = Firestore.firestore()
@@ -63,7 +69,8 @@ class RestaurantViewModel: ObservableObject {
             
             self.newestRes = self.restaurants.sorted {$0.date > $1.date}
             self.olderRes = self.restaurants.sorted {$0.date < $1.date}
-            
+            self.leastRate = self.restaurants.sorted {$0.rating < $1.rating}
+            self.mostRate = self.restaurants.sorted {$0.rating > $1.rating}
         }
     }
     
@@ -166,6 +173,41 @@ class RestaurantViewModel: ObservableObject {
             return self.japaneseRes
         case "Korean":
             return self.koreanRes
+        default:
+            return self.restaurants
+        }
+    }
+    
+    func performSearch(keyword: String) {
+        if keyword.isEmpty {
+            if selectedCate != "All" {
+                filteredArray = getFilteredRestaurants(selectedCategory: selectedCate)
+            } else {
+                filteredArray = restaurants
+            }
+        } else {
+            if selectedCate != "All" {
+                filteredArray = getFilteredRestaurants(selectedCategory: selectedCate).filter{
+                    $0.name?.lowercased().contains(keyword.lowercased()) ?? false
+                }
+            } else {
+                filteredArray = restaurants.filter{
+                    $0.name?.lowercased().contains(keyword.lowercased()) ?? false
+                }
+            }
+        }
+    }
+    
+    func getSortedRestaurants(selectedSort: String) -> [Restaurant]{
+        switch selectedSort {
+        case "Newest":
+            return self.newestRes
+        case "Oldest":
+            return self.olderRes
+        case "Least Ratings":
+            return self.leastRate
+        case "Most Ratings":
+            return self.mostRate
         default:
             return self.restaurants
         }

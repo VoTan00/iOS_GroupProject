@@ -23,7 +23,7 @@ struct RestaurantView: View {
             
             // button to add a restaurant
             Button {
-                self.restaurantViewModel.addNewRestaurant(curName: restaurant, curAddress: "test 1", curHours: "test 1", curPhone: "test 1")
+//                self.restaurantViewModel.addNewRestaurant(curName: restaurant, curAddress: "test 1", curHours: "test 1", curPhone: "test 1")
             } label: {
                 Text("Add restaurants")
                     .padding()

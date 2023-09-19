@@ -157,9 +157,9 @@ struct RestaurantDetailView: View{
         
     
 
-//struct RestaurantDetailPreview_Preview: PreviewProvider{
-//    static var previews: some View {
-//        RestaurantDetailView(restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", ratings: 4 ))
-//    }
-//
-//}
+struct RestaurantDetailPreview_Preview: PreviewProvider{
+    static var previews: some View {
+        RestaurantDetailView(restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", img: "KFC", description: "example", category: "Chinese", date: NSDate() as Date, author: "new", rating: 3.5))
+    }
+
+}

@@ -47,7 +47,7 @@ struct ListView: View{
                 List (restaurantViewModel.restaurants) { item in
                     //                ForEach(restaurantviewmodel.restaurants, id: \.id) { restaurant in
                     
-                        NavigationLink(destination: RestaurantDetailView(restaurant: Restaurant(ratings: 4))){
+                        NavigationLink(destination: RestaurantDetailView(restaurant: Restaurant())){
                         
                         Text("\(item.name!)")
                     }

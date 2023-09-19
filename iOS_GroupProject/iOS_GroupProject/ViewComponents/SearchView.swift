@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct SearchView: View {
+    @ObservedObject var restaurantViewModel : RestaurantViewModel
     @Binding var search: String
     
     var body: some View {
@@ -22,7 +23,7 @@ struct SearchView: View {
             .padding(.trailing, 8)
             
             NavigationLink(
-                destination: FilterOptionView(),
+                destination: FilterOptionView(restaurantViewModel: restaurantViewModel),
                 label: {
                     Image("filter-2")
                         .padding()
