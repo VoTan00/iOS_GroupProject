@@ -10,6 +10,7 @@ import SwiftUI
 struct RestaurantDetailView: View{
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var context
+    
     @State private var isPickerShowing = false
     @State private var selectedImage = UIImage?.self
     @State private var showReview = false
@@ -20,9 +21,8 @@ struct RestaurantDetailView: View{
     @State private var image = UIImage()
     
     var restaurant: Restaurant
+    
     @State private var review = ""
-    
-    
     
     var body: some View{
         ScrollView{
@@ -157,9 +157,9 @@ struct RestaurantDetailView: View{
         
     
 
-struct RestaurantDetailPreview_Preview: PreviewProvider{
-    static var previews: some View {
-        RestaurantDetailView(restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", ratings: 4 ))
-    }
-    
-}
+//struct RestaurantDetailPreview_Preview: PreviewProvider{
+//    static var previews: some View {
+//        RestaurantDetailView(restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", ratings: 4 ))
+//    }
+//
+//}

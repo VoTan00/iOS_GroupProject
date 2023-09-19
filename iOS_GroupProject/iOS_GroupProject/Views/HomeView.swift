@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var restaurantviewmodel = RestaurantViewModel()
+    @ObservedObject var restaurantViewModel : RestaurantViewModel
+    
     @State private var search: String = ""
     @State private var selectedIndex: Int = 1
     private let categories = ["All", "Chinese", "Mexican", "Vietnamese", "Italian", "French", "Thai", "Indian", "International", "Japanese", "Korean"]
@@ -16,17 +17,18 @@ struct HomeView: View {
     var column = [GridItem(.adaptive(minimum: 160), spacing: 20)]
     
     private var res: [Restaurant] {
-        restaurantviewmodel.filteredArray.isEmpty ? restaurantviewmodel.filteredArray : restaurantviewmodel.filteredArray
+        restaurantViewModel.filteredArray.isEmpty ? restaurantViewModel.filteredArray : restaurantViewModel.filteredArray
     }
     
     var body: some View {
         NavigationView {
             ZStack {
-                Color(#colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1))
+                Color("Color2")
                     .ignoresSafeArea()
                 
                 ScrollView (showsIndicators: false) {
                     VStack (alignment: .leading) {
+                        // MARK: APP NAME
                         Text("Shop")
                             .font(.largeTitle)
                             .foregroundColor(Color("Color1"))
@@ -34,10 +36,14 @@ struct HomeView: View {
                             .font(.largeTitle)
                             .bold()
                             .foregroundColor(Color("Color4"))
+                        
+                        // MARK: SEARCH VIEW
                         SearchView(search: $search)
-                            .onChange(of: search, perform: restaurantviewmodel.performSearch)
+                            .onChange(of: search, perform: restaurantViewModel.performSearch)
+                        
+                        
                         HStack{
-                            Picker(selection: $restaurantviewmodel.selectedSort, label: Text("Sorting:")) {
+                            Picker(selection: $restaurantViewModel.selectedSort, label: Text("Sorting:")) {
                                 ForEach(sorts, id: \.self) {
                                     Text($0)
                                         .tag($0)
@@ -45,8 +51,8 @@ struct HomeView: View {
                                 }
                                 .buttonStyle(.plain)
                             }
-                            .onChange(of: restaurantviewmodel.selectedSort, perform: { newValue in
-                                restaurantviewmodel.updateFilterRestaurants()
+                            .onChange(of: restaurantViewModel.selectedSort, perform: { newValue in
+                                restaurantViewModel.updateFilterRestaurants()
                             })
                             .buttonStyle(.plain)
                             
@@ -55,10 +61,10 @@ struct HomeView: View {
                                     ForEach(0 ..< categories.count) { i in
                                         Button(action: {
                                             selectedIndex = i
-                                            restaurantviewmodel.selectedCate = categories[i]
-                                            restaurantviewmodel.updateFilterRestaurants()
+                                            restaurantViewModel.selectedCate = categories[i]
+                                            restaurantViewModel.updateFilterRestaurants()
                                         }) {
-                                            CategotyView(isActive: selectedIndex == i, text: categories[i])
+                                            CategoryView(isActive: selectedIndex == i, text: categories[i])
                                         }
                                     }
                                     
@@ -88,7 +94,8 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
-//            .environmentObject(RestaurantViewModel())
+        let restaurantViewModel = RestaurantViewModel()
+        
+        return HomeView(restaurantViewModel: restaurantViewModel)
     }
 }

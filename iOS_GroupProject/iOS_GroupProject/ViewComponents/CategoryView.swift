@@ -1,5 +1,5 @@
 //
-//  CategotyView.swift
+//  CategoryView.swift
 //  Food Review
 //
 //  Created by Thang Do Quang on 15/09/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CategotyView: View {
+struct CategoryView: View {
     let isActive: Bool
     let text: String
     
@@ -26,8 +26,8 @@ struct CategotyView: View {
     }
 }
 
-struct CategotyView_Previews: PreviewProvider {
+struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        CategotyView(isActive: true, text: "French")
+        CategoryView(isActive: true, text: "French")
     }
 }

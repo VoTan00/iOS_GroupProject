@@ -2,8 +2,7 @@
 //  SearchView.swift
 //  Food Review
 //
-//  Created by Thang Do Quang on 15/09/2023.
-//  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
+//  Created by Thang Do Quang on 15/09/2023
 
 import SwiftUI
 

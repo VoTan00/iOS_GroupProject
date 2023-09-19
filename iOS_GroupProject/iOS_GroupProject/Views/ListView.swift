@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ListView: View{
+    @ObservedObject var restaurantViewModel : RestaurantViewModel
     
-    @State private var restaurantName:String = ""
-    @State private var restaurantAdd: String = ""
-    @State private var restaurantHour: String = ""
-    @State private var restaurantPhone: String = ""
-    @StateObject var restaurantviewmodel = RestaurantViewModel()
-    @State private var isShowingSheet = false
-    @State private var showingDetail = false
+    // @State private var restaurantName:String = ""
+    // @State private var restaurantAdd: String = ""
+    // @State private var restaurantHour: String = ""
+    // @State private var restaurantPhone: String = ""
+
+    // @State private var isShowingSheet = false
+    // @State private var showingDetail = false
+    
     var body: some View{
         
         /*  VStack{
@@ -38,39 +40,44 @@ struct ListView: View{
          }*/
         
         NavigationStack{
-            List (restaurantviewmodel.restaurants) {item in
-//                ForEach(restaurantviewmodel.restaurants, id: \.id) { restaurant in
-   
+            ZStack {
+                Color("Color2")
+                    .ignoresSafeArea()
+                
+                List (restaurantViewModel.restaurants) { item in
+                    //                ForEach(restaurantviewmodel.restaurants, id: \.id) { restaurant in
+                    
                         NavigationLink(destination: RestaurantDetailView(restaurant: Restaurant(ratings: 4))){
                         
-                            Text("\(item.name!)")
+                        Text("\(item.name!)")
                     }
                     
-                   
-//                }
-            }
-            .navigationTitle("ShopSpark")
-            .toolbar{
-                ToolbarItem(placement: .navigationBarLeading){
-                    Button ("Sign Out"){
-                        //code sign out
+                }
+                .navigationTitle("ShopSpark")
+                .toolbar{
+                    ToolbarItem(placement: .navigationBarLeading){
+                        Button ("Sign Out"){
+                            //code sign out
+                        }
                     }
                 }
             }
         }
-            /*.sheet(isPresented: $isShowingSheet){
-                NavigationStack{
-                    RestaurantDetailView(restaurant: Restaurant())
-                }
-            }*/
+        /*.sheet(isPresented: $isShowingSheet){
+         NavigationStack{
+         RestaurantDetailView((restaurant: restaurant))
+         }
+         }*/
         
     }
 }
 
 
 
-struct ListView_Previews: PreviewProvider{
-    static var previews: some View{
-        ListView()
+struct ListView_Previews: PreviewProvider {
+    static var previews: some View {
+        let restaurantViewModel = RestaurantViewModel()
+        
+        return ListView(restaurantViewModel: restaurantViewModel)
     }
 }

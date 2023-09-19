@@ -11,6 +11,8 @@ import SwiftUI
 struct MainView: View {
     @State var currentTab: Tab = .Home
     
+    @StateObject var restaurantViewModel = RestaurantViewModel()
+    
     init(){
         UITabBar.appearance().isHidden = true
     }
@@ -19,27 +21,32 @@ struct MainView: View {
     var body: some View {
         
         TabView(selection: $currentTab) {
-            HomeView()
+            // MARK: HOMEVIEW
+            HomeView(restaurantViewModel : restaurantViewModel)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background()
                 .tag(Tab.Home)
             
-            ListView()
+            // MARK: LISTVIEW
+            ListView(restaurantViewModel : restaurantViewModel)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background()
                 .tag(Tab.Favourite)
             
+            // MARK: POSTVIEW
             Text("Post")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background()
                 .tag(Tab.Post)
             
+            // MARK: PROFILEVIEW
             Text("Profile")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background()
                 .tag(Tab.Account)
         }
         .overlay(
+            // MARK: NAV BAR
             HStack (spacing: 0){
                 ForEach(Tab.allCases, id: \.rawValue) {tab in
                     TabButton(tab: tab)
@@ -51,9 +58,10 @@ struct MainView: View {
             ,
             alignment: .bottom
         ).ignoresSafeArea(.all, edges: .bottom)
-        .accentColor(Color("Color4"))
+            .accentColor(Color("Color4"))
     }
     
+    // MARK: TAB BUTTON
     func TabButton (tab: Tab) -> some View {
         GeometryReader{ proxy in
             Button(action: {
@@ -96,6 +104,7 @@ struct MainView_Previews: PreviewProvider {
         MainView()
     }
 }
+
 
 enum Tab: String, CaseIterable {
     case Home = "house"
