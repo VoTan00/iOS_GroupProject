@@ -9,9 +9,10 @@ import Foundation
 
 
 struct Review: Codable, Identifiable {
-    var id: String = UUID().uuidString
-    var user: String
-    var content: String?
-    var date: Date = Date()
-    var rating: Int?
+   var id: String = UUID().uuidString
+   var restaurantID: String
+   var reviewAuthor: String
+   var content: String?
+   var date: Date = Date()
+   var rating: Int = 0
 }
