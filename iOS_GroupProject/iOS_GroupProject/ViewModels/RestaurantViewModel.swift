@@ -12,12 +12,14 @@ import FirebaseFirestore
 class RestaurantViewModel: ObservableObject {
     @Published var restaurants = [Restaurant]()
     @Published var filteredArray = [Restaurant]()
+    
+    @Published var selectedSort = "Worst Rate"
+    @Published var selectedCate = "All"
 
     private var db = Firestore.firestore()
     
     init() {
         getAllRestaurantData()
-        updateFilterRestaurants()
     }
     
     func getAllRestaurantData() {
@@ -38,7 +40,19 @@ class RestaurantViewModel: ObservableObject {
                 let phone = data["phone"] as? String ?? ""
                 let category = data["category"] as? String ?? ""
                 let ratings = data["ratings"] as? Int ?? 0
-                self.restaurants.append(Restaurant(name: name, address: address, hours: hours, phone: phone, category: category, ratings: ratings))
+//                self.restaurants.append(Restaurant(name: name, address: address, hours: hours, phone: phone, category: category, ratings: ratings))
+                return Restaurant(name: name, address: address, hours: hours, phone: phone, category: category, ratings: ratings)
+            }
+            
+            self.filteredArray = documents.map { (queryDocumentSnapshot) -> Restaurant in
+                let data = queryDocumentSnapshot.data()
+                let name = data["name"] as? String ?? ""
+                let address = data["address"] as? String ?? ""
+                let hours = data["hours"] as? String ?? ""
+                let phone = data["phone"] as? String ?? ""
+                let category = data["category"] as? String ?? ""
+                let ratings = data["ratings"] as? Int ?? 0
+//                self.restaurants.append(Restaurant(name: name, address: address, hours: hours, phone: phone, category: category, ratings: ratings))
                 return Restaurant(name: name, address: address, hours: hours, phone: phone, category: category, ratings: ratings)
             }
         }
@@ -52,9 +66,70 @@ class RestaurantViewModel: ObservableObject {
     }
     
     func updateFilterRestaurants() {
-        getAllRestaurantData()
-        filteredArray = restaurants.sorted { (res1, res2) -> Bool in
-            return res1.ratings! > res2.ratings!
+        switch selectedSort{
+        case "Worst Rate":
+            filteredArray = filteredArray.sorted { (res1, res2) -> Bool in
+                return res1.ratings! < res2.ratings!
+            }
+        case "Best Rate":
+            filteredArray = filteredArray.sorted { (res1, res2) -> Bool in
+                return res1.ratings! > res2.ratings!
+            }
+        default:
+            filteredArray = filteredArray
+        }
+        
+        switch selectedCate{
+            case "All":
+                filteredArray = restaurants
+            case "Chinese":
+                filteredArray = restaurants.filter { restaurant in
+                    restaurant.category! == "Chinese"
+                }
+            case "Mexican":
+                filteredArray = restaurants.filter { restaurant in
+                    restaurant.category! == "Mexican"
+                }
+            case "Vietnamese":
+                filteredArray = restaurants.filter { restaurant in
+                    restaurant.category! == "Vietnamese"
+                }
+            case "Italian":
+                filteredArray = restaurants.filter { restaurant in
+                    restaurant.category! == "Italian"
+                }
+            case "French":
+                filteredArray = restaurants.filter { restaurant in
+                    restaurant.category! == "French"
+                }
+            case "Thai":
+                filteredArray = restaurants.filter { restaurant in
+                    restaurant.category! == "Thai"
+                }
+            case "Indian":
+                filteredArray = restaurants.filter { restaurant in
+                    restaurant.category! == "Indian"
+                }
+            case "International":
+                filteredArray = restaurants.filter { restaurant in
+                    restaurant.category! == "International"
+                }
+            case "Japanese":
+                filteredArray = restaurants.filter { restaurant in
+                    restaurant.category! == "Japanese"
+                }
+            case "Korean":
+                filteredArray = restaurants.filter { restaurant in
+                    restaurant.category! == "Korean"
+                }
+            default:
+                filteredArray = restaurants
+        }
+    }
+    
+    func performSearch(keyword: String) {
+        filteredArray = filteredArray.filter { restaurant in
+            restaurant.name!.contains(keyword)
         }
     }
     

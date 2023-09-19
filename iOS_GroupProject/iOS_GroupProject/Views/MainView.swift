@@ -51,8 +51,7 @@ struct MainView: View {
             ,
             alignment: .bottom
         ).ignoresSafeArea(.all, edges: .bottom)
-        .accentColor(Color.orange)
-        
+        .accentColor(Color("Color4"))
     }
     
     func TabButton (tab: Tab) -> some View {

@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct HomeView: View {
-//    @EnvironmentObject var restaurantViewModel: RestaurantViewModel
     @StateObject var restaurantviewmodel = RestaurantViewModel()
-    
     @State private var search: String = ""
     @State private var selectedIndex: Int = 1
-    private let categories = ["All", "Cafe", "Fast Food", "Buffet", "Pub", "Diner"]
-    
-    var sorts = ["Newest", "Oldest", "Cheapest", "Expensive"]
-    @State private var selectedSort = "Newest"
-    
+    private let categories = ["All", "Chinese", "Mexican", "Vietnamese", "Italian", "French", "Thai", "Indian", "International", "Japanese", "Korean"]
+    var sorts = ["Worst Rate", "Best Rate"]
     var column = [GridItem(.adaptive(minimum: 160), spacing: 20)]
+    
+    private var res: [Restaurant] {
+        restaurantviewmodel.filteredArray.isEmpty ? restaurantviewmodel.filteredArray : restaurantviewmodel.filteredArray
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -35,24 +35,33 @@ struct HomeView: View {
                             .bold()
                             .foregroundColor(Color("Color4"))
                         SearchView(search: $search)
+                            .onChange(of: search, perform: restaurantviewmodel.performSearch)
                         HStack{
-                            Picker(selection: $selectedSort, label: Text("Sorting:")) {
+                            Picker(selection: $restaurantviewmodel.selectedSort, label: Text("Sorting:")) {
                                 ForEach(sorts, id: \.self) {
                                     Text($0)
                                         .tag($0)
-                                        .foregroundColor(.black)
+                                        .foregroundColor(Color("Color1"))
                                 }
-                                .foregroundColor(.black)
+                                .buttonStyle(.plain)
                             }
-                            .foregroundColor(.black)
+                            .onChange(of: restaurantviewmodel.selectedSort, perform: { newValue in
+                                restaurantviewmodel.updateFilterRestaurants()
+                            })
+                            .buttonStyle(.plain)
                             
                             ScrollView (.horizontal, showsIndicators: false) {
                                 HStack {
                                     ForEach(0 ..< categories.count) { i in
-                                        Button(action: {selectedIndex = i}) {
+                                        Button(action: {
+                                            selectedIndex = i
+                                            restaurantviewmodel.selectedCate = categories[i]
+                                            restaurantviewmodel.updateFilterRestaurants()
+                                        }) {
                                             CategotyView(isActive: selectedIndex == i, text: categories[i])
                                         }
                                     }
+                                    
                                 }
                                 .padding()
                             }
@@ -60,8 +69,11 @@ struct HomeView: View {
                         
                         ScrollView{
                             LazyVGrid(columns: column, spacing: 20) {
-                                ForEach(restaurantviewmodel.restaurants, id: \.id) {restaurant in
-                                    RestaurantCardView(restaurant: restaurant)
+                                ForEach(res, id: \.id) {restaurant in
+                                    NavigationLink(destination: RestaurantDetailView(restaurant: Restaurant(ratings: 4))) {
+                                        RestaurantCardView(restaurant: restaurant)
+                                    }
+                                    .buttonStyle(.plain)
                                 }
                             }
                             .padding()

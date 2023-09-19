@@ -96,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				64B09E732AB6332400C99904 /* RestaurantDetailView.swift */,
+				18211F0D2AB4737800004F3E /* ContentView.swift */,
 				A3A60F1B2AB62A5400BD8083 /* TestViews */,
 				A3A60F162AB6164600BD8083 /* LogInView.swift */,
 				A3A60F152AB6164600BD8083 /* SignUpView.swift */,
@@ -172,7 +173,6 @@
 		A3A60F1B2AB62A5400BD8083 /* TestViews */ = {
 			isa = PBXGroup;
 			children = (
-				18211F0D2AB4737800004F3E /* ContentView.swift */,
 				A3A60F1C2AB62A7200BD8083 /* ImageView.swift */,
 				A3A60F1E2AB62A8400BD8083 /* RestaurantView.swift */,
 			);
