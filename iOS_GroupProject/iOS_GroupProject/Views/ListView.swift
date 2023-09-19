@@ -39,15 +39,15 @@ struct ListView: View{
         
         NavigationStack{
             List (restaurantviewmodel.restaurants) {item in
-                ForEach(restaurantviewmodel.restaurants, id: \.id) { restaurant in
+//                ForEach(restaurantviewmodel.restaurants, id: \.id) { restaurant in
    
-                        NavigationLink(destination: RestaurantDetailView(restaurant: Restaurant())){
+                        NavigationLink(destination: RestaurantDetailView(restaurant: Restaurant(ratings: 4))){
                         
-                        Text(restaurant.name ?? "")
+                            Text("\(item.name!)")
                     }
                     
                    
-                }
+//                }
             }
             .navigationTitle("ShopSpark")
             .toolbar{

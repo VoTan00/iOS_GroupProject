@@ -1,13 +1,16 @@
 //
-//  SearchAndFilterView.swift
+//  HomeView.swift
 //  iOS_GroupProject
 //
-//  Created by Thang Do Quang on 17/09/2023.
+//  Created by Thang Do Quang on 19/09/2023.
 //
 
 import SwiftUI
 
-struct SearchAndFilterView: View {
+struct HomeView: View {
+//    @EnvironmentObject var restaurantViewModel: RestaurantViewModel
+    @StateObject var restaurantviewmodel = RestaurantViewModel()
+    
     @State private var search: String = ""
     @State private var selectedIndex: Int = 1
     private let categories = ["All", "Cafe", "Fast Food", "Buffet", "Pub", "Diner"]
@@ -15,6 +18,7 @@ struct SearchAndFilterView: View {
     var sorts = ["Newest", "Oldest", "Cheapest", "Expensive"]
     @State private var selectedSort = "Newest"
     
+    var column = [GridItem(.adaptive(minimum: 160), spacing: 20)]
     var body: some View {
         NavigationView {
             ZStack {
@@ -23,7 +27,13 @@ struct SearchAndFilterView: View {
                 
                 ScrollView (showsIndicators: false) {
                     VStack (alignment: .leading) {
-                        
+                        Text("Shop")
+                            .font(.largeTitle)
+                            .foregroundColor(Color("Color1"))
+                        + Text("Spark")
+                            .font(.largeTitle)
+                            .bold()
+                            .foregroundColor(Color("Color4"))
                         SearchView(search: $search)
                         HStack{
                             Picker(selection: $selectedSort, label: Text("Sorting:")) {
@@ -47,18 +57,26 @@ struct SearchAndFilterView: View {
                                 .padding()
                             }
                         }
+                        
+                        ScrollView{
+                            LazyVGrid(columns: column, spacing: 20) {
+                                ForEach(restaurantviewmodel.restaurants, id: \.id) {restaurant in
+                                    RestaurantCardView(restaurant: restaurant)
+                                }
+                            }
+                            .padding()
+                        }
+                        .navigationTitle(Text("All restaurants"))
                     }
                 }
             }
         }
-        .navigationBarTitle("") //this must be empty
-        .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
     }
 }
 
-struct SearchAndFilterView_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchAndFilterView()
+        HomeView()
+//            .environmentObject(RestaurantViewModel())
     }
 }

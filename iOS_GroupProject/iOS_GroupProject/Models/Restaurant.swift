@@ -14,5 +14,7 @@ struct Restaurant: Codable, Identifiable {
     var hours: String?
     var phone: String?
     var reviews: Review?
+    var category: String?
+    var ratings: Int?
 }
 
