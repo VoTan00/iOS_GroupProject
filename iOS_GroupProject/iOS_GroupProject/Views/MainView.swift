@@ -25,6 +25,7 @@ struct MainView: View {
             HomeView(restaurantViewModel : restaurantViewModel)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background()
+                .padding(.bottom, 40)
                 .tag(Tab.Home)
             
             // MARK: LISTVIEW

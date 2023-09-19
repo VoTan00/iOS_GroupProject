@@ -56,6 +56,7 @@ class RestaurantViewModel: ObservableObject {
                 let author = data["author"] as? String ?? ""
                 return Restaurant(id: id, name: name, address: address, hours: hours, phone: phone, img: img, description: description, category: category, date: date, author: author)
             }
+            self.filteredArray = self.restaurants
             self.vietnameseRes = self.restaurants.filter { $0.category?.contains("Vietnamese") ?? false}
             self.italianRes = self.restaurants.filter { $0.category?.contains("Italian") ?? false}
             self.frenchRes = self.restaurants.filter { $0.category?.contains("French") ?? false}

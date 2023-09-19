@@ -14,12 +14,7 @@ struct HomeView: View {
     @State private var selectedIndex: Int = 1
     @State private var selectedCate: String = "All"
     private let categories = ["All", "Chinese", "Mexican", "Vietnamese", "Italian", "French", "Thai", "Indian", "International", "Japanese", "Korean"]
-    var sorts = ["Worst Rate", "Best Rate"]
     var column = [GridItem(.adaptive(minimum: 160), spacing: 20)]
-    
-//    private var res: [Restaurant] {
-//        restaurantViewModel.filteredArray.isEmpty ? restaurantViewModel.filteredArray : restaurantViewModel.filteredArray
-//    }
     
     var body: some View {
         NavigationView {
@@ -63,22 +58,6 @@ struct HomeView: View {
                             }
                             .padding()
                         }
-//                        HStack{
-//                            Picker(selection: $restaurantViewModel.selectedSort, label: Text("Sorting:")) {
-//                                ForEach(sorts, id: \.self) {
-//                                    Text($0)
-//                                        .tag($0)
-//                                        .foregroundColor(Color("Color1"))
-//                                }
-//                                .buttonStyle(.plain)
-//                            }
-//                            .onChange(of: restaurantViewModel.selectedSort, perform: { newValue in
-//                                restaurantViewModel.updateFilterRestaurants()
-//                            })
-//                            .buttonStyle(.plain)
-//                            
-//                            
-//                        }
                         
                         ScrollView{
                             LazyVGrid(columns: column, spacing: 20) {
@@ -96,7 +75,9 @@ struct HomeView: View {
                 }
             }
         }
-        .onAppear{restaurantViewModel.filteredArray = restaurantViewModel.restaurants}
+        .onAppear{
+            restaurantViewModel.filteredArray = restaurantViewModel.restaurants
+        }
     }
 }
 

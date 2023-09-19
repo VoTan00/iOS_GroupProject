@@ -140,6 +140,7 @@ struct FilterOptionView: View {
                 Spacer()
                 Button {
                     restaurantViewModel.selectedSort = "none"
+                    restaurantViewModel.filteredArray = restaurantViewModel.getSortedRestaurants(selectedSort: restaurantViewModel.selectedSort)
                 } label: {
                     Text("Reset")
                         .font(.title3)
