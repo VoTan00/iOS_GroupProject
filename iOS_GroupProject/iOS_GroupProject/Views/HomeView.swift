@@ -41,37 +41,44 @@ struct HomeView: View {
                         SearchView(search: $search)
                             .onChange(of: search, perform: restaurantViewModel.performSearch)
                         
-                        
-                        HStack{
-                            Picker(selection: $restaurantViewModel.selectedSort, label: Text("Sorting:")) {
-                                ForEach(sorts, id: \.self) {
-                                    Text($0)
-                                        .tag($0)
-                                        .foregroundColor(Color("Color1"))
-                                }
-                                .buttonStyle(.plain)
-                            }
-                            .onChange(of: restaurantViewModel.selectedSort, perform: { newValue in
-                                restaurantViewModel.updateFilterRestaurants()
-                            })
-                            .buttonStyle(.plain)
-                            
-                            ScrollView (.horizontal, showsIndicators: false) {
-                                HStack {
-                                    ForEach(0 ..< categories.count) { i in
-                                        Button(action: {
-                                            selectedIndex = i
-                                            restaurantViewModel.selectedCate = categories[i]
-                                            restaurantViewModel.updateFilterRestaurants()
-                                        }) {
-                                            CategoryView(isActive: selectedIndex == i, text: categories[i])
-                                        }
+                        ScrollView (.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(0 ..< categories.count) { i in
+                                    Button(action: {
+                                        selectedIndex = i
+                                        restaurantViewModel.selectedCate = categories[i]
+                                        restaurantViewModel.updateFilterRestaurants()
+                                    }) {
+                                        CategoryView(isActive: selectedIndex == i, text: categories[i])
                                     }
-                                    
                                 }
-                                .padding()
+                                .onAppear{
+                                    selectedIndex = 0
+                                    restaurantViewModel.selectedCate = categories[0]
+                                }
+                                .onChange(of: search) { newValue in
+                                    selectedIndex = 0
+                                    restaurantViewModel.selectedCate = categories[0]
+                                }
                             }
+                            .padding()
                         }
+//                        HStack{
+//                            Picker(selection: $restaurantViewModel.selectedSort, label: Text("Sorting:")) {
+//                                ForEach(sorts, id: \.self) {
+//                                    Text($0)
+//                                        .tag($0)
+//                                        .foregroundColor(Color("Color1"))
+//                                }
+//                                .buttonStyle(.plain)
+//                            }
+//                            .onChange(of: restaurantViewModel.selectedSort, perform: { newValue in
+//                                restaurantViewModel.updateFilterRestaurants()
+//                            })
+//                            .buttonStyle(.plain)
+//                            
+//                            
+//                        }
                         
                         ScrollView{
                             LazyVGrid(columns: column, spacing: 20) {
