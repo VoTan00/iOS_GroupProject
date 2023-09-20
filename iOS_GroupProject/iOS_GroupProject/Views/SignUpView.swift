@@ -9,25 +9,20 @@ import SwiftUI
 import Firebase
 
 struct SignUpView: View {
-    @State private var name: String = ""
+    @ObservedObject var userViewModel : UserViewModel
+
+//    @State private var name: String = ""
     @State private var password: String = ""
     @State private var email: String = ""
     @State private var cpassword: String = ""
     @State var isLinkActive = false
     @State var signUpSuccess: Bool = false
     
-    func signUp() {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            if error != nil {
-                print(error?.localizedDescription ?? "")
-                signUpSuccess = false
-            } else {
-                print("success")
-                signUpSuccess = true
-            }
-        }
+    // MARK: SIGN UP FUNC
+    func signUp()  {
+        userViewModel.signUp(email: email, password: password)
+        signUpSuccess = true
     }
-    
     
     var body: some View {
         NavigationView {
@@ -55,7 +50,7 @@ struct SignUpView: View {
                             
                             // MARK: INPUT FIELDS
                             VStack (spacing: 20){
-                                UserTextField(placeHolder: "Name", imageName: "person", bColor: "textColor2", tOpacity: 0.8, value: $name)
+//                                UserTextField(placeHolder: "Name", imageName: "person", bColor: "textColor2", tOpacity: 0.8, value: $name)
                                 UserTextField(placeHolder: "Email", imageName: "envelope", bColor: "textColor2", tOpacity: 0.8, value: $email)
                                 UserTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor2", tOpacity: 0.8, value: $password)
                                 UserTextField(placeHolder: "Confirm Password", imageName: "lock", bColor: "textColor2", tOpacity: 0.8, value: $cpassword)
@@ -77,14 +72,6 @@ struct SignUpView: View {
                                 })
                                 .padding(.horizontal, 20)
                                 .disabled(email.isEmpty || password.isEmpty)
-                            }
-                            
-                            // if sign up success, display welcome + name
-                            if signUpSuccess {
-                                Text("Welcome \(name)")
-                                    .foregroundColor(.red)
-                                    .font(.system(size: 20))
-                                    .fontWeight(.semibold)
                             }
                             
                             //                            HStack {
@@ -121,7 +108,7 @@ struct SignUpView: View {
                             .fontWeight(.bold)
                             .foregroundColor(Color("textColor1"))
                             .font(.system(size: 18))
-                        NavigationLink(destination: LogInView(), isActive: $isLinkActive){
+                        NavigationLink(destination: LogInView(userViewModel: userViewModel), isActive: $isLinkActive){
                             Button(action: {
                                 self.isLinkActive = true
                             }, label: {
@@ -145,8 +132,17 @@ struct SignUpView: View {
     }
 }
 
+//struct SignUpView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SignUpView()
+//    }
+//}
+
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        let userViewModel = UserViewModel()
+        
+        return SignUpView(userViewModel: userViewModel)
     }
 }
+

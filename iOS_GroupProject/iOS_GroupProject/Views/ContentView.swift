@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var userViewModel = UserViewModel()
+    
     var body: some View {
-//        MainView()
-        LogInView()
+        //        MainView()
+        
+        LogInView(userViewModel: userViewModel)
+        
     }
 }
 

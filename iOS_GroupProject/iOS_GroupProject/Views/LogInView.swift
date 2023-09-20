@@ -10,23 +10,18 @@ import Firebase
 
 struct LogInView: View {
     
+    @ObservedObject var userViewModel : UserViewModel
+    
     @State private var email: String = ""
     @State private var password: String = ""
     @State var isLinkActive = false
     @State var loginSuccess = false
     
-    func login() {
-        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "")
-                loginSuccess = false
-            } else {
-                print("success")
-                loginSuccess = true
-            }
-        }
+    // MARK: LOG IN FUNC
+    func login()  {
+        userViewModel.login(email: email, password: password)
+        loginSuccess = true
     }
-    
     
     var body: some View {
         NavigationView{
@@ -119,7 +114,7 @@ struct LogInView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 18))
                         
-                        NavigationLink(destination: SignUpView(), isActive: $isLinkActive){
+                        NavigationLink(destination: SignUpView(userViewModel: userViewModel), isActive: $isLinkActive){
                             Button(action: {
                                 self.isLinkActive = true
                             }, label: {
@@ -143,8 +138,16 @@ struct LogInView: View {
     }
 }
 
+//struct LogInView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LogInView()
+//    }
+//}
+
 struct LogInView_Previews: PreviewProvider {
     static var previews: some View {
-        LogInView()
+        let userViewModel = UserViewModel()
+        
+        return LogInView(userViewModel: userViewModel)
     }
 }

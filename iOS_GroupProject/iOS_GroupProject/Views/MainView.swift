@@ -12,6 +12,7 @@ struct MainView: View {
     @State var currentTab: Tab = .Home
     
     @StateObject var restaurantViewModel = RestaurantViewModel()
+//    @ObservedObject var userViewModel : UserViewModel
     
     init(){
         UITabBar.appearance().isHidden = true
@@ -45,6 +46,11 @@ struct MainView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background()
                 .tag(Tab.Account)
+
+//            ProfileView(userViewModel: userViewModel)
+//                .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                .background()
+//                .tag(Tab.Account)
         }
         .overlay(
             // MARK: NAV BAR
