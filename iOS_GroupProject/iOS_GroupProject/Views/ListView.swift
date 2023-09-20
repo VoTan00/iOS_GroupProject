@@ -56,8 +56,8 @@ struct ListView: View{
                 .navigationTitle("ShopSpark")
                 .toolbar{
                     ToolbarItem(placement: .navigationBarLeading){
-                        Button ("Sign Out"){
-                            //code sign out
+                        Button ("Log out"){
+                            //code log out
                         }
                     }
                 }
