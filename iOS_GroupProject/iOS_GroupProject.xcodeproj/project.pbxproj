@@ -19,6 +19,7 @@
 		18211F072AB454B900004F3E /* RestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18211F062AB454B900004F3E /* RestaurantViewModel.swift */; };
 		18211F0A2AB466E800004F3E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18211F092AB466E800004F3E /* ImagePicker.swift */; };
 		18211F0E2AB4737800004F3E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18211F0D2AB4737800004F3E /* ContentView.swift */; };
+		21633A512ABBA1740098BD66 /* ImagePicker2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21633A502ABBA1740098BD66 /* ImagePicker2.swift */; };
 		64A137E82AB83C8400D798F4 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A137E72AB83C8400D798F4 /* ListView.swift */; };
 		64A137EA2AB83CA600D798F4 /* RatingStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A137E92AB83CA600D798F4 /* RatingStarView.swift */; };
 		64A137EC2AB83CBD00D798F4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A137EB2AB83CBD00D798F4 /* MainView.swift */; };
@@ -49,6 +50,7 @@
 		18211F062AB454B900004F3E /* RestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewModel.swift; sourceTree = "<group>"; };
 		18211F092AB466E800004F3E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		18211F0D2AB4737800004F3E /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		21633A502ABBA1740098BD66 /* ImagePicker2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker2.swift; sourceTree = "<group>"; };
 		64A137E72AB83C8400D798F4 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		64A137E92AB83CA600D798F4 /* RatingStarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingStarView.swift; sourceTree = "<group>"; };
 		64A137EB2AB83CBD00D798F4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				AE1173A42AB951D600DAD0FC /* RestaurantCardView.swift */,
 				64A137E92AB83CA600D798F4 /* RatingStarView.swift */,
 				64B09E722AB6332400C99904 /* MapView.swift */,
+				21633A502ABBA1740098BD66 /* ImagePicker2.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				A33B63062AAB67E2007A8753 /* iOS_GroupProjectApp.swift in Sources */,
 				A35B9CC72ABB2AC8008A27FB /* ProfileView.swift in Sources */,
 				64A137EC2AB83CBD00D798F4 /* MainView.swift in Sources */,
+				21633A512ABBA1740098BD66 /* ImagePicker2.swift in Sources */,
 				AE0641492AB6D0DD00079E23 /* SearchView.swift in Sources */,
 				AE1173A32AB94EC000DAD0FC /* HomeView.swift in Sources */,
 				64A137EA2AB83CA600D798F4 /* RatingStarView.swift in Sources */,

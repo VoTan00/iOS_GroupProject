@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-  
+import Foundation
+
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var image: UIImage?
      

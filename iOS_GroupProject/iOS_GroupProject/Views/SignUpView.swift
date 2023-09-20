@@ -12,9 +12,16 @@ struct SignUpView: View {
     @ObservedObject var userViewModel : UserViewModel
 
 //    @State private var name: String = ""
-    @State private var password: String = ""
     @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var username: String = ""
     @State private var cpassword: String = ""
+    @State private var profileImage: Image?
+    @State private var pickedImage: Image?
+    @State private var showingActionSheet = false
+    @State private var showingImagePicker = false
+    @State private var imageData: Data = Data()
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var isLinkActive = false
     @State var signUpSuccess: Bool = false
     
@@ -24,112 +31,118 @@ struct SignUpView: View {
         signUpSuccess = true
     }
     
+    func loadImage() {
+        guard let inputImage = pickedImage else {
+            return
+        }
+        profileImage = inputImage
+    }
+    
     var body: some View {
         NavigationView {
             ZStack (alignment: .topLeading){
                 Color("Color1").ignoresSafeArea()
-                VStack {
-                    VStack (spacing: 40) {
-                        ZStack {
+                VStack{
+                    VStack(spacing: 40) {
+                        ZStack{
                             Ellipse()
                                 .frame(width: 458, height: 420)
                                 .padding(.trailing, -500)
                                 .foregroundColor(Color("Color2"))
-                                .padding(.top, -200)
-                            
-                            Text("Create \nAccount")
+                                .padding(.top, -250)
+            
+                                
+                                Text("Sign Up \nTo Start")
                                 .foregroundColor(.white)
                                 .font(.system(size: 35))
                                 .fontWeight(.bold)
                                 .multilineTextAlignment(.leading)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 20)
-                                .padding(.top, 100)
+                                .padding(.top, 10)
                         }
-                        VStack (spacing: 20){
-                            
-                            // MARK: INPUT FIELDS
-                            VStack (spacing: 20){
-//                                UserTextField(placeHolder: "Name", imageName: "person", bColor: "textColor2", tOpacity: 0.8, value: $name)
-                                UserTextField(placeHolder: "Email", imageName: "envelope", bColor: "textColor2", tOpacity: 0.8, value: $email)
-                                UserTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor2", tOpacity: 0.8, value: $password)
-                                UserTextField(placeHolder: "Confirm Password", imageName: "lock", bColor: "textColor2", tOpacity: 0.8, value: $cpassword)
-                                
-                                if cpassword != password {
-                                    Text("Password does not match")
-                                        .foregroundColor(.red)
-                                        .font(.system(size: 20))
-                                        .fontWeight(.semibold)
+                        VStack {
+                            Group {
+                                if profileImage != nil {
+                                    profileImage!.resizable()
+                                        .clipShape(Circle())
+                                        .frame(width: 200, height: 200)
+                                        .padding(.top, 5)
+                                        .onTapGesture{
+                                            self.showingActionSheet = true
+                                        }
+                                } else {
+                                    Image(systemName: "person.circle")
+                                        .resizable()
+                                        .clipShape(Circle())
+                                        .frame(width: 100, height: 100)
+                                        .foregroundColor(Color("Color2"))
+                                        .onTapGesture{
+                                            self.showingActionSheet = true
+                                        }
+                                    Button(action: {}) {
+                                        Text("Choose Photo")
+                                            .font(.body)
+                                            .fontWeight(.bold)
+                                            .frame(height:30)
+                                            .frame(minWidth: 0, maxWidth: 150)
+                                            .foregroundColor(Color("Color1"))
+                                            .background(Color("Color2"))
+                                            .onTapGesture{
+                                                self.showingActionSheet = true
+                                            }
+                                    }
                                 }
                             }
-                            
-                            // MARK: SIGN UP BUTTON
-                            NavigationLink(destination: MainView(), isActive: $signUpSuccess){
-                                Button(action: {
-                                    signUp()
-                                }, label: {
-                                    UserButton(title: "SIGN UP", bgColor: "Color2", textColor: "textColor1")
-                                })
-                                .padding(.horizontal, 20)
-                                .disabled(email.isEmpty || password.isEmpty)
-                            }
-                            
-                            //                            HStack {
-                            //                                Button(action: {}, label:  {
-                            //                                    Image("fb")
-                            //                                        .resizable()
-                            //                                        .frame(width: 30, height: 30)
-                            //                                        .padding(.horizontal,60)
-                            //                                        .padding(.vertical,15)
-                            //                                        .background(Color("button-bg"))
-                            //                                        .cornerRadius(15)
-                            //                                })
-                            //
-                            //                                Spacer()
-                            //                                Button(action: {}, label:  {
-                            //                                    Image("google")
-                            //                                        .resizable()
-                            //                                        .frame(width: 30, height: 30)
-                            //                                        .padding(.horizontal,60)
-                            //                                        .padding(.vertical,15)
-                            //                                        .background(Color("button-bg"))
-                            //                                        .cornerRadius(15)
-                            //                                })
-                            //                            }
-                            //                            .padding(.horizontal, 20)
                         }
-                    }
-                    
-                    Spacer()
-                    
-                    // MARK: LOG IN
-                    HStack {
-                        Text("Already have an account?")
-                            .fontWeight(.bold)
-                            .foregroundColor(Color("textColor1"))
-                            .font(.system(size: 18))
-                        NavigationLink(destination: LogInView(userViewModel: userViewModel), isActive: $isLinkActive){
-                            Button(action: {
-                                self.isLinkActive = true
-                            }, label: {
-                                Text("LOG IN")
-                                    .font(.system(size:18))
-                                    .foregroundColor(Color("Color1"))
-                                    .fontWeight(.bold)
-                            })
+                        
+                        VStack (spacing: 15){
+                            UserTextField(placeHolder: "Name", imageName: "person", bColor: "textColor2", tOpacity: 0.8, value: $username)
+                            UserTextField(placeHolder: "Email", imageName: "envelope", bColor: "textColor2", tOpacity: 0.8, value: $email)
+                            UserTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor2", tOpacity: 0.8, value: $password)
+                            UserTextField(placeHolder: "Confirm Password", imageName: "lock", bColor: "textColor2", tOpacity: 0.8, value: $cpassword)
                         }
-                    }
-                    .frame(height: 63)
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .background(Color("Color2"))
-                    .ignoresSafeArea()
+                        
+                        Button(action: {}) {
+                            Text("Sign Up")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .frame(height: 58)
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .foregroundColor(Color("Color1"))
+                                .background(Color("Color2"))
+                            
+                            
+                            
+                        }
+                        
+                        //            HStack{
+                        //                Text("Got An Account?")
+                        //                NavigationLink(destination: SignInView()) {
+                        //                    Text("Sign In").font(.system(size: 20, weight: .semibold))
+                        //                        .foregroundColor(.black)
+                        //                }
+                        //            }
+                    }.padding()
+                }.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+                    ImagePicker2(pickedImage: self.$pickedImage, showImagePicker: self.$showingImagePicker, imageData: self.$imageData)
+                }.actionSheet(isPresented: $showingActionSheet) {
+                    ActionSheet(title: Text(""), buttons: [.default(Text("Choose A Photo")){
+                        self.sourceType = .photoLibrary
+                        self.showingImagePicker = true
+                    },
+                    .default(Text("Take A Photo")){
+                        self.sourceType = .camera
+                        self.showingImagePicker = true
+                                                               
+                    }, .cancel()
+                                                          ])
                 }
-                //                TopBarView()
             }
-            .edgesIgnoringSafeArea(.bottom)
-        }
-        .navigationBarHidden(true)
-    }
+            }
+            
+            }
+            
 }
 
 //struct SignUpView_Previews: PreviewProvider {
