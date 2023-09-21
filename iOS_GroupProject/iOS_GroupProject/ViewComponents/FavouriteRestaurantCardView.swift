@@ -39,6 +39,7 @@ struct FavouriteRestaurantCardView: View {
         .background(Color("Color1"))
         .cornerRadius(12)
         .frame(width: .infinity, alignment: .leading)
+        .shadow(color:Color("Color-black-transparent"), radius: 7)
         .padding()
     }
 }

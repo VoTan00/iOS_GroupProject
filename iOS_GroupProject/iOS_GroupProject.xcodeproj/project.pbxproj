@@ -47,6 +47,7 @@
 		AE1173A32AB94EC000DAD0FC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1173A22AB94EC000DAD0FC /* HomeView.swift */; };
 		AE1173A52AB951D600DAD0FC /* RestaurantCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1173A42AB951D600DAD0FC /* RestaurantCardView.swift */; };
 		AE2A44202ABC338B009F325E /* FavouriteRestaurantCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A441F2ABC338B009F325E /* FavouriteRestaurantCardView.swift */; };
+		AE2A44222ABC4CAE009F325E /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A44212ABC4CAE009F325E /* SplashScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		AE1173A22AB94EC000DAD0FC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		AE1173A42AB951D600DAD0FC /* RestaurantCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCardView.swift; sourceTree = "<group>"; };
 		AE2A441F2ABC338B009F325E /* FavouriteRestaurantCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRestaurantCardView.swift; sourceTree = "<group>"; };
+		AE2A44212ABC4CAE009F325E /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				64A137E72AB83C8400D798F4 /* ListView.swift */,
 				AE1173A22AB94EC000DAD0FC /* HomeView.swift */,
 				64A137EB2AB83CBD00D798F4 /* MainView.swift */,
+				AE2A44212ABC4CAE009F325E /* SplashScreenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				A35B9CC32ABB1D4D008A27FB /* UserViewModel.swift in Sources */,
 				A35B9CC12ABB1C16008A27FB /* User.swift in Sources */,
 				AE0641452AB6D09900079E23 /* CategoryView.swift in Sources */,
+				AE2A44222ABC4CAE009F325E /* SplashScreenView.swift in Sources */,
 				A3A60F172AB6164600BD8083 /* SignUpView.swift in Sources */,
 				AE0641472AB6D0D600079E23 /* FilterOptionView.swift in Sources */,
 				A33B63062AAB67E2007A8753 /* iOS_GroupProjectApp.swift in Sources */,

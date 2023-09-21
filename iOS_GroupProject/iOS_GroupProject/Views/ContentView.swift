@@ -14,7 +14,7 @@ struct ContentView: View {
     
     var body: some View {
         //        MainView()
-        LogInView()
+//        LogInView()
 //        Group {
 //            if (session.session != nil) {
 //                HomeView()
@@ -23,7 +23,7 @@ struct ContentView: View {
 //                LogInView()
 //            }
 //        }.onAppear(perform: listen)
-        
+        SplashScreenView()
     }
 }
 

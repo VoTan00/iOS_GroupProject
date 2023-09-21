@@ -62,7 +62,7 @@ struct HomeView: View {
                         ScrollView{
                             LazyVGrid(columns: column, spacing: 20) {
                                 ForEach(restaurantViewModel.filteredArray, id: \.id) {restaurant in
-                                    NavigationLink(destination: RestaurantDetailView(restaurant: Restaurant())) {
+                                    NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)) {
                                         RestaurantCardView(restaurant: restaurant)
                                     }
                                     .buttonStyle(.plain)
