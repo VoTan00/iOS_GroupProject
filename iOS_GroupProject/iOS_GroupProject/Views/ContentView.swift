@@ -13,7 +13,10 @@ struct ContentView: View {
     @EnvironmentObject var session: SessionStore
     
     var body: some View {
-        //        MainView()
+        
+        // AddRestaurantButton()
+        
+               MainView()
 //        LogInView()
 //        Group {
 //            if (session.session != nil) {

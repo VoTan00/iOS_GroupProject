@@ -37,7 +37,7 @@ struct MainView: View {
                 .tag(Tab.Favourite)
             
             // MARK: POSTVIEW
-            Text("Post")
+            PostsView(restaurantViewModel: restaurantViewModel)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background()
                 .padding(.bottom, 40)

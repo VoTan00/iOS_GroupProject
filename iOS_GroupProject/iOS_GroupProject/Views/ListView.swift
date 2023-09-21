@@ -10,6 +10,7 @@ import SwiftUI
 struct ListView: View {
     @ObservedObject var restaurantViewModel : RestaurantViewModel
     @State private var gridLayout: [GridItem] = [GridItem(.flexible())]
+    
   
     var body: some View {
         ZStack {
