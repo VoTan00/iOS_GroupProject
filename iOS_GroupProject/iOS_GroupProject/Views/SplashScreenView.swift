@@ -13,7 +13,6 @@ struct SplashScreenView: View {
     @State var glow = false
     @State var isFinished = false
     
-    
     var body: some View {
         HStack {
             if !isFinished {

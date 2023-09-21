@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-//    @StateObject private var userViewModel = UserViewModel()
+    @StateObject private var userViewModel = UserViewModel()
     
-    @EnvironmentObject var session: SessionStore
+//    @EnvironmentObject var session: SessionStore
     
     var body: some View {
-        //        MainView()
-        LogInView()
+        LogInView(userViewModel : userViewModel)
             .overlay(
                 SplashScreenView()
             )

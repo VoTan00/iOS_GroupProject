@@ -14,11 +14,10 @@ import Foundation
 //    var profilePic: String?
 //}
 
-struct User: Encodable, Decodable {
+struct User: Codable, Identifiable {
     var id: String
     var email: String
-    var profileImageUrl: String
-    var username: String
-    var searchName: [String]
-    var bio: String
+    var profileImageUrl: String?
+    var username: String?
+    var bio: String? = ""
 }

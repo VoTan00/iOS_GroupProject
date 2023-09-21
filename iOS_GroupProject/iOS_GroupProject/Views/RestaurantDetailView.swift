@@ -21,11 +21,7 @@ struct RestaurantDetailView: View{
     
     var restaurant: Restaurant
     
-
     @State private var review = ""
-    
-
-    
     
     var body: some View{
         ScrollView{
