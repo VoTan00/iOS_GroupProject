@@ -9,13 +9,12 @@ import SwiftUI
 import Firebase
 
 struct SignUpView: View {
-    @ObservedObject var userViewModel : UserViewModel
+//    @ObservedObject var userViewModel : UserViewModel
 
 //    @State private var name: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var username: String = ""
-    @State private var cpassword: String = ""
     @State private var profileImage: Image?
     @State private var pickedImage: Image?
     @State private var showingActionSheet = false
@@ -25,17 +24,56 @@ struct SignUpView: View {
     @State var isLinkActive = false
     @State var signUpSuccess: Bool = false
     
+    @State private var error: String = ""
+    @State private var showingAlert = false
+    @State private var alertTitle: String = "Oh No 😭"
+    
     // MARK: SIGN UP FUNC
-    func signUp()  {
-        userViewModel.signUp(email: email, password: password)
-        signUpSuccess = true
-    }
+//    func signUp()  {
+//        userViewModel.signUp(email: email, password: password)
+//        signUpSuccess = true
+//    }
     
     func loadImage() {
         guard let inputImage = pickedImage else {
             return
         }
         profileImage = inputImage
+    }
+    
+    func errorCheck() -> String? {
+        if email.trimmingCharacters(in: .whitespaces).isEmpty ||
+            password.trimmingCharacters(in: .whitespaces).isEmpty ||
+            username.trimmingCharacters(in: .whitespaces).isEmpty ||
+            imageData.isEmpty{
+            return "Please Fill In All Fields And Provide An Image"
+        }
+        return nil
+    }
+    
+    func clear() {
+        self.email = ""
+        self.username = ""
+        self.password = ""
+    }
+    
+    func signUp() {
+        if let error = errorCheck() {
+            self.error = error
+            self.showingAlert = true
+            return
+        }
+        
+        AuthService.signUp(username: username, email: email, password: password, imageData: imageData, onSuccess: {
+            (user) in
+            self.clear()
+        }) {
+            (errorMessage) in
+            print("Error \(errorMessage)")
+            self.error = errorMessage
+            self.showingAlert = true
+            return
+        }
     }
     
     var body: some View {
@@ -100,20 +138,22 @@ struct SignUpView: View {
                             UserTextField(placeHolder: "Name", imageName: "person", bColor: "textColor2", tOpacity: 0.8, value: $username)
                             UserTextField(placeHolder: "Email", imageName: "envelope", bColor: "textColor2", tOpacity: 0.8, value: $email)
                             UserTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor2", tOpacity: 0.8, value: $password)
-                            UserTextField(placeHolder: "Confirm Password", imageName: "lock", bColor: "textColor2", tOpacity: 0.8, value: $cpassword)
+            
                         }
                         
-                        Button(action: {}) {
+                        Button(action: signUp) {
                             Text("Sign Up")
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .frame(height: 58)
-                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .frame(minWidth: 0, maxWidth: 400)
                                 .foregroundColor(Color("Color1"))
                                 .background(Color("Color2"))
                             
                             
                             
+                        }.alert(isPresented: $showingAlert) {
+                            Alert(title: Text(alertTitle), message: Text(error), dismissButton: .default(Text("OK")))
                         }
                         
                         //            HStack{
@@ -153,9 +193,9 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        let userViewModel = UserViewModel()
+//        let userViewModel = UserViewModel()
         
-        return SignUpView(userViewModel: userViewModel)
+        return SignUpView()
     }
 }
 

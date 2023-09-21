@@ -8,12 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var userViewModel = UserViewModel()
+//    @StateObject private var userViewModel = UserViewModel()
+    
+    @EnvironmentObject var session: SessionStore
     
     var body: some View {
         //        MainView()
-        
-        LogInView(userViewModel: userViewModel)
+        LogInView()
+//        Group {
+//            if (session.session != nil) {
+//                HomeView()
+//            }
+//            else {
+//                LogInView()
+//            }
+//        }.onAppear(perform: listen)
         
     }
 }

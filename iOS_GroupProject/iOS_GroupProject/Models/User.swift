@@ -7,9 +7,18 @@
 
 import Foundation
 
-struct User: Codable, Identifiable {
-    var id: String = UUID().uuidString
-    var name: String?
+//struct User: Codable, Identifiable {
+//    var id: String = UUID().uuidString
+//    var name: String?
+//    var email: String
+//    var profilePic: String?
+//}
+
+struct User: Encodable, Decodable {
+    var id: String
     var email: String
-    var profilePic: String?
+    var profileImageUrl: String
+    var username: String
+    var searchName: [String]
+    var bio: String
 }
