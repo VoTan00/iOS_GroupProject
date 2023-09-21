@@ -13,11 +13,11 @@ struct ContentView: View {
     @EnvironmentObject var session: SessionStore
     
     var body: some View {
-        
-        // AddRestaurantButton()
-        
-               MainView()
-//        LogInView()
+        //        MainView()
+        LogInView()
+            .overlay(
+                SplashScreenView()
+            )
 //        Group {
 //            if (session.session != nil) {
 //                HomeView()
@@ -26,7 +26,7 @@ struct ContentView: View {
 //                LogInView()
 //            }
 //        }.onAppear(perform: listen)
-        SplashScreenView()
+        
     }
 }
 
