@@ -36,6 +36,7 @@ struct RestaurantCardView: View {
         }
         .frame(width: 180, height: 260)
         .cornerRadius(15)
+        .shadow(color:Color("Color-black-transparent"), radius: 7)
     }
 }
 

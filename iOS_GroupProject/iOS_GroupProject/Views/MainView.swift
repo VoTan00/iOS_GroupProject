@@ -33,18 +33,21 @@ struct MainView: View {
             ListView(restaurantViewModel : restaurantViewModel)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background()
+                .padding(.bottom, 40)
                 .tag(Tab.Favourite)
             
             // MARK: POSTVIEW
             Text("Post")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background()
+                .padding(.bottom, 40)
                 .tag(Tab.Post)
             
             // MARK: PROFILEVIEW
             Text("Profile")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background()
+                .padding(.bottom, 40)
                 .tag(Tab.Account)
 
 //            ProfileView(userViewModel: userViewModel)

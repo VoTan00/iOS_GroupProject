@@ -10,7 +10,6 @@ import SwiftUI
 struct RestaurantDetailView: View{
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var context
-    
     @State private var isPickerShowing = false
     @State private var selectedImage = UIImage?.self
     @State private var showReview = false
@@ -22,7 +21,11 @@ struct RestaurantDetailView: View{
     
     var restaurant: Restaurant
     
+
     @State private var review = ""
+    
+
+    
     
     var body: some View{
         ScrollView{
@@ -60,33 +63,33 @@ struct RestaurantDetailView: View{
                             .foregroundColor(.black)
                             .padding()
                         }
-                        
+
                     }
                 }
-            
+
             RatingStarsView(rating: $rating)
 //            Text(restaurant.reviews?.content ?? "")
-//                .padding()
-            
+                .padding()
+
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     Text("ADDRESS")
                         .font(.system(.headline, design: .rounded))
-                    
+
                     Text(restaurant.address ?? "")
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                
+
                 VStack(alignment: .leading) {
                     Text("PHONE")
                         .font(.system(.headline, design: .rounded))
-                    
+
                     Text(restaurant.phone ?? "")
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
             }
             .padding(.horizontal)
-            
+
             NavigationLink(
                 destination:
                     MapView(location: restaurant.address ?? "")
@@ -111,7 +114,7 @@ struct RestaurantDetailView: View{
             .controlSize(.large)
             .padding(.horizontal)
             .padding(.bottom, 20)
-            
+
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -128,10 +131,10 @@ struct RestaurantDetailView: View{
             Form{
                 Section{
                     TextEditor(text: $review)
-                    
+
                     //Complex version with star image
                     RatingStarsView(rating: $rating)
-                    
+
                     /*: Simple version without star image
                     Picker("Rating", selection: $rating){
                         Simple version without star image
@@ -139,7 +142,7 @@ struct RestaurantDetailView: View{
                             Text(String($0))
                         }
                     } */
-                    
+
                 } header : {
                     Text("Review")
                 }
@@ -155,8 +158,6 @@ struct RestaurantDetailView: View{
 
 }
         
-    
-
 struct RestaurantDetailPreview_Preview: PreviewProvider{
     static var previews: some View {
         RestaurantDetailView(restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", img: "KFC", description: "example", category: "Chinese", date: NSDate() as Date, author: "new", rating: 3.5))

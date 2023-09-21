@@ -34,6 +34,7 @@ struct SearchView: View {
                 .foregroundColor(.black)
         }
         .padding(.horizontal)
+        .shadow(color:Color("Color-black-transparent"), radius: 7)
     }
 }
 //

@@ -171,6 +171,7 @@ struct FilterOptionView: View {
             .frame(maxHeight: .infinity, alignment: .bottom)
             .edgesIgnoringSafeArea(.bottom)
         }
+        .shadow(color:Color("Color-black-transparent"), radius: 7)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: BackButton(action: {presentationMode.wrappedValue.dismiss()}), trailing: Image("threeDot"))
     }
