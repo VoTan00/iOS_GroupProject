@@ -59,6 +59,24 @@ struct RestaurantDetailView: View{
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomLeading)
                             .foregroundColor(.black)
                             .padding()
+                            
+                            Button {
+                                userViewModel.updateFavList(resId: restaurant.id)
+                //                userViewModel.fetchUser(uid: userViewModel.currentUser!.id)
+                            } label: {
+                                if (userViewModel.currentUser != nil) {
+                                    Image(systemName: (userViewModel.currentUser?.favList?.contains(restaurant.id))! ? "heart.fill" : "heart")
+                                        .resizable()
+                                        .foregroundColor(Color(.red))
+                                        .frame(width: 30, height: 30)
+                                } else {
+                                    Image(systemName: "heart")
+                                        .resizable()
+                                        .foregroundColor(Color(.red))
+                                        .frame(width: 30, height: 30)
+                                }
+                            }
+                            .padding()
                         }
 
                     }
@@ -67,18 +85,6 @@ struct RestaurantDetailView: View{
             RatingStarsView(rating: $rating)
 //            Text(restaurant.reviews?.content ?? "")
                 .padding()
-                
-            Button {
-                userViewModel.updateFavList(resId: restaurant.id)
-                userViewModel.fetchUser(uid: userViewModel.currentUser!.id)
-            } label: {
-                Image(systemName: (userViewModel.currentUser?.favList?.contains(restaurant.id))! ? "heart.fill" : "heart")
-                    .resizable()
-                    .foregroundColor(Color(.red))
-                    .frame(width: 50, height: 50)
-            }
-
-                
                 
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {

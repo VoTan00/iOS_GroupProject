@@ -47,7 +47,6 @@ struct RestaurantPostCardView: View {
             .confirmationDialog("Are you sure?", isPresented: $isShowingAlert, titleVisibility: .visible) {
                 Button("Delete", role: .destructive) {
                     restaurantViewModel.deleteRestaurant(restaurantID: restaurant.id)
-                    print("RES DELETED!")
                 }
             }
         }
