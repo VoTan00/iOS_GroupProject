@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RestaurantDetailView: View{
+    @EnvironmentObject var userViewModel: UserViewModel
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var context
     @State private var isPickerShowing = false
@@ -66,7 +67,19 @@ struct RestaurantDetailView: View{
             RatingStarsView(rating: $rating)
 //            Text(restaurant.reviews?.content ?? "")
                 .padding()
+                
+            Button {
+                userViewModel.updateFavList(resId: restaurant.id)
+                userViewModel.fetchUser(uid: userViewModel.currentUser!.id)
+            } label: {
+                Image(systemName: (userViewModel.currentUser?.favList?.contains(restaurant.id))! ? "heart.fill" : "heart")
+                    .resizable()
+                    .foregroundColor(Color(.red))
+                    .frame(width: 50, height: 50)
+            }
 
+                
+                
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     Text("ADDRESS")
@@ -157,6 +170,7 @@ struct RestaurantDetailView: View{
 struct RestaurantDetailPreview_Preview: PreviewProvider{
     static var previews: some View {
         RestaurantDetailView(restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", img: "KFC", description: "example", category: "Chinese", date: NSDate() as Date, author: "new", rating: 3.5))
+            .environmentObject(UserViewModel())
     }
 
 }

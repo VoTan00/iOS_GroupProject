@@ -34,22 +34,57 @@ class UserViewModel: ObservableObject {
                 let email = data["email"] as? String ?? ""
                 let profileImageUrl = data["profileImageUrl"] as? String ?? ""
                 let bio = data["bio"] as? String ?? ""
-                return User(id: id, email: email, profileImageUrl: profileImageUrl, username: username, bio: bio)
+                let favList = data["favList"] as? [String] ?? []
+                return User(id: id, email: email, profileImageUrl: profileImageUrl, username: username, bio: bio, favList: favList)
             }
         }
     }
 
     // MARK: update current user
-    func updateCurrentUser(username: String, profileImageUrl: String, bio: String) {
+    func updateCurrentUser(username: String, profileImageUrl: String, bio: String, favList: [String]) {
         // allow user to update username and profile pic
         let userRef = db.collection("users").document(currentUser!.id)
-        userRef.updateData(["username": username, "profileImageUrl": profileImageUrl, "bio": bio])
+        userRef.updateData(["username": username, "profileImageUrl": profileImageUrl, "bio": bio, "favList": favList])
+    }
+    
+    // MARK: update FAVOURITE LIST current user
+    func updateFavList(resId: String) {
+        // allow user to update username and profile pic
+//        print([])
+        var favList = currentUser?.favList as? [String] ?? []
+
+        if !(favList.contains(resId)) {
+            favList.append(resId)
+            print(resId)
+        } else {
+            if let index = favList.firstIndex(of: resId) {
+                favList.remove(at: index)
+            }
+        }
+//
+        print(favList)
+        let userRef = db.collection("users").document(currentUser!.id)
+        print(userRef)
+        userRef.updateData(["favList": favList])
+    }
+    
+    func removeResInFavList(resId: String) {
+        // allow user to update username and profile pic
+        var newList = currentUser?.favList as? [String] ?? []
+        if !newList.contains(resId) {
+            print("no res to remove")
+        } else {
+            newList = newList.filter { $0 != resId }
+        }
+        
+        let userRef = db.collection("users").document(currentUser!.id)
+        userRef.updateData(["username": currentUser?.username!, "profileImageUrl": currentUser?.profileImageUrl!, "bio": currentUser?.bio!, "favList": newList])
     }
 
     // MARK: add user
     func addUserToFirestore(user: User) {
         let userRef = db.collection("users").document(user.id)
-        userRef.setData(["email": user.email, "username": user.username , "profileImageUrl": user.profileImageUrl , "bio": user.bio ])
+        userRef.setData(["email": user.email, "username": user.username , "profileImageUrl": user.profileImageUrl , "bio": user.bio, "favList": user.favList ])
     }
 
     // MARK: sign up
@@ -83,7 +118,7 @@ class UserViewModel: ObservableObject {
 
             if let document = document, document.exists {
                 if let data = document.data() {
-                    let user = User(id: uid, email: data["email"] as! String, profileImageUrl: data["profileImageUrl"] as? String, username: data["name"] as? String)
+                    let user = User(id: uid, email: data["email"] as! String, profileImageUrl: data["profileImageUrl"] as? String, username: data["name"] as? String, favList: data["favList"] as? [String])
                     self.currentUser = user
                 }
             } else {
