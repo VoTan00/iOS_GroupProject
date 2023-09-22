@@ -106,7 +106,7 @@ struct AddRestaurantButton: View {
                     .navigationBarItems(trailing: Button("Cancel") {
                         isShowingAddRestaurantSheet.toggle()
                     })
-                }
+                }.navigationBarHidden(true)
             }
         }
     }

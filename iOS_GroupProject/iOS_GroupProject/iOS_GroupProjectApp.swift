@@ -10,6 +10,7 @@ import Firebase
 
 @main
 struct iOS_GroupProjectApp: App {
+    @StateObject var userViewModel = UserViewModel()
     
     init() {
         FirebaseApp.configure();
@@ -17,6 +18,7 @@ struct iOS_GroupProjectApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(userViewModel)
         }
     }
 }

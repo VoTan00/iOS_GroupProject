@@ -84,7 +84,7 @@ struct LogInView: View {
                     }
                 }
             }.padding()
-        }
+        }.navigationBarHidden(true)
     }
 }
 
