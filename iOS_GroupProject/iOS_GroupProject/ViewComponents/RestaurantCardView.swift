@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RestaurantCardView: View {
+    @StateObject var restaurantViewModel = RestaurantViewModel()
     var restaurant: Restaurant
     var body: some View {
         ZStack{
@@ -15,7 +16,7 @@ struct RestaurantCardView: View {
             
             ZStack(alignment: .bottomTrailing) {
                 VStack(alignment: .leading) {
-                    Image("KFC")
+                    Image(uiImage: restaurantViewModel.im)
                         .resizable()
                         .frame(width: 175, height: 160)
                         .cornerRadius(12)
@@ -37,6 +38,9 @@ struct RestaurantCardView: View {
         .frame(width: 180, height: 260)
         .cornerRadius(15)
         .shadow(color:Color("Color-black-transparent"), radius: 7)
+        .onAppear{
+            restaurantViewModel.retrieveImage(resId: restaurant.id)
+        }
     }
 }
 
