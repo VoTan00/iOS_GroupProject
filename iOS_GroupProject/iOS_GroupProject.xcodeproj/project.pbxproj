@@ -31,6 +31,7 @@
 		6476C5762ABDDCB300E082CB /* ReviewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6476C5742ABDDCB000E082CB /* ReviewListView.swift */; };
 		6476C5772ABDDCB300E082CB /* ReviewRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6476C5752ABDDCB300E082CB /* ReviewRowView.swift */; };
 		6476C57B2ABDDD1C00E082CB /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6476C57A2ABDDD1C00E082CB /* ReviewViewModel.swift */; };
+		6476C57F2ABDE76100E082CB /* ReviewFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6476C57E2ABDE76100E082CB /* ReviewFormView.swift */; };
 		64A137E82AB83C8400D798F4 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A137E72AB83C8400D798F4 /* ListView.swift */; };
 		64A137EA2AB83CA600D798F4 /* RatingStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A137E92AB83CA600D798F4 /* RatingStarView.swift */; };
 		64A137EC2AB83CBD00D798F4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A137EB2AB83CBD00D798F4 /* MainView.swift */; };
@@ -75,6 +76,7 @@
 		6476C5742ABDDCB000E082CB /* ReviewListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewListView.swift; sourceTree = "<group>"; };
 		6476C5752ABDDCB300E082CB /* ReviewRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewRowView.swift; sourceTree = "<group>"; };
 		6476C57A2ABDDD1C00E082CB /* ReviewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
+		6476C57E2ABDE76100E082CB /* ReviewFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFormView.swift; sourceTree = "<group>"; };
 		64A137E72AB83C8400D798F4 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		64A137E92AB83CA600D798F4 /* RatingStarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingStarView.swift; sourceTree = "<group>"; };
 		64A137EB2AB83CBD00D798F4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				64A137EB2AB83CBD00D798F4 /* MainView.swift */,
 				AE2A44212ABC4CAE009F325E /* SplashScreenView.swift */,
 				18B87F0C2ABC731400661A1B /* PostsView.swift */,
+				6476C57E2ABDE76100E082CB /* ReviewFormView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				64A137EA2AB83CA600D798F4 /* RatingStarView.swift in Sources */,
 				AE2A44202ABC338B009F325E /* FavouriteRestaurantCardView.swift in Sources */,
 				A3A60F182AB6164600BD8083 /* LogInView.swift in Sources */,
+				6476C57F2ABDE76100E082CB /* ReviewFormView.swift in Sources */,
 				18211F032AB4523000004F3E /* Restaurant.swift in Sources */,
 				A3A60F142AB6163300BD8083 /* UserView.swift in Sources */,
 				21633A592ABBAAFF0098BD66 /* Extensions.swift in Sources */,
