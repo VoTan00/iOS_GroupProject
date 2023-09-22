@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct RestaurantPostCardView: View {
+    @StateObject var restaurantViewModel = RestaurantViewModel()
     var restaurant: Restaurant
+    @State private var isShowingAlert = false
     var body: some View {
         HStack(spacing: 20){
             Image("KFC")
@@ -28,12 +30,28 @@ struct RestaurantPostCardView: View {
             .padding()
             
             Spacer()
+            NavigationLink {
+                ResUpdateSheet(restaurant: restaurant)
+            } label: {
+                Image(systemName: "pencil")
+                    .foregroundColor(.blue)
+            }
+
             
-            Image(systemName: "pencil")
-                .foregroundColor(.blue)
+            Button {
+                isShowingAlert = true
+            } label: {
+                Image(systemName: "trash")
+                    .foregroundColor(.red)
+            }
+            .confirmationDialog("Are you sure?", isPresented: $isShowingAlert, titleVisibility: .visible) {
+                Button("Delete", role: .destructive) {
+                    restaurantViewModel.deleteRestaurant(restaurantID: restaurant.id)
+                    print("RES DELETED!")
+                }
+            }
+
             
-            Image(systemName: "trash")
-                .foregroundColor(.red)
 //                .onTapGesture {
 //
 //                }
@@ -47,8 +65,8 @@ struct RestaurantPostCardView: View {
     }
 }
 
-//struct RestaurantPostCardView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RestaurantPostCardView()
-//    }
-//}
+struct RestaurantPostCardView_Previews: PreviewProvider {
+    static var previews: some View {
+        RestaurantPostCardView(restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", img: "KFC", description: "example", category: "Chinese", date: NSDate() as Date, author: "new", rating: 3.5))
+    }
+}
