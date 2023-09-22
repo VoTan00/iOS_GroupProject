@@ -75,6 +75,7 @@ struct HomeView: View {
                 }
             }
         }
+        .navigationBarHidden(true)
         .onAppear{
             restaurantViewModel.filteredArray = restaurantViewModel.restaurants
         }

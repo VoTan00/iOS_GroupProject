@@ -35,7 +35,7 @@ struct ListView: View {
                     }
                     .navigationTitle(Text("Favourite List"))
                 }
-            }
+            }.navigationBarHidden(true)
         }
         
 //        ZStack {

@@ -14,6 +14,7 @@ struct ProfileView: View {
         VStack {
             Text("Name: \(userViewModel.currentUser?.username ?? "username")")
             Text("Email: \(userViewModel.currentUser?.email ?? "email")")
+            Text("UID: \(userViewModel.currentUser?.id ?? "id")")
         }
     }
 }

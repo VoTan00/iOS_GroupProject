@@ -12,7 +12,6 @@ struct PostsView: View {
     @ObservedObject var restaurantViewModel : RestaurantViewModel
     @State private var gridLayout: [GridItem] = [GridItem(.flexible())]
     
-    
     var body: some View {
         ZStack {
             NavigationView {
@@ -36,7 +35,7 @@ struct PostsView: View {
                     }
                     .navigationTitle(Text("Restaurants Posts"))
                 }
-            }
+            }.navigationBarHidden(true)
             
             // AddRestaurantButton()
         }

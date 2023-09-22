@@ -108,7 +108,7 @@ struct ResUpdateSheet: View {
                 }
             }
             .navigationTitle("Update Restaurant")
-        }
+        }.navigationBarHidden(true)
     }
 }
 
