@@ -12,7 +12,7 @@ struct MainView: View {
     @State var currentTab: Tab = .Home
     
     @StateObject var restaurantViewModel = RestaurantViewModel()
-//    @ObservedObject var userViewModel : UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     init(){
         UITabBar.appearance().isHidden = true
@@ -44,16 +44,10 @@ struct MainView: View {
                 .tag(Tab.Post)
             
             // MARK: PROFILEVIEW
-            Text("Profile")
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background()
-                .padding(.bottom, 40)
-                .tag(Tab.Account)
-
-//            ProfileView(userViewModel: userViewModel)
-//                .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                .background()
-//                .tag(Tab.Account)
+           ProfileView()
+               .frame(maxWidth: .infinity, maxHeight: .infinity)
+               .background()
+               .tag(Tab.Account)
         }
         .overlay(
             // MARK: NAV BAR
@@ -112,6 +106,7 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+            .environmentObject(UserViewModel())
     }
 }
 

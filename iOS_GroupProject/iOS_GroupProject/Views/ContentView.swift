@@ -8,30 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var userViewModel = UserViewModel()
-    
-//    @EnvironmentObject var session: SessionStore
-    
+    @EnvironmentObject var userViewModel: UserViewModel
+        
     var body: some View {
-        LogInView(userViewModel : userViewModel)
+        LogInView()
             .overlay(
                 SplashScreenView()
             )
-//        Group {
-//            if (session.session != nil) {
-//                HomeView()
-//            }
-//            else {
-//                LogInView()
-//            }
-//        }.onAppear(perform: listen)
-        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(UserViewModel())
     }
 }
 

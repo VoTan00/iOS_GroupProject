@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 struct LogInView: View {
-    @ObservedObject var userViewModel : UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     
     @State private var email: String = ""
@@ -27,39 +27,6 @@ struct LogInView: View {
         userViewModel.login(email: email, password: password)
         loginSuccess = true
     }
-    
-    //    func errorCheck() -> String? {
-    //        if email.trimmingCharacters(in: .whitespaces).isEmpty ||
-    //            password.trimmingCharacters(in: .whitespaces).isEmpty{
-    //            return "Please Fill In All Fields And Provide An Image"
-    //        }
-    //        return nil
-    //    }
-    //
-    //    func clear() {
-    //        self.email = ""
-    //        self.password = ""
-    //    }
-    //
-    //    func signIn() {
-    //        if let error = errorCheck() {
-    //            self.error = error
-    //            self.showingAlert = true
-    //            return
-    //        }
-    //
-    //        AuthService.signIn(email: email, password: password, onSuccess: {
-    //            (user) in
-    //            self.clear()
-    //        }) {
-    //            (errorMessage) in
-    //            print("Error \(errorMessage)")
-    //            self.error = errorMessage
-    //            self.showingAlert = true
-    //            return
-    //        }
-    //    }
-    
     
     var body: some View {
         NavigationView {
@@ -94,19 +61,6 @@ struct LogInView: View {
                 
                 UserTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor1", tOpacity: 0.6, value: $password)
                 
-                //                // MARK: LOGIN BUTTON
-                //                Button(action: login) {
-                //                    Text("Log In").font(.title)
-                //                        .fontWeight(.bold)
-                //                        .frame(height: 58)
-                //                        .frame(minWidth: 0, maxWidth: .infinity)
-                //                        .foregroundColor(Color("Color2"))
-                //                        .background(Color("Color1"))
-                //
-                //                }.alert(isPresented: $showingAlert) {
-                //                    Alert(title: Text(alertTitle), message: Text(error), dismissButton: .default(Text("OK")))
-                //                }
-                
                 // MARK: LOGIN BUTTON
                 NavigationLink(destination: MainView(), isActive: $loginSuccess){
                     Button(action: {
@@ -124,7 +78,7 @@ struct LogInView: View {
                 // MARK: SIGN UP BUTTON
                 HStack{
                     Text("New?")
-                    NavigationLink(destination: SignUpView(userViewModel: userViewModel)) {
+                    NavigationLink(destination: SignUpView()) {
                         Text("Create An Account").font(.system(size: 20, weight: .semibold))
                         
                     }
@@ -136,8 +90,7 @@ struct LogInView: View {
 
 struct LogInView_Previews: PreviewProvider {
     static var previews: some View {
-        let userViewModel = UserViewModel()
-        
-        return LogInView(userViewModel: userViewModel)
+        LogInView()
+            .environmentObject(UserViewModel())
     }
 }

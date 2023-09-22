@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 struct SignUpView: View {
-    @ObservedObject var userViewModel : UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     @State private var email: String = ""
     @State private var password: String = ""
@@ -28,26 +28,8 @@ struct SignUpView: View {
     var body: some View {
         NavigationView {
             ZStack (alignment: .topLeading){
-                //                Color("Color1").ignoresSafeArea()
                 VStack {
                     VStack (spacing: 40) {
-                        //                        ZStack {
-                        //                            Ellipse()
-                        //                                .frame(width: 458, height: 420)
-                        //                                .padding(.trailing, -500)
-                        //                                .foregroundColor(Color("Color2"))
-                        //                                .padding(.top, -200)
-                        //
-                        //                            Text("Create \nAccount")
-                        //                                .foregroundColor(.white)
-                        //                                .font(.system(size: 50))
-                        //                                .fontWeight(.bold)
-                        //                                .multilineTextAlignment(.leading)
-                        //                                .frame(maxWidth: .infinity, alignment: .leading)
-                        //                                .padding(.leading, 20)
-                        //                                .padding(.top, 100)
-                        //                        }
-                        
                         ZStack {
                             Ellipse()
                                 .frame(width: 510, height: 478)
@@ -105,7 +87,7 @@ struct SignUpView: View {
                             .fontWeight(.bold)
                             .foregroundColor(Color("textColor1"))
                             .font(.system(size: 18))
-                        NavigationLink(destination: LogInView(userViewModel: userViewModel), isActive: $isLinkActive){
+                        NavigationLink(destination: LogInView(), isActive: $isLinkActive){
                             Button(action: {
                                 self.isLinkActive = true
                             }, label: {
@@ -131,9 +113,9 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        let userViewModel = UserViewModel()
         
-        return SignUpView(userViewModel: userViewModel)
+        SignUpView()
+            .environmentObject(UserViewModel())
     }
 }
 
