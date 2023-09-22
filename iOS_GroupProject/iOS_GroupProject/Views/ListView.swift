@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ListView: View {
+    @EnvironmentObject var userViewModel: UserViewModel
     @ObservedObject var restaurantViewModel : RestaurantViewModel
     @State private var gridLayout: [GridItem] = [GridItem(.flexible())]
     
@@ -19,78 +20,29 @@ struct ListView: View {
                     Color("Color2").ignoresSafeArea(.all, edges: .all)
                     
                     ScrollView{
-                        if restaurantViewModel.restaurants.count > 0 {
-                            ForEach(restaurantViewModel.restaurants, id: \.id) {res in
-                                NavigationLink{
-                                    RestaurantDetailView(restaurant: res)
-                                } label:
-                                {
-                                    FavouriteRestaurantCardView(restaurant: res)
+                        if (userViewModel.currentUser != nil) {
+                            if (userViewModel.currentUser?.favList?.count)! > 0 {
+                                ForEach(0..<(userViewModel.currentUser?.favList?.count)!, id: \.self) {res in
+                                    NavigationLink{
+                                        RestaurantDetailView(restaurant: restaurantViewModel.getRestaurantByID(restaurantID: (userViewModel.currentUser?.favList?[res])!))
+                                    } label:
+                                    {
+                                        FavouriteRestaurantCardView(restaurant: restaurantViewModel.getRestaurantByID(restaurantID: (userViewModel.currentUser!.favList![res])))
+                                    }
+                                    .buttonStyle(.plain)
                                 }
-                                .buttonStyle(.plain)
+                            } else {
+                                Text("Your favoutite list is empty!")
                             }
                         } else {
-                            Text("Your favoutite list is empty!")
+                            Text("Please log in to see favourite list!")
                         }
+//
                     }
                     .navigationTitle(Text("Favourite List"))
                 }
             }.navigationBarHidden(true)
         }
-        
-//        ZStack {
-//            NavigationView {
-//                ZStack {
-//                    Color("taco-yellow").ignoresSafeArea(.all, edges: .all)
-//
-//                    ScrollView {
-//                        LazyVGrid(columns: gridLayout, alignment: .center, spacing: 30) {
-//                            ForEach(restaurantViewModel.restaurants) { restaurant in
-//                                NavigationLink{
-//                                    RestaurantDetailView(restaurant: restaurant)
-//                                } label:
-//                                {
-//                                    VStack {
-//                                        Image("KFC")
-//                                            .resizable()
-//                                            .scaledToFill()
-//                                            .frame(minWidth: 0, maxWidth: .infinity)
-//                                            .frame(height: 200)
-//                                            .cornerRadius(10)
-//                                            .shadow(color: Color.primary.opacity(0.3), radius: 1)
-//
-//                                        VStack(spacing: 5) {
-//                                            Text(restaurant.name ?? "")
-//                                                .font(.system(size: 20).bold())
-//
-//                                            if (gridLayout.count == 1) {
-//                                                Text(restaurant.phone ?? "")
-//                                            }
-//                                        }
-//                                        .frame(height: 80)
-//                                    }
-//                                    .foregroundColor(.black)
-//
-//                                }
-//                            }
-//                        }
-//                        .padding(.all, 20)
-//                    }
-//                }
-//                .navigationTitle("Taco Places")
-//                .toolbar {
-//                    ToolbarItem(placement: .navigationBarTrailing) {
-//                        Button(action: {
-//                            self.gridLayout = Array(repeating: .init(.flexible()), count: self.gridLayout.count % 2 + 1)
-//                        }) {
-//                            Image(systemName: "circle.grid.2x2")
-//                                .font(.title)
-//                                .foregroundColor(.primary)
-//                        }
-//                    }
-//                }
-//            }
-//        }
     }
 }
  
@@ -98,6 +50,7 @@ struct ListView_Previews: PreviewProvider {
     static var previews: some View {
         let restaurantViewModel = RestaurantViewModel()
         
-        return ListView(restaurantViewModel: restaurantViewModel)
+        ListView(restaurantViewModel: restaurantViewModel)
+            .environmentObject(UserViewModel())
     }
 }

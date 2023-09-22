@@ -202,8 +202,8 @@ class RestaurantViewModel: ObservableObject {
         }
     }
     
-    func getRestaurantByID(restaurantID: String) -> Restaurant? {
-        return restaurants.first(where: { $0.id == restaurantID })
+    func getRestaurantByID(restaurantID: String) -> Restaurant {
+        return restaurants.first(where: { $0.id == restaurantID })!
     }
      
     func getFilteredRestaurants(selectedCategory: String) -> [Restaurant]{

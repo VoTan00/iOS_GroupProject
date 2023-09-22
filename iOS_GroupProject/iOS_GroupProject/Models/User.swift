@@ -20,4 +20,5 @@ struct User: Codable, Identifiable {
     var profileImageUrl: String?
     var username: String?
     var bio: String? = ""
+    var favList: [String]?
 }
