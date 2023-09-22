@@ -88,6 +88,12 @@ struct ProfileView: View {
                 Text("UID: \(userViewModel.currentUser?.id ?? "id")")
                 
             }
+            .onAppear {
+                // Load values from userViewModel when the view appears
+                name = userViewModel.currentUser?.username ?? ""
+                email = userViewModel.currentUser?.email ?? ""
+                bio = userViewModel.currentUser?.bio ?? ""
+            }
         }
     }
     
@@ -103,3 +109,4 @@ struct ProfileView_Previews: PreviewProvider {
 }
 
 
+ 

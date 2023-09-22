@@ -15,6 +15,8 @@ struct ContentView: View {
             .overlay(
                 SplashScreenView()
             )
+        
+        //ProfileView()
     }
 }
 
