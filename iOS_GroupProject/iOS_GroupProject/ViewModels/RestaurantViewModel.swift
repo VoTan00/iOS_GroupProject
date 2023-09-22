@@ -26,6 +26,7 @@ class RestaurantViewModel: ObservableObject {
     @Published var selectedSort = "None"
     @Published var filteredArray = [Restaurant]()
     
+    @Published var im = UIImage ()
     
     private var db = Firestore.firestore()
     
@@ -75,27 +76,84 @@ class RestaurantViewModel: ObservableObject {
         }
     }
     
-    func addRestaurant(name: String, address: String, hours: String, phone: String, img: String, description: String, category: String, date: Date, author: String) {
+    // MARK: RETRIEVE IMAGE FUNC for a restaurant
+    func retrieveImage(resId: String) {
+        db.collection("restaurants").getDocuments { snapshot, error in
+            
+            if error == nil && snapshot != nil {
+                
+                var path = String ()
+                
+                for doc in snapshot!.documents {
+                    // extract the file path
+                    if doc["img"] != nil {
+                        if doc.documentID == resId {
+                            path = doc["img"] as! String
+                        }
+                    }
+                    
+                }
+                
+                // fetch data from storage
+                let storageRef = Storage.storage().reference()
+                
+                let  fileRef = storageRef.child(path)
+                
+                fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                    
+                    if error == nil && data != nil {
+                        
+                        if let image = UIImage(data: data!) {
+                            DispatchQueue.main.async {
+                                self.im = image
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    func addRestaurant(name: String, address: String, hours: String, phone: String, img: UIImage, description: String, category: String, date: Date, author: String) {
         do {
-            let restaurantData: [String: Any] = [
+            var restaurantData: [String: Any] = [
                 "name": name,
                 "address": address,
                 "hours": hours,
                 "phone": phone,
-                "img": img,
+                "img": "",
                 "description": description,
                 "category": category,
                 "date": date,
                 "author": author
             ]
             
+            // create storage reference
+            let storageRef = Storage.storage().reference()
+            
+            // turn image into data
+            let imageData = img.jpegData(compressionQuality: 0.8)
+            
+            // specify the file path and name
+            let path = "images/\(UUID().uuidString).jpg"
+            let fileRef = storageRef.child(path)
+            
+            restaurantData["img"] = path
+
+            // upload data
+            fileRef.putData(imageData!, metadata: nil) {metadata, error in
+                if let error = error {
+                    print("Failed to push image: \(error)")
+                    return
+                }
+            }
+            
             db.collection("restaurants").addDocument(data: restaurantData) { error in
                 if let error = error {
                     print("Error adding restaurant to Firestore: \(error)")
                     return
                 }
-                
-                // Restaurant added successfully
                 print("Restaurant added successfully!")
             }
         } catch {

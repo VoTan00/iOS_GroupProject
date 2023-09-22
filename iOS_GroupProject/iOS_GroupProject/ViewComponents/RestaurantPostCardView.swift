@@ -13,7 +13,7 @@ struct RestaurantPostCardView: View {
     @State private var isShowingAlert = false
     var body: some View {
         HStack(spacing: 20){
-            Image("KFC")
+            Image(uiImage: restaurantViewModel.im)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 70)
@@ -50,11 +50,6 @@ struct RestaurantPostCardView: View {
                     print("RES DELETED!")
                 }
             }
-
-            
-//                .onTapGesture {
-//
-//                }
         }
         .padding(.horizontal)
         .background(Color("Color1"))
@@ -62,6 +57,9 @@ struct RestaurantPostCardView: View {
         .frame(width: .infinity, alignment: .leading)
         .shadow(color:Color("Color-black-transparent"), radius: 7)
         .padding()
+        .onAppear{
+            restaurantViewModel.retrieveImage(resId: restaurant.id)
+        }
     }
 }
 

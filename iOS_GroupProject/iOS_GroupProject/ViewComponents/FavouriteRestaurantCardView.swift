@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct FavouriteRestaurantCardView: View {
+    @StateObject var restaurantViewModel = RestaurantViewModel()
     var restaurant: Restaurant
     var body: some View {
         HStack(spacing: 20){
-            Image("KFC")
+            Image(uiImage: restaurantViewModel.im)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 70)
@@ -41,6 +42,9 @@ struct FavouriteRestaurantCardView: View {
         .frame(width: .infinity, alignment: .leading)
         .shadow(color:Color("Color-black-transparent"), radius: 7)
         .padding()
+        .onAppear{
+            restaurantViewModel.retrieveImage(resId: restaurant.id)
+        }
     }
 }
 

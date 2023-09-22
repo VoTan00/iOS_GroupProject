@@ -19,17 +19,72 @@ struct ResUpdateSheet: View {
     @State private var description: String = ""
     @State private var category: String = ""
     
+    @State var showImagePicker = false
+    @State var image: UIImage?
     var body: some View {
         NavigationView {
             Form {
+                Section {
+                    VStack{
+                        // MARK: CHOOSE IMAGE BUTTON
+                        Button {
+                            showImagePicker.toggle()
+                        } label: {
+                            
+                            VStack{
+                                if let image = self.image {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 64, height: 64)
+                                        .cornerRadius(32)
+                                } else {
+                                    Image(uiImage: restaurantViewModel.im)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 64, height: 64)
+                                        .cornerRadius(32)
+                                }
+                                
+                            }.overlay(RoundedRectangle(cornerRadius: 64)
+                                .stroke(Color.black, lineWidth: 3))
+                            
+                            
+                        }
+                        
+                    }.fullScreenCover(isPresented: $showImagePicker, onDismiss: nil){
+                        ImagePicker(image: $image)
+                    }
+                    .onAppear{
+                        restaurantViewModel.retrieveImage(resId: restaurant.id)
+                    }
+                }
+                
                 Section(header: Text("Restaurant Details")) {
                     TextField("Name", text: $name)
+                        .onAppear{
+                            name = restaurant.name!
+                        }
                     TextField("Address", text: $address)
+                        .onAppear{
+                            address = restaurant.address!
+                        }
                     TextField("Hours", text: $hours)
+                        .onAppear{
+                            hours = restaurant.hours!
+                        }
                     TextField("Phone", text: $phone)
+                        .onAppear{
+                            phone = restaurant.phone!
+                        }
                     TextField("Description", text: $description)
+                        .onAppear{
+                            description = restaurant.description!
+                        }
                     TextField("Category", text: $category)
-                    
+                        .onAppear{
+                            category = restaurant.category!
+                        }
                 }
                  
                 Section {
@@ -40,13 +95,13 @@ struct ResUpdateSheet: View {
                          
                          
                         restaurantViewModel.updateRestaurant(restaurantID: restaurant.id, name: name, address: address, hours: hours, phone: phone, img: "test", description: description, category: category, date: Calendar.current.startOfDay(for: Date()), author: "tester")
-                        // Clear the input fields
-                        name = ""
-                        address = ""
-                        hours = ""
-                        phone = ""
-                        description = ""
-                        category = ""
+//                        // Clear the input fields
+//                        name = ""
+//                        address = ""
+//                        hours = ""
+//                        phone = ""
+//                        description = ""
+//                        category = ""
                     }) {
                         Text("Update")
                     }
