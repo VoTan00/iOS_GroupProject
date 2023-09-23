@@ -50,35 +50,20 @@ class UserViewModel: ObservableObject {
     // MARK: update FAVOURITE LIST current user
     func updateFavList(resId: String) {
         // allow user to update username and profile pic
-//        print([])
-        var favList = currentUser?.favList as? [String] ?? []
+        if currentUser != nil {
+            var favList = currentUser?.favList as? [String] ?? []
 
-        if !(favList.contains(resId)) {
-            favList.append(resId)
-            print(resId)
-        } else {
-            if let index = favList.firstIndex(of: resId) {
-                favList.remove(at: index)
+            if !(favList.contains(resId)) {
+                favList.append(resId)
+            } else {
+                if let index = favList.firstIndex(of: resId) {
+                    favList.remove(at: index)
+                }
             }
+
+            let userRef = db.collection("users").document(currentUser!.id)
+            userRef.updateData(["favList": favList])
         }
-//
-        print(favList)
-        let userRef = db.collection("users").document(currentUser!.id)
-        print(userRef)
-        userRef.updateData(["favList": favList])
-    }
-    
-    func removeResInFavList(resId: String) {
-        // allow user to update username and profile pic
-        var newList = currentUser?.favList as? [String] ?? []
-        if !newList.contains(resId) {
-            print("no res to remove")
-        } else {
-            newList = newList.filter { $0 != resId }
-        }
-        
-        let userRef = db.collection("users").document(currentUser!.id)
-        userRef.updateData(["username": currentUser?.username!, "profileImageUrl": currentUser?.profileImageUrl!, "bio": currentUser?.bio!, "favList": newList])
     }
 
     // MARK: add user

@@ -24,7 +24,7 @@ struct RestaurantDetailView: View{
     @StateObject var reviewviewmodel = ReviewViewModel()
     
     @State private var reviews: [Review] = []
-    var selectedRestaurantID: String
+    var restaurant: Restaurant
     
 
     @State private var review = ""
@@ -58,14 +58,34 @@ struct RestaurantDetailView: View{
                     VStack{
                         HStack(alignment: .bottom) {
                             VStack(alignment: .leading){
-                                Text(restaurantviewmodel.getRestaurantByID(restaurantID: selectedRestaurantID).name ?? "")
+                                Text(restaurant.name ?? "")
                                     .font(.title)
                                     .fontWeight(.bold)
                                 Text("Open hours")
-                                Text(restaurantviewmodel.getRestaurantByID(restaurantID: selectedRestaurantID).hours ?? "")
+                                Text(restaurant.hours ?? "")
                             }
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomLeading)
                             .foregroundColor(.black)
+                            .padding()
+                            
+                            Button {
+                                userViewModel.updateFavList(resId: restaurant.id)
+                                if (userViewModel.currentUser != nil) {
+                                    userViewModel.fetchUser(uid: userViewModel.currentUser!.id)
+                                }
+                            } label: {
+                                if (userViewModel.currentUser != nil) {
+                                    Image(systemName: (userViewModel.currentUser?.favList?.contains(restaurant.id))! ? "heart.fill" : "heart")
+                                        .resizable()
+                                        .foregroundColor(Color(.red))
+                                        .frame(width: 30, height: 30)
+                                } else {
+                                    Image(systemName: "heart")
+                                        .resizable()
+                                        .foregroundColor(Color(.red))
+                                        .frame(width: 30, height: 30)
+                                }
+                            }
                             .padding()
                         }
 
@@ -75,14 +95,14 @@ struct RestaurantDetailView: View{
             RatingStarsView(rating: $rating)
 //            Text(restaurant.reviews?.content ?? "")
                 .padding()
-                Text(restaurantviewmodel.getRestaurantByID(restaurantID: selectedRestaurantID).description ?? "")
+                Text(restaurant.description ?? "")
 
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     Text("ADDRESS")
                         .font(.system(.headline, design: .rounded))
 
-                    Text(restaurantviewmodel.getRestaurantByID(restaurantID: selectedRestaurantID).address ?? "")
+                    Text(restaurant.address ?? "")
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
 
@@ -90,7 +110,7 @@ struct RestaurantDetailView: View{
                     Text("PHONE")
                         .font(.system(.headline, design: .rounded))
 
-                    Text(restaurantviewmodel.getRestaurantByID(restaurantID: selectedRestaurantID).phone ?? "")
+                    Text(restaurant.phone ?? "")
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
             }
@@ -98,10 +118,10 @@ struct RestaurantDetailView: View{
 
             NavigationLink(
                 destination:
-                    MapView(location: restaurantviewmodel.getRestaurantByID(restaurantID: selectedRestaurantID).address ?? "")
+                    MapView(location: restaurant.address ?? "")
                     .edgesIgnoringSafeArea(.all)
             ) {
-                MapView(location: restaurantviewmodel.getRestaurantByID(restaurantID: selectedRestaurantID).address ?? "", interactionModes: [])
+                MapView(location: restaurant.address ?? "", interactionModes: [])
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .frame(height: 150)
                     .cornerRadius(20)
@@ -136,17 +156,17 @@ struct RestaurantDetailView: View{
 
             .sheet(isPresented: $showReview) {
                 // You'll need to pass any required data to ReviewListView here
-                ReviewListView(restaurantID: selectedRestaurantID, reviewViewModel: reviewviewmodel)
+                ReviewListView(restaurant: restaurant, reviewViewModel: reviewviewmodel)
             }
     }
 }
 
 }
         
-/*struct RestaurantDetailPreview_Preview: PreviewProvider{
+struct RestaurantDetailPreview_Preview: PreviewProvider{
     static var previews: some View {
         RestaurantDetailView(restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", img: "KFC", description: "example", category: "Chinese", date: NSDate() as Date, author: "new", rating: 3.5))
             .environmentObject(UserViewModel())
     }
 
-}*/
+}

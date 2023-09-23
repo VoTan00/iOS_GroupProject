@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct ReviewListView: View {
-    var restaurantID: String
+    var restaurant: Restaurant
     @ObservedObject var reviewViewModel: ReviewViewModel
 
     var body: some View {
@@ -17,14 +17,14 @@ struct ReviewListView: View {
 
             // Fetch and display reviews for the selected restaurant
             List(reviewViewModel.reviews) { review in
-                if review.restaurantID == restaurantID {
+                if review.restaurantID == restaurant.id {
                     ReviewRowView(review: review)
                 }
             }
         }
         .onAppear {
             // Fetch reviews for the selected restaurant
-            reviewViewModel.getReviewsByRestaurantID(restaurantID){ reviews in
+            reviewViewModel.getReviewsByRestaurantID(restaurant.id){ reviews in
                 reviewViewModel.reviews = reviews
                 
             }
