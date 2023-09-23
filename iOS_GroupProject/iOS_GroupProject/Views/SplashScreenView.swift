@@ -12,6 +12,8 @@ struct SplashScreenView: View {
     @State var bowAnimation = false
     @State var glow = false
     @State var isFinished = false
+    @EnvironmentObject var reviewViewModal: ReviewViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     var body: some View {
         HStack {
@@ -105,5 +107,7 @@ struct SplashScreenView: View {
 struct SplashScreenView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(UserViewModel())
+            .environmentObject(ReviewViewModel())
     }
 }

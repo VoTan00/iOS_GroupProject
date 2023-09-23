@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var restaurantViewModel : RestaurantViewModel
+    @EnvironmentObject var reviewViewModal: ReviewViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     @State private var search: String = ""
     @State private var selectedIndex: Int = 1
@@ -86,6 +88,8 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         let restaurantViewModel = RestaurantViewModel()
         
-        return HomeView(restaurantViewModel: restaurantViewModel)
+        HomeView(restaurantViewModel: restaurantViewModel)
+            .environmentObject(UserViewModel())
+            .environmentObject(ReviewViewModel())
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FavouriteRestaurantCardView: View {
     @EnvironmentObject var userViewModel: UserViewModel
+    @EnvironmentObject var reviewViewModal: ReviewViewModel
     @StateObject var restaurantViewModel = RestaurantViewModel()
     var restaurant: Restaurant
     var body: some View {
@@ -55,5 +56,6 @@ struct FavouriteRestaurantCardView_Previews: PreviewProvider {
     static var previews: some View {
         FavouriteRestaurantCardView(restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", img: "KFC", description: "example", category: "Chinese", date: NSDate() as Date, author: "new", rating: 3.5))
             .environmentObject(UserViewModel())
+            .environmentObject(ReviewViewModel())
     }
 }

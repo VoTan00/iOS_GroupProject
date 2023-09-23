@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var userViewModel: UserViewModel
+    @EnvironmentObject var reviewViewModal: ReviewViewModel
     @EnvironmentObject var preferenceViewModel: PreferenceViewModel
   
     @State private var isEditingName = false
@@ -119,6 +120,7 @@ struct ProfileView_Previews: PreviewProvider {
     ProfileView()
       .environmentObject(UserViewModel())
         .environmentObject(PreferenceViewModel())
+        .environmentObject(ReviewViewModel())
   }
 
 }

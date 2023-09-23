@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BioUnlock: View {
     @EnvironmentObject var userViewModel: UserViewModel
+    @EnvironmentObject var reviewViewModal: ReviewViewModel
     var body: some View {
         VStack{
             Button {
@@ -30,5 +31,6 @@ struct BioUnlock_Previews: PreviewProvider {
     static var previews: some View {
         BioUnlock()
             .environmentObject(UserViewModel())
+            .environmentObject(ReviewViewModel())
     }
 }

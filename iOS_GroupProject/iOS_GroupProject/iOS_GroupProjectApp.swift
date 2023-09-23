@@ -10,7 +10,9 @@ import Firebase
 
 @main
 struct iOS_GroupProjectApp: App {
-    @StateObject var userViewModel = UserViewModel()
+//    @StateObject var userViewModel = UserViewModel()
+    @EnvironmentObject var reviewViewModal: ReviewViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     @StateObject var preferenceViewModel = PreferenceViewModel()
     
     init() {
@@ -19,7 +21,8 @@ struct iOS_GroupProjectApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(userViewModel)
+                .environmentObject(UserViewModel())
+                .environmentObject(ReviewViewModel())
                 .environmentObject(preferenceViewModel)
                 .preferredColorScheme(preferenceViewModel.colorScheme)
         }

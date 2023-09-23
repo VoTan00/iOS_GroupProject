@@ -10,6 +10,8 @@ import SwiftUI
 struct AddRestaurantButton: View {
     @State private var isShowingAddRestaurantSheet = false
     @StateObject var restaurantViewModel = RestaurantViewModel()
+    @EnvironmentObject var reviewViewModal: ReviewViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
      
     // Properties to store restaurant details
     @State private var name: String = ""
@@ -115,6 +117,8 @@ struct AddRestaurantButton: View {
 struct AddRestaurantButton_Previews: PreviewProvider {
     static var previews: some View {
         AddRestaurantButton()
+            .environmentObject(UserViewModel())
+            .environmentObject(ReviewViewModel())
     }
 }
  

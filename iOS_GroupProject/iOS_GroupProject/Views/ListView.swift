@@ -11,6 +11,7 @@ struct ListView: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @ObservedObject var restaurantViewModel : RestaurantViewModel
     @State private var gridLayout: [GridItem] = [GridItem(.flexible())]
+    @EnvironmentObject var reviewViewModal: ReviewViewModel
     
   
     var body: some View {
@@ -52,5 +53,6 @@ struct ListView_Previews: PreviewProvider {
         
         ListView(restaurantViewModel: restaurantViewModel)
             .environmentObject(UserViewModel())
+            .environmentObject(ReviewViewModel())
     }
 }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ResUpdateSheet: View {
     @StateObject var restaurantViewModel = RestaurantViewModel()
+    @EnvironmentObject var reviewViewModal: ReviewViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     // Properties to store restaurant details
     var restaurant: Restaurant
@@ -115,5 +117,7 @@ struct ResUpdateSheet: View {
 struct ResUpdateSheet_Previews: PreviewProvider {
     static var previews: some View {
         ResUpdateSheet(restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", img: "KFC", description: "example", category: "Chinese", date: NSDate() as Date, author: "new", rating: 3.5))
+            .environmentObject(UserViewModel())
+            .environmentObject(ReviewViewModel())
     }
 }

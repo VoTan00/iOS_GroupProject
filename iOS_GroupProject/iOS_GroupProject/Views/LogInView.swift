@@ -10,6 +10,7 @@ import Firebase
 
 struct LogInView: View {
     @EnvironmentObject var userViewModel: UserViewModel
+    @EnvironmentObject var reviewViewModal: ReviewViewModel
     
     @State private var email: String = ""
     @State private var password: String = ""
@@ -96,5 +97,6 @@ struct LogInView_Previews: PreviewProvider {
     static var previews: some View {
         LogInView()
             .environmentObject(UserViewModel())
+            .environmentObject(ReviewViewModel())
     }
 }
