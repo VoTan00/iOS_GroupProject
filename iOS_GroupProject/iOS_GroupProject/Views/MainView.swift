@@ -20,7 +20,7 @@ struct MainView: View {
     
     @Namespace var animation
     var body: some View {
-        if userViewModel.isUnlocked {
+//        if userViewModel.isUnlocked {
             TabView(selection: $currentTab) {
                 // MARK: HOMEVIEW
                 HomeView(restaurantViewModel : restaurantViewModel)
@@ -63,10 +63,10 @@ struct MainView: View {
                 alignment: .bottom
             ).ignoresSafeArea(.all, edges: .bottom)
                 .accentColor(Color("Color4"))
-        }
-        else {
-            BioUnlock()
-        }
+//        }
+//        else {
+//            BioUnlock()
+//        }
     }
         
     

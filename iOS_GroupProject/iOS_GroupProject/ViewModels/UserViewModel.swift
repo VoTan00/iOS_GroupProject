@@ -108,7 +108,7 @@ class UserViewModel: ObservableObject {
                 if let data = document.data() {
                     let user = User(id: uid, email: data["email"] as! String, profileImageUrl: data["profileImageUrl"] as? String, username: data["name"] as? String, favList: data["favList"] as? [String])
                     self.currentUser = user
-                    self.bioAuthentication()
+//                    self.bioAuthentication()
                 }
             } else {
                 print("Document does not exist")
