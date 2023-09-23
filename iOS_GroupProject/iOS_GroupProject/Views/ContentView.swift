@@ -12,11 +12,9 @@ struct ContentView: View {
         
     var body: some View {
         LogInView()
-            .overlay(
-                SplashScreenView()
-            )
-        
-        //ProfileView()
+//            .overlay(
+//                SplashScreenView()
+//            )
     }
 }
 

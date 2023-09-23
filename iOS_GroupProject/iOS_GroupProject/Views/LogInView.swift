@@ -11,7 +11,6 @@ import Firebase
 struct LogInView: View {
     @EnvironmentObject var userViewModel: UserViewModel
     
-    
     @State private var email: String = ""
     @State private var password: String = ""
     
@@ -30,60 +29,64 @@ struct LogInView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 20) {
-                ZStack {
-                    Ellipse()
-                        .frame(width: 510, height: 478)
-                        .padding(.leading, -200)
-                        .foregroundColor(Color("Color1"))
-                        .padding(.top, -200)
-                    Ellipse()
-                        .frame(width: 458, height: 420)
-                        .padding(.trailing, -500)
-                        .foregroundColor(Color("Color2"))
-                        .padding(.top, -200)
-                    
-                    Text("Welcome \nBack")
-                        .foregroundColor(Color("Color2"))
-                        .font(.system(size: 35))
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading, 20)
-                }
-                VStack(alignment: .leading) {
-                    Text("Sign In To Continue").font(.system(size: 32, weight: .medium))
-                        .padding(40)
-                        .foregroundColor(Color("Color1"))
-                }
-                // MARK: INPUT FIELDS
-                UserTextField(placeHolder: "Email", imageName: "envelope", bColor: "textColor1", tOpacity: 0.6, value: $email)
-                
-                UserTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor1", tOpacity: 0.6, value: $password)
-                
-                // MARK: LOGIN BUTTON
-                NavigationLink(destination: MainView(), isActive: $loginSuccess){
-                    Button(action: {
-                        login()
-                    }, label: {
-                        Text("Log In").font(.title)
-                            .fontWeight(.bold)
-                            .frame(height: 58)
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .foregroundColor(Color("Color2"))
-                            .background(Color("Color1"))
-                    })
-                }.disabled(email.isEmpty || password.isEmpty)
-                
-                // MARK: SIGN UP BUTTON
-                HStack{
-                    Text("New?")
-                    NavigationLink(destination: SignUpView()) {
-                        Text("Create An Account").font(.system(size: 20, weight: .semibold))
+            ZStack {
+//                Color("textColor2")
+//                    .edgesIgnoringSafeArea(.all)
+                VStack(spacing: 20) {
+                    ZStack {
+                        Ellipse()
+                            .frame(width: 510, height: 478)
+                            .padding(.leading, -200)
+                            .foregroundColor(Color("Color1"))
+                            .padding(.top, -200)
+                        Ellipse()
+                            .frame(width: 458, height: 420)
+                            .padding(.trailing, -500)
+                            .foregroundColor(Color("Color3"))
+                            .padding(.top, -200)
                         
+                        Text("Welcome \nBack")
+                            .foregroundColor(Color("textColor3"))
+                            .font(.system(size: 35))
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.leading)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 20)
                     }
-                }
-            }.padding()
+                    VStack(alignment: .leading) {
+                        Text("Sign In To Continue").font(.system(size: 32, weight: .medium))
+                            .padding(40)
+                            .foregroundColor(Color("textColor4"))
+                    }
+                    // MARK: INPUT FIELDS
+                    UserTextField(placeHolder: "Email", imageName: "envelope", bColor: "textColor1", tOpacity: 0.6, value: $email)
+                    
+                    UserTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor1", tOpacity: 0.6, value: $password)
+                    
+                    // MARK: LOGIN BUTTON
+                    NavigationLink(destination: MainView(), isActive: $loginSuccess){
+                        Button(action: {
+                            login()
+                        }, label: {
+                            Text("Log In").font(.title)
+                                .fontWeight(.bold)
+                                .frame(height: 58)
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .foregroundColor(Color("textColor3"))
+                                .background(Color("Color1"))
+                        })
+                    }.disabled(email.isEmpty || password.isEmpty)
+                    
+                    // MARK: SIGN UP BUTTON
+                    HStack{
+                        Text("New?")
+                        NavigationLink(destination: SignUpView()) {
+                            Text("Create An Account").font(.system(size: 20, weight: .semibold))
+                            
+                        }
+                    }
+                }.padding()
+            }
         }.navigationBarHidden(true)
     }
 }

@@ -21,6 +21,7 @@ struct RestaurantPostCardView: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text(restaurant.name!)
                     .bold()
+                    .foregroundColor(Color("textColor2"))
 //                Text(restaurant.hours!)
 //                    .bold()
 //                Text(restaurant.phone!)
@@ -51,7 +52,7 @@ struct RestaurantPostCardView: View {
             }
         }
         .padding(.horizontal)
-        .background(Color("Color1"))
+        .background(Color("Color5"))
         .cornerRadius(12)
         .frame(width: .infinity, alignment: .leading)
         .shadow(color:Color("Color-black-transparent"), radius: 7)

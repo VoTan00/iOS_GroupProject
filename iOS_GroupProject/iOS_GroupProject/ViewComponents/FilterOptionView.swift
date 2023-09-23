@@ -69,7 +69,7 @@ struct FilterOptionView: View {
                             .padding()
                             .padding(.horizontal, 6)
                             .foregroundColor(restaurantViewModel.selectedSort == "Newest" ? Color.white : Color("Color1"))
-                            .background(restaurantViewModel.selectedSort == "Newest" ? Color("Color1") : Color.white)
+                            .background(restaurantViewModel.selectedSort == "Newest" ? Color("Color5") : Color.white)
                             .cornerRadius(10.0)
                     }
                         
@@ -86,7 +86,7 @@ struct FilterOptionView: View {
                             .padding()
                             .padding(.horizontal, 6)
                             .foregroundColor(restaurantViewModel.selectedSort == "Oldest" ? Color.white : Color("Color1"))
-                            .background(restaurantViewModel.selectedSort == "Oldest" ? Color("Color1") : Color.white)
+                            .background(restaurantViewModel.selectedSort == "Oldest" ? Color("Color5") : Color.white)
                             .cornerRadius(10.0)
                     }
                     
@@ -107,7 +107,7 @@ struct FilterOptionView: View {
                             .padding()
                             .padding(.horizontal, 6)
                             .foregroundColor(restaurantViewModel.selectedSort == "Least Ratings" ? Color.white : Color("Color1"))
-                            .background(restaurantViewModel.selectedSort == "Least Ratings" ? Color("Color1") : Color.white)
+                            .background(restaurantViewModel.selectedSort == "Least Ratings" ? Color("Color5") : Color.white)
                             .cornerRadius(10.0)
                     }
                         
@@ -124,7 +124,7 @@ struct FilterOptionView: View {
                             .padding()
                             .padding(.horizontal, 6)
                             .foregroundColor(restaurantViewModel.selectedSort == "Most Ratings" ? Color.white : Color("Color1"))
-                            .background(restaurantViewModel.selectedSort == "Most Ratings" ? Color("Color1") : Color.white)
+                            .background(restaurantViewModel.selectedSort == "Most Ratings" ? Color("Color5") : Color.white)
                             .cornerRadius(10.0)
                     }
                     
@@ -148,7 +148,7 @@ struct FilterOptionView: View {
                         .foregroundColor(Color.white)
                         .padding()
                         .padding(.horizontal, 8)
-                        .background(Color("Color1"))
+                        .background(Color("Color5"))
                         .cornerRadius(10.0)
                 }
                 

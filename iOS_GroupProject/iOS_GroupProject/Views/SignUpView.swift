@@ -39,11 +39,11 @@ struct SignUpView: View {
                             Ellipse()
                                 .frame(width: 458, height: 420)
                                 .padding(.trailing, -500)
-                                .foregroundColor(Color("Color1"))
+                                .foregroundColor(Color("Color3"))
                                 .padding(.top, -200)
                             
                             Text("Create\nAccount")
-                                .foregroundColor(Color("Color1"))
+                                .foregroundColor(Color("textColor4"))
                                 .font(.system(size: 40))
                                 .fontWeight(.bold)
                                 .multilineTextAlignment(.leading)
@@ -71,7 +71,7 @@ struct SignUpView: View {
                                 Button(action: {
                                     signUp()
                                 }, label: {
-                                    UserButton(title: "SIGN UP", bgColor: "Color1", textColor: "textColor2")
+                                    UserButton(title: "SIGN UP", bgColor: "Color1", textColor: "textColor3")
                                 })
                                 .padding(.horizontal, 20)
                                 
@@ -93,7 +93,7 @@ struct SignUpView: View {
                             }, label: {
                                 Text("LOG IN")
                                     .font(.system(size:18))
-                                    .foregroundColor(Color("Color1"))
+                                    .foregroundColor(Color("textColor4"))
                                     .fontWeight(.bold)
                             })
                         }
