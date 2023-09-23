@@ -140,9 +140,9 @@
 		18211F002AB4495400004F3E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6476C5742ABDDCB000E082CB /* ReviewListView.swift */,
 				6476C5752ABDDCB300E082CB /* ReviewRowView.swift */,
 				6476C57E2ABDE76100E082CB /* ReviewFormView.swift */,
+				6476C5742ABDDCB000E082CB /* ReviewListView.swift */,
 				64B09E732AB6332400C99904 /* RestaurantDetailView.swift */,
 				18211F0D2AB4737800004F3E /* ContentView.swift */,
 				A3A60F1B2AB62A5400BD8083 /* TestViews */,

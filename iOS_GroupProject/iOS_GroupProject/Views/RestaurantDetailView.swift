@@ -125,7 +125,7 @@ struct RestaurantDetailView: View{
                     .padding()
             }
             Button(action: {
-                self.isShownSheet.toggle()
+                self.showReview.toggle()
             }) {
                 Text("Review")
                     .font(.system(.headline, design: .rounded))
@@ -137,27 +137,13 @@ struct RestaurantDetailView: View{
             .controlSize(.large)
             .padding(.horizontal)
             .padding(.bottom, 20)
-            Button(action:{
-                self.showReview.toggle()
-            }){
-                Text("Reviews")
-                    .font(.system(.headline, design: .rounded))
-                    .frame(minWidth: 0, maxWidth: .infinity)
-
             }
-                
+            .sheet(isPresented: $showReview) {
+            // You'll need to pass any required data to ReviewListView here
+            ReviewListView(restaurant: restaurant, isFormPresented: $showReview)
+            }
         }
-            .sheet(isPresented: $isShownSheet) {
-                ReviewFormView(isFormPresented: $isShownSheet, restaurant: restaurant)
-            }
-
-//            .sheet(isPresented: $showReview) {
-//                // You'll need to pass any required data to ReviewListView here
-//                ReviewListView(restaurant: restaurant, reviewViewModel: reviewviewmodel)
-//            }
     }
-}
-
 }
         
 struct RestaurantDetailPreview_Preview: PreviewProvider{
