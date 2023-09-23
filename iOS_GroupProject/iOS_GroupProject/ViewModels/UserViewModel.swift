@@ -73,7 +73,7 @@ class UserViewModel: ObservableObject {
     // MARK: add user
     func addUserToFirestore(user: User) {
         let userRef = db.collection("users").document(user.id)
-        userRef.setData(["email": user.email, "username": user.username , "profileImageUrl": user.profileImageUrl , "bio": user.bio, "favList": user.favList ])
+        userRef.setData(["email": user.email, "username": user.username , "profileImageUrl": user.profileImageUrl , "bio": user.bio, "favList": [] ])
     }
 
     // MARK: sign up
