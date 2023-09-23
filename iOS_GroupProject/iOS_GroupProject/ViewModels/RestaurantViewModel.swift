@@ -200,6 +200,18 @@ class RestaurantViewModel: ObservableObject {
                 print("Restaurant deleted successfully!")
             }
         }
+
+        let storageRef = Storage.storage().reference()
+                
+        let  fileRef = storageRef.child(getRestaurantByID(restaurantID).img)
+        // Delete the image
+        fileRef.delete { error in
+            if let error = error {
+                print("Error deleting image: \(error.localizedDescription)")
+            } else {
+                print("Image deleted successfully.")
+            }
+        }
     }
     
     func getRestaurantByID(restaurantID: String) -> Restaurant {

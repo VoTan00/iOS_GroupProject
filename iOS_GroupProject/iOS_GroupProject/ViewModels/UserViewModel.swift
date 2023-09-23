@@ -140,5 +140,9 @@ class UserViewModel: ObservableObject {
             self.msg = "Phone does not have Biometrics!"
         }
     }
+
+    func getUserByID(userId: String) -> [User] {
+        return users.filter { $0.id? == userId ?? false}
+    }
 }
 
