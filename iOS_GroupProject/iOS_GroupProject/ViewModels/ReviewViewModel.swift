@@ -92,7 +92,7 @@ class ReviewViewModel: ObservableObject {
     
     func addReview(restaurantID: String, reviewAuthor: String, content: String, date: Date, rating: Int) {
         do {
-            var reviewData: [String: Any] = [
+            let reviewData: [String: Any] = [
                 "restaurantID": restaurantID,
                 "reviewAuthor": reviewAuthor,
                 "content": content,
@@ -100,19 +100,18 @@ class ReviewViewModel: ObservableObject {
                 "rating": rating
             ]
             
+            print(reviewData)
             // create storage reference
-            let storageRef = Storage.storage().reference()
+//            let storageRef = Storage.storage().reference()
             
             db.collection("reviews").addDocument(data: reviewData) { error in
                 if let error = error {
-                    print("Error adding review to Firestore: \(error)")
+                    print("Error adding review to Firestore")
                     return
                 }
                 print("review added successfully!")
-                self.fetchData()
+//                self.fetchData()
             }
-        } catch {
-            print("Error adding review to Firestore: \(error)")
         }
     }
 

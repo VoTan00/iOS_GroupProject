@@ -19,6 +19,7 @@ struct ProfileView: View {
     @State private var name: String = "John"
     @State private var email: String = "John@gmail.com"
     @State private var bio: String = "John's bio"
+    @State private var userId: String = "John's bio"
   
     var body: some View {
         GeometryReader { g in
@@ -93,7 +94,9 @@ struct ProfileView: View {
                 name = userViewModel.currentUser?.username ?? ""
                 email = userViewModel.currentUser?.email ?? ""
                 bio = userViewModel.currentUser?.bio ?? ""
+                userId = userViewModel.currentUser?.id ?? ""
             }
+            .padding(30)
         }
     }
     

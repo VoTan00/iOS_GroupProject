@@ -15,7 +15,8 @@ class UserViewModel: ObservableObject {
     @Published var currentUser: User?
     @Published var isUnlocked = false
     @Published var msg = "Locked"
-
+    @Published var isLogedIn = false
+    
     private var db = Firestore.firestore()
 
     init () {
@@ -95,6 +96,7 @@ class UserViewModel: ObservableObject {
                 print(error?.localizedDescription ?? "")
             } else if let user = result?.user {
                 self.fetchUser(uid: user.uid)
+                self.isLogedIn = true
             }
         }
     }

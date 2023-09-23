@@ -62,18 +62,20 @@ struct LogInView: View {
                 UserTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor1", tOpacity: 0.6, value: $password)
                 
                 // MARK: LOGIN BUTTON
-                NavigationLink(destination: MainView(), isActive: $loginSuccess){
-                    Button(action: {
-                        login()
-                    }, label: {
-                        Text("Log In").font(.title)
-                            .fontWeight(.bold)
-                            .frame(height: 58)
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .foregroundColor(Color("Color2"))
-                            .background(Color("Color1"))
-                    })
-                }.disabled(email.isEmpty || password.isEmpty)
+                Button(action: {
+                    userViewModel.login(email: email, password: password)
+                }, label: {
+                    Text("Log In").font(.title)
+                        .fontWeight(.bold)
+                        .frame(height: 58)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .foregroundColor(Color("Color2"))
+                        .background(Color("Color1"))
+                })
+                
+                NavigationLink(destination: MainView(), isActive: $userViewModel.isLogedIn) {
+                    EmptyView()
+                }
                 
                 // MARK: SIGN UP BUTTON
                 HStack{

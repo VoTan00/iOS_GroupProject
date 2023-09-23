@@ -21,16 +21,13 @@ struct RestaurantDetailView: View{
     @State private var image = UIImage()
     
     @StateObject var restaurantviewmodel = RestaurantViewModel()
-    @StateObject var reviewviewmodel = ReviewViewModel()
+    @EnvironmentObject var reviewViewModal: ReviewViewModel
     
     @State private var reviews: [Review] = []
     var restaurant: Restaurant
     
 
     @State private var review = ""
-    
-
-    
     
     var body: some View{
         ScrollView{
@@ -130,7 +127,7 @@ struct RestaurantDetailView: View{
             Button(action: {
                 self.isShownSheet.toggle()
             }) {
-                Text("Rate it")
+                Text("Review")
                     .font(.system(.headline, design: .rounded))
                     .frame(minWidth: 0, maxWidth: .infinity)
             }
@@ -151,13 +148,13 @@ struct RestaurantDetailView: View{
                 
         }
             .sheet(isPresented: $isShownSheet) {
-                ReviewFormView(isFormPresented: $isShownSheet)
+                ReviewFormView(isFormPresented: $isShownSheet, restaurant: restaurant)
             }
 
-            .sheet(isPresented: $showReview) {
-                // You'll need to pass any required data to ReviewListView here
-                ReviewListView(restaurant: restaurant, reviewViewModel: reviewviewmodel)
-            }
+//            .sheet(isPresented: $showReview) {
+//                // You'll need to pass any required data to ReviewListView here
+//                ReviewListView(restaurant: restaurant, reviewViewModel: reviewviewmodel)
+//            }
     }
 }
 
@@ -167,6 +164,7 @@ struct RestaurantDetailPreview_Preview: PreviewProvider{
     static var previews: some View {
         RestaurantDetailView(restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", img: "KFC", description: "example", category: "Chinese", date: NSDate() as Date, author: "new", rating: 3.5))
             .environmentObject(UserViewModel())
+            .environmentObject(ReviewViewModel())
     }
 
 }
