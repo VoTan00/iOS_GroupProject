@@ -47,3 +47,16 @@ struct PostsView: View {
 //        PostsView()
 //    }
 //}
+
+struct PostsView_Previews: PreviewProvider {
+    static var previews: some View {
+        let restaurantViewModel = RestaurantViewModel()
+        
+        return Group {
+            PostsView(restaurantViewModel: restaurantViewModel)
+                .preferredColorScheme(.dark)
+            PostsView(restaurantViewModel: restaurantViewModel)
+                .preferredColorScheme(.light)
+        }
+    }
+}

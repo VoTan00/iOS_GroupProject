@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var userViewModel: UserViewModel
-
+    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
   
     @State private var isEditingName = false
     @State private var isEditingEmail = false
@@ -32,6 +32,15 @@ struct ProfileView: View {
                     .padding(.bottom, 10)
                 Text("John Doer")
                     .font(.system(size: 20))
+                
+                // MARK: DARK MODE BUTTON
+                Button {
+                    preferenceViewModel.toggleColorScheme()
+                } label: {
+                    Image(systemName: preferenceViewModel.colorScheme == .dark ? "sun.max.fill" : "moon.fill")
+                        .font(.system(size: 30))
+                        .foregroundColor(preferenceViewModel.colorScheme == .dark ? .yellow : .blue)
+                }
   
                 Form {
                     Section(header: Label("Personal Information", systemImage: "person.circle.fill")) {
@@ -65,8 +74,10 @@ struct ProfileView: View {
                     // Rest of your Form
                 }
   
-                .background(Color(red: 242 / 255, green: 242 / 255, blue: 242 / 255))
+                .background(Color("Color1"))
                 .navigationBarTitle("Profile")
+
+                
   
                 Button(action: {
                     // Toggle the editing states
@@ -107,6 +118,7 @@ struct ProfileView_Previews: PreviewProvider {
   static var previews: some View {
     ProfileView()
       .environmentObject(UserViewModel())
+        .environmentObject(PreferenceViewModel())
   }
 
 }
