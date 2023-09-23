@@ -20,50 +20,55 @@ struct MainView: View {
     
     @Namespace var animation
     var body: some View {
-        
-        TabView(selection: $currentTab) {
-            // MARK: HOMEVIEW
-            HomeView(restaurantViewModel : restaurantViewModel)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background()
-                .padding(.bottom, 40)
-                .tag(Tab.Home)
-            
-            // MARK: LISTVIEW
-            ListView(restaurantViewModel : restaurantViewModel)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background()
-                .padding(.bottom, 40)
-                .tag(Tab.Favourite)
-            
-            // MARK: POSTVIEW
-            PostsView(restaurantViewModel: restaurantViewModel)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background()
-                .padding(.bottom, 40)
-                .tag(Tab.Post)
-            
-            // MARK: PROFILEVIEW
-           ProfileView()
-               .frame(maxWidth: .infinity, maxHeight: .infinity)
-               .background()
-               .tag(Tab.Account)
-        }
-        .overlay(
-            // MARK: NAV BAR
-            HStack (spacing: 0){
-                ForEach(Tab.allCases, id: \.rawValue) {tab in
-                    TabButton(tab: tab)
-                }
-                .padding(.vertical)
-                .padding(.bottom, getSafeArea().bottom == 0 ? 5 : (getSafeArea().bottom - 15))
-                .background(Color("Color1"))
+        if userViewModel.isUnlocked {
+            TabView(selection: $currentTab) {
+                // MARK: HOMEVIEW
+                HomeView(restaurantViewModel : restaurantViewModel)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background()
+                    .padding(.bottom, 40)
+                    .tag(Tab.Home)
+                
+                // MARK: LISTVIEW
+                ListView(restaurantViewModel : restaurantViewModel)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background()
+                    .padding(.bottom, 40)
+                    .tag(Tab.Favourite)
+                
+                // MARK: POSTVIEW
+                PostsView(restaurantViewModel: restaurantViewModel)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background()
+                    .padding(.bottom, 40)
+                    .tag(Tab.Post)
+                
+                // MARK: PROFILEVIEW
+               ProfileView()
+                   .frame(maxWidth: .infinity, maxHeight: .infinity)
+                   .background()
+                   .tag(Tab.Account)
             }
-            ,
-            alignment: .bottom
-        ).ignoresSafeArea(.all, edges: .bottom)
-            .accentColor(Color("Color4"))
+            .overlay(
+                // MARK: NAV BAR
+                HStack (spacing: 0){
+                    ForEach(Tab.allCases, id: \.rawValue) {tab in
+                        TabButton(tab: tab)
+                    }
+                    .padding(.vertical)
+                    .padding(.bottom, getSafeArea().bottom == 0 ? 5 : (getSafeArea().bottom - 15))
+                    .background(Color("Color1"))
+                }
+                ,
+                alignment: .bottom
+            ).ignoresSafeArea(.all, edges: .bottom)
+                .accentColor(Color("Color4"))
+        }
+        else {
+            BioUnlock()
+        }
     }
+        
     
     // MARK: TAB BUTTON
     func TabButton (tab: Tab) -> some View {

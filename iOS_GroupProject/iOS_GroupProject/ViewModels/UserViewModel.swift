@@ -8,10 +8,13 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
+import LocalAuthentication
 
 class UserViewModel: ObservableObject {
     @Published var users = [User]()
     @Published var currentUser: User?
+    @Published var isUnlocked = false
+    @Published var msg = "Locked"
 
     private var db = Firestore.firestore()
 
@@ -105,10 +108,36 @@ class UserViewModel: ObservableObject {
                 if let data = document.data() {
                     let user = User(id: uid, email: data["email"] as! String, profileImageUrl: data["profileImageUrl"] as? String, username: data["name"] as? String, favList: data["favList"] as? [String])
                     self.currentUser = user
+                    self.bioAuthentication()
                 }
             } else {
                 print("Document does not exist")
             }
+        }
+    }
+    
+    // MARK: bio authentication
+    func bioAuthentication() {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = " Please authenticate yourself to log in the system."
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {success, authentacationError in
+                if success {
+                    Task {@MainActor in
+                        self.isUnlocked = true
+                        self.msg = "Unlocked"
+                    }
+                } else {
+                    //error
+                    self.msg = "There is a problem"
+                }
+            }
+        } else {
+            //no bio
+            self.msg = "Phone does not have Biometrics!"
         }
     }
 }

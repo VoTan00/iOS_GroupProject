@@ -56,6 +56,7 @@
 		AE206A642ABD2CB500463225 /* ResUpdateSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE206A632ABD2CB500463225 /* ResUpdateSheet.swift */; };
 		AE2A44202ABC338B009F325E /* FavouriteRestaurantCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A441F2ABC338B009F325E /* FavouriteRestaurantCardView.swift */; };
 		AE2A44222ABC4CAE009F325E /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A44212ABC4CAE009F325E /* SplashScreenView.swift */; };
+		AE4AB8F32ABEA7BE0007690A /* BioUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4AB8F22ABEA7BE0007690A /* BioUnlock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		AE206A632ABD2CB500463225 /* ResUpdateSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResUpdateSheet.swift; sourceTree = "<group>"; };
 		AE2A441F2ABC338B009F325E /* FavouriteRestaurantCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRestaurantCardView.swift; sourceTree = "<group>"; };
 		AE2A44212ABC4CAE009F325E /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		AE4AB8F22ABEA7BE0007690A /* BioUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioUnlock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				AE2A44212ABC4CAE009F325E /* SplashScreenView.swift */,
 				18B87F0C2ABC731400661A1B /* PostsView.swift */,
 				6476C57E2ABDE76100E082CB /* ReviewFormView.swift */,
+				AE4AB8F22ABEA7BE0007690A /* BioUnlock.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				18211F072AB454B900004F3E /* RestaurantViewModel.swift in Sources */,
 				18211F0A2AB466E800004F3E /* ImagePicker.swift in Sources */,
 				64A137E82AB83C8400D798F4 /* ListView.swift in Sources */,
+				AE4AB8F32ABEA7BE0007690A /* BioUnlock.swift in Sources */,
 				A35B9CC32ABB1D4D008A27FB /* UserViewModel.swift in Sources */,
 				A35B9CC12ABB1C16008A27FB /* User.swift in Sources */,
 				AE0641452AB6D09900079E23 /* CategoryView.swift in Sources */,
@@ -505,6 +509,7 @@
 				DEVELOPMENT_TEAM = X75K78C3A4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to unlock your data";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -537,6 +542,7 @@
 				DEVELOPMENT_TEAM = X75K78C3A4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to unlock your data";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
