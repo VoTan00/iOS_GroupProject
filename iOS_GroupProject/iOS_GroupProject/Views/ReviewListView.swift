@@ -22,12 +22,12 @@ struct ReviewListView: View {
                 }
             }
         }
-        .onAppear {
-            // Fetch reviews for the selected restaurant
-            reviewViewModel.getReviewsByRestaurantID(restaurant.id){ reviews in
-                reviewViewModel.reviews = reviews
-                
-            }
-        }
+//        .onAppear {
+//            // Fetch reviews for the selected restaurant
+//            reviewViewModel.getReviewsByRestaurantID(restaurant.id){ reviews in
+//                reviewViewModel.reviews = reviews
+//                
+//            }
+//        }
     }
 }

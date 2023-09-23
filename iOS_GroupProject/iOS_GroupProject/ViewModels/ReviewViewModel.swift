@@ -8,6 +8,7 @@
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseStorage
 
 class ReviewViewModel: ObservableObject {
     @Published var reviews: [Review] = []
@@ -50,7 +51,7 @@ class ReviewViewModel: ObservableObject {
             //     return try? queryDocumentSnapshot.data(as: Review.self)
             // }
 
-            self.reviews = documents.map{ (queryDocumentSnapshot -> Review) in
+            self.reviews = documents.map{ (queryDocumentSnapshot) -> Review in
                 let data = queryDocumentSnapshot.data()
                 let id = queryDocumentSnapshot.documentID
                 let restaurantID = data["restaurantID"] as? String ?? ""
@@ -108,7 +109,7 @@ class ReviewViewModel: ObservableObject {
                     return
                 }
                 print("review added successfully!")
-                fetchData()
+                self.fetchData()
             }
         } catch {
             print("Error adding review to Firestore: \(error)")
@@ -147,7 +148,7 @@ class ReviewViewModel: ObservableObject {
     // }
 
     func getReviewsByRestaurantID(resId: String) -> [Review] {
-        return reviews.filter { $0.restaurantID? == resId ?? false}
+        return reviews.filter { $0.restaurantID == resId }
     }
 
     func deleteReview(revId: String) {
@@ -176,7 +177,7 @@ class ReviewViewModel: ObservableObject {
                     print("Error updating review in Firestore: \(error)")
                     return
                 }
-                fetchData()
+                self.fetchData()
                 // Restaurant updated successfully
                 print("Review updated successfully!")
             }
@@ -186,13 +187,13 @@ class ReviewViewModel: ObservableObject {
     }
 
     func getAllRatingOfARestaurant(resId: String) -> Double {
-        let resRev = reviews.filter { $0.restaurantID? == resId ?? false}
-        let sum = 0
-        for(rev in resRev) {
-            sum += rev.rating
+        let resRev = reviews.filter { $0.restaurantID == resId}
+        var sum = 0
+        for rev in resRev {
+            sum += rev.rating!
         }
         sum = sum / resRev.count
-        return sum
+        return Double(sum)
     }
     // Implement additional methods for CRUD operations on reviews, if needed
 }

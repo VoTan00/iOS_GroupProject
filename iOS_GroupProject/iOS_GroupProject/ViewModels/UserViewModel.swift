@@ -142,7 +142,7 @@ class UserViewModel: ObservableObject {
     }
 
     func getUserByID(userId: String) -> [User] {
-        return users.filter { $0.id? == userId ?? false}
+        return users.filter { $0.id == userId}
     }
 }
 

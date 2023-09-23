@@ -203,7 +203,7 @@ class RestaurantViewModel: ObservableObject {
 
         let storageRef = Storage.storage().reference()
                 
-        let  fileRef = storageRef.child(getRestaurantByID(restaurantID).img)
+        let  fileRef = storageRef.child(getRestaurantByID(restaurantID: restaurantID).img!)
         // Delete the image
         fileRef.delete { error in
             if let error = error {

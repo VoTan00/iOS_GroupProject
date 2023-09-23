@@ -13,6 +13,6 @@ struct Review: Codable, Identifiable {
    var restaurantID: String?
    var reviewAuthor: String?
    var content: String?
-   var date: Date = Date()?
+   var date: Date = Date()
    var rating: Int?
 }

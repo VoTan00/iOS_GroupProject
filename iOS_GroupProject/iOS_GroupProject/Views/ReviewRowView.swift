@@ -12,7 +12,7 @@ struct ReviewRowView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Rating: \(review.rating)")
+            Text("Rating: \(review.rating!)")
                 .font(.headline)
             Text(review.content ?? "")
                 .font(.body)
