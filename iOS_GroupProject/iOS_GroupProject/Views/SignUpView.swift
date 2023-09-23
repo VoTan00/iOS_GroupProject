@@ -22,8 +22,11 @@ struct SignUpView: View {
     
     // MARK: SIGN UP FUNC
     func signUp()  {
+        print("Signup button triggered")
         userViewModel.signUp(email: email, password: password)
+        print("uvm called")
         signUpSuccess = true
+        print("success true")
     }
     
     var body: some View {

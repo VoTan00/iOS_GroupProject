@@ -12,10 +12,11 @@ struct ContentView: View {
     @EnvironmentObject var reviewViewModal: ReviewViewModel
         
     var body: some View {
-        LogInView()
+//        LogInView()
 //            .overlay(
 //                SplashScreenView()
 //            )
+        ProfileView()
     }
 }
 

@@ -40,11 +40,11 @@ struct LogInView: View {
                     Ellipse()
                         .frame(width: 458, height: 420)
                         .padding(.trailing, -500)
-                        .foregroundColor(Color("Color2"))
+                        .foregroundColor(Color("Color3"))
                         .padding(.top, -200)
                     
                     Text("Welcome \nBack")
-                        .foregroundColor(Color("Color2"))
+                        .foregroundColor(Color("textColor3"))
                         .font(.system(size: 35))
                         .fontWeight(.bold)
                         .multilineTextAlignment(.leading)
@@ -54,7 +54,7 @@ struct LogInView: View {
                 VStack(alignment: .leading) {
                     Text("Sign In To Continue").font(.system(size: 32, weight: .medium))
                         .padding(40)
-                        .foregroundColor(Color("Color1"))
+                        .foregroundColor(Color("Color4"))
                 }
                 // MARK: INPUT FIELDS
                 UserTextField(placeHolder: "Email", imageName: "envelope", bColor: "textColor1", tOpacity: 0.6, value: $email)
@@ -69,7 +69,7 @@ struct LogInView: View {
                         .fontWeight(.bold)
                         .frame(height: 58)
                         .frame(minWidth: 0, maxWidth: .infinity)
-                        .foregroundColor(Color("Color2"))
+                        .foregroundColor(Color("textColor3"))
                         .background(Color("Color1"))
                 })
                 
@@ -87,8 +87,8 @@ struct LogInView: View {
                             
                         }
                     }
-                }.padding()
-            }
+                }
+            }.padding()
         }.navigationBarHidden(true)
     }
 }
