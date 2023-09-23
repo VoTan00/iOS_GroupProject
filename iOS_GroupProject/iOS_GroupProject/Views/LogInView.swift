@@ -78,42 +78,6 @@ struct LogInView: View {
                 
                 // MARK: SIGN UP BUTTON
                 HStack{
-                    Text("New?")
-                    NavigationLink(destination: SignUpView()) {
-                        Text("Create An Account").font(.system(size: 20, weight: .semibold))
-                        
-                        Text("Welcome \nBack")
-                            .foregroundColor(Color("textColor3"))
-                            .font(.system(size: 35))
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.leading)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 20)
-                    }
-                    VStack(alignment: .leading) {
-                        Text("Sign In To Continue").font(.system(size: 32, weight: .medium))
-                            .padding(40)
-                            .foregroundColor(Color("textColor4"))
-                    }
-                    // MARK: INPUT FIELDS
-                    UserTextField(placeHolder: "Email", imageName: "envelope", bColor: "textColor1", tOpacity: 0.6, value: $email)
-                    
-                    UserTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor1", tOpacity: 0.6, value: $password)
-                    
-                    // MARK: LOGIN BUTTON
-                    NavigationLink(destination: MainView(), isActive: $loginSuccess){
-                        Button(action: {
-                            login()
-                        }, label: {
-                            Text("Log In").font(.title)
-                                .fontWeight(.bold)
-                                .frame(height: 58)
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                                .foregroundColor(Color("textColor3"))
-                                .background(Color("Color1"))
-                        })
-                    }.disabled(email.isEmpty || password.isEmpty)
-                    
                     // MARK: SIGN UP BUTTON
                     HStack{
                         Text("New?")
