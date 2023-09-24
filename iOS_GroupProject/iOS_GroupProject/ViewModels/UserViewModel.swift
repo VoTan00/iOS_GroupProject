@@ -1,9 +1,14 @@
-//
-//  UserViewModel.swift
-//  iOS_GroupProject
-//
-//  Created by Thu Nguyen  on 20/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Group 27
+  Created  date: 04/09/2023
+  Last modified: 24/09/2023
+  Acknowledgement: none
+*/
+
 
 import Foundation
 import Firebase
@@ -19,6 +24,7 @@ class UserViewModel: ObservableObject {
     @Published var isLogedIn = false
     @Published var isSignedUp = false
     @Published var im = UIImage ()
+    @Published var isDark = false
     
     private var db = Firestore.firestore()
     

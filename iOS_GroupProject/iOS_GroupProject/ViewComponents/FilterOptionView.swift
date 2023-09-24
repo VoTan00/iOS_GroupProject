@@ -1,9 +1,14 @@
-//
-//  FilterOptionView.swift
-//  Food Review
-//
-//  Created by Thang Do Quang on 15/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Group 27
+  Created  date: 04/09/2023
+  Last modified: 24/09/2023
+  Acknowledgement: none
+*/
+
 
 import SwiftUI
 
@@ -17,40 +22,6 @@ struct FilterOptionView: View {
                 .ignoresSafeArea()
             
             VStack(alignment: .leading) {
-//                Text("Categories")
-//                    .font(.title)
-//                    .fontWeight(.bold)
-//
-//                HStack (alignment: .top) {
-//                    Spacer()
-//
-//                    Button(action: {selectedButton.toggle()}) {
-//                        Text("Break fast")
-//                            .font(.title3)
-//                            .fontWeight(.semibold)
-//                            .padding()
-//                            .padding(.horizontal, 6)
-//                            .foregroundColor(selectedButton ? Color.white : Color("Color1"))
-//                            .background(selectedButton ? Color("Color1") : Color.white)
-//                            .cornerRadius(10.0)
-//                    }
-//
-//                    Spacer()
-//
-//                    Button(action: {selectedButton.toggle()}) {
-//                        Text("Diner")
-//                            .font(.title3)
-//                            .fontWeight(.semibold)
-//                            .padding()
-//                            .padding(.horizontal, 6)
-//                            .foregroundColor(selectedButton ? Color.white : Color("Color1"))
-//                            .background(selectedButton ? Color("Color1") : Color.white)
-//                            .cornerRadius(10.0)
-//                    }
-//
-//                    Spacer()
-//                }
-//                .padding(.vertical)
                 
                 Text("Sort By")
                     .font(.title)

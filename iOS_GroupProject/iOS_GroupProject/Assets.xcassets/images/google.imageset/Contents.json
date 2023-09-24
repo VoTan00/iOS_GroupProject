@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "1298745_google_brand_branding_logo_network_icon.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "1298745_google_brand_branding_logo_network_icon@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "1298745_google_brand_branding_logo_network_icon@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

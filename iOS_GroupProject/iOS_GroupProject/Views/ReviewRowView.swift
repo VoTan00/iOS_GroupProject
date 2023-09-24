@@ -1,9 +1,14 @@
-//
-//  ReviewRowView.swift
-//  iOS_GroupProject
-//
-//  Created by Bùi Thiên on 22/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Group 27
+  Created  date: 04/09/2023
+  Last modified: 24/09/2023
+  Acknowledgement: none
+*/
+
 
 import SwiftUI
 
@@ -19,22 +24,6 @@ struct ReviewRowView: View {
                 .resizable()
                 .frame(width: 50, height: 50)
                 .cornerRadius(100)
-//            VStack{
-//                if let image = self.image {
-//
-//                } else {
-//                    Image("Logo")
-//                        .resizable()
-//                        .frame(width: 50, height: 50)
-//                        .cornerRadius(100)
-//                }
-//
-//            }.overlay(RoundedRectangle(cornerRadius: 64)
-//                .stroke(Color.black, lineWidth: 3))
-//            Image(uiImage: userViewModel.retrieveImage(userId: review.reviewAuthor!))
-//                .resizable()
-//                .frame(width: 50, height: 50)
-//                .cornerRadius(100)
             
             VStack(alignment: .leading, spacing: 8) {
                 HStack{
@@ -49,7 +38,6 @@ struct ReviewRowView: View {
                     .font(.body)
                     .lineLimit(nil) // Show full review content
             }
-//            .frame(width: 250)
             .padding()
             .background(Color.gray.opacity(0.2))
             .cornerRadius(10)

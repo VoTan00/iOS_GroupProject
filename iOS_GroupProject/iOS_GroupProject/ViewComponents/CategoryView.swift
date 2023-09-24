@@ -1,9 +1,14 @@
-//
-//  CategoryView.swift
-//  Food Review
-//
-//  Created by Thang Do Quang on 15/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Group 27
+  Created  date: 04/09/2023
+  Last modified: 24/09/2023
+  Acknowledgement: none
+*/
+
 
 import SwiftUI
 
@@ -16,8 +21,8 @@ struct CategoryView: View {
             Text(text)
                 .font(.system(size: 18))
                 .fontWeight(.medium)
-                .foregroundColor(isActive ? Color("Color1") : Color.black.opacity(0.5))
-            if (isActive) { Color("Color1")
+                .foregroundColor(isActive ? Color("textColor1") : Color.black.opacity(0.5))
+            if (isActive) { Color("textColor1")
                 .frame(width: 20, height: 2)
                 .clipShape(Capsule())
             }

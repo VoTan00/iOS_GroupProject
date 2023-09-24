@@ -1,9 +1,13 @@
-//
-//  HomeView.swift
-//  iOS_GroupProject
-//
-//  Created by Thang Do Quang on 19/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Group 27
+  Created  date: 04/09/2023
+  Last modified: 24/09/2023
+  Acknowledgement: none
+*/
 
 import SwiftUI
 
@@ -28,9 +32,9 @@ struct HomeView: View {
                 ScrollView (showsIndicators: false) {
                     VStack (alignment: .leading) {
                         // MARK: APP NAME
-                        Text("Shop")
+                        Text("Food")
                             .font(.largeTitle)
-                            .foregroundColor(Color("Color1"))
+                            .foregroundColor(Color("textColor1"))
                         + Text("Spark")
                             .font(.largeTitle)
                             .bold()

@@ -1,19 +1,22 @@
-//
-//  iOS_GroupProjectApp.swift
-//  iOS_GroupProject
-//
-//  Created by Thu Nguyen  on 08/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Group 27
+  Created  date: 04/09/2023
+  Last modified: 24/09/2023
+  Acknowledgement: none
+*/
+
 
 import SwiftUI
 import Firebase
 
 @main
 struct iOS_GroupProjectApp: App {
-//    @StateObject var userViewModel = UserViewModel()
     @EnvironmentObject var reviewViewModal: ReviewViewModel
-    @EnvironmentObject var userViewModel: UserViewModel
-    @StateObject var preferenceViewModel = PreferenceViewModel()
+    @StateObject var userViewModel = UserViewModel()
     
     init() {
         FirebaseApp.configure();
@@ -21,10 +24,8 @@ struct iOS_GroupProjectApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(UserViewModel())
+                .environmentObject(userViewModel)
                 .environmentObject(ReviewViewModel())
-                .environmentObject(preferenceViewModel)
-                .preferredColorScheme(preferenceViewModel.colorScheme)
         }
     }
 }
