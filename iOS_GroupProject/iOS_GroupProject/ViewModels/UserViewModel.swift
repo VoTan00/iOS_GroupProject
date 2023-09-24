@@ -17,6 +17,7 @@ class UserViewModel: ObservableObject {
     @Published var isUnlocked = false
     @Published var msg = "Locked"
     @Published var isLogedIn = false
+    @Published var isSignedUp = false
     @Published var im = UIImage ()
     
     private var db = Firestore.firestore()
@@ -75,7 +76,7 @@ class UserViewModel: ObservableObject {
     // MARK: add user
     func addUserToFirestore(user: User) {
         let userRef = db.collection("users").document(user.id)
-        userRef.setData(["email": user.email, "username": user.username , "profileImageUrl": user.profileImageUrl , "bio": user.bio, "favList": [] ])
+        userRef.setData(["email": user.email, "username": "", "profileImageUrl": "", "bio": "","favList": []])
     }
     
     // MARK: sign up
@@ -84,12 +85,10 @@ class UserViewModel: ObservableObject {
             if error != nil {
                 print(error?.localizedDescription ?? "")
             } else if let user = authResult?.user {
-                let newUser = User(id: user.uid, email: email)
-                print("New user created")
+                let newUser = User(id: user.uid, email: email, profileImageUrl: "", username: "", bio: "", favList: [])
                 self.addUserToFirestore(user: newUser)
-                print("new user added")
                 self.currentUser = newUser
-                print("current user set")
+                self.isSignedUp = true
             }
         }
     }
@@ -100,6 +99,7 @@ class UserViewModel: ObservableObject {
             if error != nil {
                 print(error?.localizedDescription ?? "")
             } else if let user = result?.user {
+//                print(user.uid)
                 self.fetchUser(uid: user.uid)
                 self.isLogedIn = true
             }
@@ -113,7 +113,7 @@ class UserViewModel: ObservableObject {
             
             if let document = document, document.exists {
                 if let data = document.data() {
-                    let user = User(id: uid, email: data["email"] as! String, profileImageUrl: data["profileImageUrl"] as? String, username: data["name"] as? String, favList: data["favList"] as? [String])
+                    let user = User(id: uid, email: data["email"] as! String, profileImageUrl: data["profileImageUrl"] as? String, username: data["username"] as? String, bio: data["bio"] as! String, favList: data["favList"] as? [String])
                     self.currentUser = user
                     //                    self.bioAuthentication()
                 }
@@ -153,214 +153,110 @@ class UserViewModel: ObservableObject {
     }
     
     // MARK: update current user
-    
-    func updateProfile(name: String, email: String, bio: String) {
-        
+    func updateProfile(name: String, email: String, bio: String, img: UIImage) {
         // Check if currentUser is nil, and if so, create a default user with the specified ID
-        
         let currentUser = currentUser ?? User(id: "i70k5v1IZoUpqEz41YfiaNtfrk32",  email: "", username: "", bio: "")
-        
-        
-        
-        // Allow the user to update username and profile pic
-        
-        let userRef = db.collection("users").document(currentUser.id)
-        
-        
-        
-        userRef.updateData(["username": name, "email": email, "bio": bio]) { error in
-            
+        // create storage reference
+        let storageRef = Storage.storage().reference()
+        // turn image into data
+        let imageData = img.jpegData(compressionQuality: 0.8)
+        // specify the file path and name
+        let path = "profile/\(UUID().uuidString).jpg"
+        let fileRef = storageRef.child(path)
+//        currentUser.p= path
+
+        // upload data
+        fileRef.putData(imageData!, metadata: nil) {metadata, error in
             if let error = error {
-                
-                // Handle the error, e.g., show an error message
-                
-                print("Error updating profile: \(error.localizedDescription)")
-                
-            } else {
-                
-                // Profile updated successfully
-                
-                print("Profile updated successfully")
-                
+                print("Failed to push image: \(error)")
+                return
             }
-            
         }
-        
+        // Allow the user to update username and profile pic
+        let userRef = db.collection("users").document(currentUser.id)
+        userRef.updateData(["username": name, "email": email, "bio": bio, "profileImageUrl": path]) { error in
+            if let error = error {
+                // Handle the error, e.g., show an error message
+                print("Error updating profile: \(error.localizedDescription)")
+            } else {
+                // Profile updated successfully
+                print("Profile updated successfully")
+            }
+        }
     }
     
     // MARK: UPLOAD IMAGE FUNC
-    
-    func uploadImage(image: UIImage?,  completion: @escaping (Bool) -> Void) {
-        
-        guard let image = image else {
-            
-            completion(false)
-            
-            return
-            
-        }
-        
-        
-        
-        // Create storage reference
-        
-        let storageRef = Storage.storage().reference()
-        
-        
-        
-        // Turn image into data
-        
-        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
-            
-            return
-            
-        }
-        
-        
-        
-        // Specify the file path and name
-        
-        let path = "profile/\(UUID().uuidString).jpg"
-        
-        let fileRef = storageRef.child(path)
-        
-        
-        
-        // Upload data
-        
-        fileRef.putData(imageData, metadata: nil) { metadata, error in
-            
-            if error == nil && metadata != nil {
-                
-                // Image uploaded successfully
-                
-                let db = Firestore.firestore()
-                
-                let currentUserID = self.currentUser?.id ?? "i70k5v1IZoUpqEz41YfiaNtfrk32"
-                
-                
-                
-                // Update the profileImageUrl field without affecting other fields
-                
-                let userRef = db.collection("users").document(currentUserID)
-                
-                userRef.updateData(["profileImageUrl": path]) { error in
-                    
-                    if error == nil {
-                        
-                        DispatchQueue.main.async {
-                            
-                            // Add uploaded images to the list of images for display if needed
-                            
-                        }
-                        
-                    } else {
-                        
-                        // Handle the error, e.g., show an error message
-                        
-                        print("Error updating profile image URL in Firestore: \(error!.localizedDescription)")
-                        
-                    }
-                    
-                }
-                
-            } else {
-                
-                // Handle the error, e.g., show an error message
-                
-                print("Error uploading image to Storage: \(error!.localizedDescription)")
-                
-            }
-            
-        }
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+//    func uploadImage(image: UIImage?,  completion: @escaping (Bool) -> Void) {
+//        guard let image = image else {
+//            completion(false)
+//            return
+//        }
+//        // Create storage reference
+//        let storageRef = Storage.storage().reference()
+//        // Turn image into data
+//        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+//            return
+//        }
+//        // Specify the file path and name
+//        let path = "profile/\(UUID().uuidString).jpg"
+//        let fileRef = storageRef.child(path)
+//        // Upload data
+//        fileRef.putData(imageData, metadata: nil) { metadata, error in
+//            if error == nil && metadata != nil {
+//                // Image uploaded successfully
+//                let db = Firestore.firestore()
+//                let currentUserID = self.currentUser?.id ?? "i70k5v1IZoUpqEz41YfiaNtfrk32"
+//                // Update the profileImageUrl field without affecting other fields
+//                let userRef = db.collection("users").document(currentUserID)
+//                userRef.updateData(["profileImageUrl": path]) { error in
+//                    if error == nil {
+//                        DispatchQueue.main.async {
+//                            // Add uploaded images to the list of images for display if needed
+//                        }
+//                    } else {
+//                        // Handle the error, e.g., show an error message
+//                        print("Error updating profile image URL in Firestore: \(error!.localizedDescription)")
+//                    }
+//                }
+//            } else {
+//                // Handle the error, e.g., show an error message
+//                print("Error uploading image to Storage: \(error!.localizedDescription)")
+//            }
+//        }
+//    }
+
     // MARK: RETRIEVE IMAGE FUNC for a user
-    
     func retrieveImage(userId: String) {
-        
         db.collection("users").getDocuments { snapshot, error in
-            
-            
-            
             if error == nil && snapshot != nil {
-                
-                
-                
                 var path = String ()
-                
-                
-                
                 for doc in snapshot!.documents {
-                    
                     // extract the file path
-                    
                     if doc["profileImageUrl"] != nil {
-                        
                         if doc.documentID == userId {
-                            
                             path = doc["profileImageUrl"] as! String
-                            
                         }
-                        
                     }
-                    
-                    
-                    
                 }
-                
-                
-                
                 // fetch data from storage
-                
                 let storageRef = Storage.storage().reference()
-                
-                
-                
-                let  fileRef = storageRef.child(path)
-                
-                
-                
+                let fileRef = storageRef.child(path)
                 fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-                    
-                    
-                    
                     if error == nil && data != nil {
-                        
-                        
-                        
                         if let image = UIImage(data: data!) {
-                            
                             DispatchQueue.main.async {
-                                
                                 self.im = image
-                                
                             }
-                            
                         }
-                        
                     }
-                    
                 }
-                
-                
-                
             }
-            
         }
     }
     
+    func logout() {
+        self.currentUser = nil
+        self.isLogedIn = false
+        self.isUnlocked = false
+    }
 }

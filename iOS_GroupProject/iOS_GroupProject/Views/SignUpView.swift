@@ -71,15 +71,19 @@ struct SignUpView: View {
                             }
                             
                             // MARK: SIGN UP BUTTON
-                            NavigationLink(destination: MainView(), isActive: $signUpSuccess){
+//                            NavigationLink(destination: MainView(), isActive: $signUpSuccess){
                                 Button(action: {
-                                    signUp()
+                                    userViewModel.signUp(email: email, password: password)
                                 }, label: {
                                     UserButton(title: "SIGN UP", bgColor: "Color1", textColor: "textColor3")
                                 })
                                 .padding(.horizontal, 20)
+                                .disabled(email.isEmpty || password.isEmpty || cpassword != password)
                                 
-                            }.disabled(email.isEmpty || password.isEmpty || cpassword != password)
+//                            }.disabled(email.isEmpty || password.isEmpty || cpassword != password)
+                            NavigationLink(destination: LogInView(), isActive: $userViewModel.isSignedUp) {
+                                EmptyView()
+                            }
                         }
                     }
                     

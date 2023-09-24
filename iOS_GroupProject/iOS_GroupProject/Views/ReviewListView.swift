@@ -41,7 +41,7 @@ struct ReviewListView: View {
                             .font(.system(.headline, design: .rounded))
                             .frame(minWidth: 0, maxWidth: .infinity)
                     }
-                    .tint(Color.orange)
+                    .tint(Color("Color1"))
                     .buttonStyle(.borderedProminent)
                     .buttonBorderShape(.roundedRectangle(radius: 25))
                     .controlSize(.large)

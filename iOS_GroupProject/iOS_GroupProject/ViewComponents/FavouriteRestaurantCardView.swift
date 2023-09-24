@@ -11,7 +11,9 @@ struct FavouriteRestaurantCardView: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var reviewViewModal: ReviewViewModel
     @StateObject var restaurantViewModel = RestaurantViewModel()
+    @State private var isShowingAlert = false
     var restaurant: Restaurant
+    
     var body: some View {
         HStack(spacing: 20){
             Image(uiImage: restaurantViewModel.im)
@@ -33,11 +35,16 @@ struct FavouriteRestaurantCardView: View {
             Spacer()
             
             Button {
-                userViewModel.updateFavList(resId: restaurant.id)
-                userViewModel.fetchUser(uid: userViewModel.currentUser!.id)
+                isShowingAlert = true
             } label: {
                 Image(systemName: "trash")
                     .foregroundColor(.red)
+            }
+            .confirmationDialog("Are you sure?", isPresented: $isShowingAlert, titleVisibility: .visible) {
+                Button("Delete", role: .destructive) {
+                    userViewModel.updateFavList(resId: restaurant.id)
+                    userViewModel.fetchUser(uid: userViewModel.currentUser!.id)
+                }
             }
         }
         .padding(.horizontal)

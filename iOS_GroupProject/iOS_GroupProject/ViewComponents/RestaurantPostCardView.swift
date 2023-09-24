@@ -13,6 +13,7 @@ struct RestaurantPostCardView: View {
     @EnvironmentObject var userViewModel: UserViewModel
     var restaurant: Restaurant
     @State private var isShowingAlert = false
+    @State private var isShowingUpdateRestaurantSheet = false
     
     var body: some View {
         HStack(spacing: 20){
@@ -34,8 +35,8 @@ struct RestaurantPostCardView: View {
             .padding()
             
             Spacer()
-            NavigationLink {
-                ResUpdateSheet(restaurant: restaurant)
+            Button {
+                isShowingUpdateRestaurantSheet = true
             } label: {
                 Image(systemName: "pencil")
                     .foregroundColor(.blue)
@@ -62,6 +63,10 @@ struct RestaurantPostCardView: View {
         .padding()
         .onAppear{
             restaurantViewModel.retrieveImage(resId: restaurant.id)
+        }
+        .sheet(isPresented: $isShowingUpdateRestaurantSheet) {
+            // You'll need to pass any required data to ReviewListView here
+            ResUpdateSheet(isFormPresented: $isShowingUpdateRestaurantSheet, restaurant: restaurant)
         }
     }
 }

@@ -11,13 +11,30 @@ struct ReviewRowView: View {
     var review: Review
     @EnvironmentObject var reviewViewModal: ReviewViewModel
     @EnvironmentObject var userViewModel: UserViewModel
+    @State var image: UIImage?
 
     var body: some View {
         HStack(alignment: .center){
-            Image("KFC")
+            Image(uiImage: userViewModel.im)
                 .resizable()
                 .frame(width: 50, height: 50)
                 .cornerRadius(100)
+//            VStack{
+//                if let image = self.image {
+//
+//                } else {
+//                    Image("Logo")
+//                        .resizable()
+//                        .frame(width: 50, height: 50)
+//                        .cornerRadius(100)
+//                }
+//
+//            }.overlay(RoundedRectangle(cornerRadius: 64)
+//                .stroke(Color.black, lineWidth: 3))
+//            Image(uiImage: userViewModel.retrieveImage(userId: review.reviewAuthor!))
+//                .resizable()
+//                .frame(width: 50, height: 50)
+//                .cornerRadius(100)
             
             VStack(alignment: .leading, spacing: 8) {
                 Text("Rating: \(review.rating!)")
@@ -43,6 +60,9 @@ struct ReviewRowView: View {
             }
             
             Spacer()
+        }
+        .onAppear{
+            userViewModel.retrieveImage(userId: review.reviewAuthor ?? "JkJacUS1vkV5sQbagw5jQhvfNhD3")
         }
         .padding()
     }

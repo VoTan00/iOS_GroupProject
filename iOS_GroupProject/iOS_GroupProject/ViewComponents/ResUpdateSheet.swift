@@ -11,6 +11,7 @@ struct ResUpdateSheet: View {
     @StateObject var restaurantViewModel = RestaurantViewModel()
     @EnvironmentObject var reviewViewModal: ReviewViewModel
     @EnvironmentObject var userViewModel: UserViewModel
+    @Binding var isFormPresented: Bool
     
     // Properties to store restaurant details
     var restaurant: Restaurant
@@ -29,30 +30,34 @@ struct ResUpdateSheet: View {
                 Section {
                     VStack{
                         // MARK: CHOOSE IMAGE BUTTON
-                        Button {
-                            showImagePicker.toggle()
-                        } label: {
-                            
-                            VStack{
-                                if let image = self.image {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 64, height: 64)
-                                        .cornerRadius(32)
-                                } else {
-                                    Image(uiImage: restaurantViewModel.im)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 64, height: 64)
-                                        .cornerRadius(32)
-                                }
+                        HStack {
+                            Spacer()
+                            Button {
+                                showImagePicker.toggle()
+                            } label: {
                                 
-                            }.overlay(RoundedRectangle(cornerRadius: 64)
-                                .stroke(Color.black, lineWidth: 3))
-                            
-                            
+                                VStack{
+                                    if let image = self.image {
+                                        Image(uiImage: image)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 64, height: 64)
+                                            .cornerRadius(32)
+                                    } else {
+                                        Image(uiImage: restaurantViewModel.im)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 64, height: 64)
+                                            .cornerRadius(32)
+                                    }
+                                    
+                                }.overlay(RoundedRectangle(cornerRadius: 64)
+                                    .stroke(Color.black, lineWidth: 3))
+                            }
+                            .shadow(color:Color("Color-black-transparent"), radius: 7)
+                            Spacer()
                         }
+                        
                         
                     }.fullScreenCover(isPresented: $showImagePicker, onDismiss: nil){
                         ImagePicker(image: $image)
@@ -90,33 +95,42 @@ struct ResUpdateSheet: View {
                 }
                  
                 Section {
-                    Button(action: {
-                        // Perform some action with the entered restaurant details
-                        // For example, add the restaurant to your data source
-                        // restaurantViewModel.addRestaurant(name: name, address: address, hours: hours, phone: phone, description: description, category: category, date: Date(), author: author)
-                         
-                         
-                        restaurantViewModel.updateRestaurant(restaurantID: restaurant.id, name: name, address: address, hours: hours, phone: phone, img: "test", description: description, category: category, date: Calendar.current.startOfDay(for: Date()), author: "tester")
-//                        // Clear the input fields
-//                        name = ""
-//                        address = ""
-//                        hours = ""
-//                        phone = ""
-//                        description = ""
-//                        category = ""
-                    }) {
-                        Text("Update")
+                    HStack{
+                        Spacer()
+                        Button(action: {
+                            // Perform some action with the entered restaurant details
+                            // For example, add the restaurant to your data source
+                            // restaurantViewModel.addRestaurant(name: name, address: address, hours: hours, phone: phone, description: description, category: category, date: Date(), author: author)
+                             
+                             
+                            restaurantViewModel.updateRestaurant(restaurantID: restaurant.id, name: name, address: address, hours: hours, phone: phone, img: "test", description: description, category: category, date: Calendar.current.startOfDay(for: Date()), author: "tester")
+    //                        // Clear the input fields
+    //                        name = ""
+    //                        address = ""
+    //                        hours = ""
+    //                        phone = ""
+    //                        description = ""
+    //                        category = ""
+                            isFormPresented.toggle()
+                        }) {
+                            Text("Update")
+                        }
+                        Spacer()
                     }
+                    
                 }
             }
             .navigationTitle("Update Restaurant")
+            .navigationBarItems(trailing: Button("Cancel") {
+                isFormPresented.toggle()
+            })
         }.navigationBarHidden(true)
     }
 }
 
 struct ResUpdateSheet_Previews: PreviewProvider {
     static var previews: some View {
-        ResUpdateSheet(restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", img: "KFC", description: "example", category: "Chinese", date: NSDate() as Date, author: "new", rating: 3.5))
+        ResUpdateSheet(isFormPresented: .constant(true), restaurant: Restaurant(id: "0", name: "KFC", address: "110 Thống Nhất, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam",hours: "8AM - 10PM",phone:"000000", img: "KFC", description: "example", category: "Chinese", date: NSDate() as Date, author: "new", rating: 3.5))
             .environmentObject(UserViewModel())
             .environmentObject(ReviewViewModel())
     }

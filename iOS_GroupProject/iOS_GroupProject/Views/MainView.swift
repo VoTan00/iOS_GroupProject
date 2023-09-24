@@ -45,7 +45,7 @@ struct MainView: View {
                     .tag(Tab.Post)
                 
                 // MARK: PROFILEVIEW
-               ProfileView()
+                ProfileView(user: userViewModel.currentUser ?? User(id: "JkJacUS1vkV5sQbagw5jQhvfNhD3", email: "Thang2@gmail.com", profileImageUrl: "profile/0C0FE48D-51EE-43B5-8119-170F458CFCB1.jpg", username: "zet", bio: "Love Sleeping"))
                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                    .background()
                    .tag(Tab.Account)

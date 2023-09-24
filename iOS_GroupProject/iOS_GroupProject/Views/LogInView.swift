@@ -65,12 +65,7 @@ struct LogInView: View {
                 Button(action: {
                     userViewModel.login(email: email, password: password)
                 }, label: {
-                    Text("Log In").font(.title)
-                        .fontWeight(.bold)
-                        .frame(height: 58)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .foregroundColor(Color("textColor3"))
-                        .background(Color("Color1"))
+                    UserButton(title: "LOG IN", bgColor: "Color1", textColor: "textColor3")
                 })
                 
                 NavigationLink(destination: MainView(), isActive: $userViewModel.isLogedIn) {

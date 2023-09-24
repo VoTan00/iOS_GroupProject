@@ -20,22 +20,28 @@ struct PostsView: View {
                 ZStack {
                     Color("Color2").ignoresSafeArea(.all, edges: .all)
                     
-                    ScrollView{
-                        if restaurantViewModel.restaurants.count > 0 {
-                            ForEach(restaurantViewModel.restaurants, id: \.id) {res in
-                                NavigationLink{
-                                    RestaurantDetailView(restaurant: res)
-                                } label:
-                                {
-                                    RestaurantPostCardView(restaurant: res)
+                    VStack{
+                        ScrollView{
+                            if restaurantViewModel.restaurants.count > 0 {
+                                ForEach(restaurantViewModel.restaurants, id: \.id) {res in
+                                    NavigationLink{
+                                        RestaurantDetailView(restaurant: res)
+                                    } label:
+                                    {
+                                        RestaurantPostCardView(restaurant: res)
+                                    }
+                                    .buttonStyle(.plain)
                                 }
-                                .buttonStyle(.plain)
+                            } else {
+                                Text("Your have not created any post!")
                             }
-                        } else {
-                            Text("Your have not created any post!")
                         }
+                        .navigationTitle(Text("Restaurants Posts"))
+                        
+                        AddRestaurantButton()
+                            .padding()
                     }
-                    .navigationTitle(Text("Restaurants Posts"))
+                    
                 }
             }.navigationBarHidden(true)
             

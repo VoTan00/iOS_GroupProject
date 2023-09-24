@@ -32,11 +32,10 @@ struct AddRestaurantButton: View {
                 isShowingAddRestaurantSheet.toggle()
             }) {
                 Text("Add Restaurant")
-                    .font(.headline)
-                    .foregroundColor(.white)
                     .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
+                    .background(Color("Color4"))
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
             }
             .sheet(isPresented: $isShowingAddRestaurantSheet) {
                 NavigationView {        
@@ -44,29 +43,31 @@ struct AddRestaurantButton: View {
                         Section {
                             VStack{
                                 // MARK: CHOOSE IMAGE BUTTON
-                                Button {
-                                    showImagePicker.toggle()
-                                } label: {
-                                    
-                                    VStack{
-                                        if let image = self.image {
-                                            Image(uiImage: image)
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 64, height: 64)
-                                                .cornerRadius(32)
-                                        } else {
-                                            Image(systemName: "house")
-                                                .font(.system(size: 64))
-                                                .padding()
-                                        }
+                                HStack{
+                                    Spacer()
+                                    Button {
+                                        showImagePicker.toggle()
+                                    } label: {
                                         
-                                    }.overlay(RoundedRectangle(cornerRadius: 64)
-                                        .stroke(Color.black, lineWidth: 3))
-                                    
-                                    
+                                        VStack{
+                                            if let image = self.image {
+                                                Image(uiImage: image)
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 64, height: 64)
+                                                    .cornerRadius(32)
+                                            } else {
+                                                Image(systemName: "house")
+                                                    .font(.system(size: 64))
+                                                    .padding()
+                                            }
+                                            
+                                        }.overlay(RoundedRectangle(cornerRadius: 64)
+                                            .stroke(Color.black, lineWidth: 3))
+                                    }
+                                    .shadow(color:Color("Color-black-transparent"), radius: 7)
+                                    Spacer()
                                 }
-                                
                             }.fullScreenCover(isPresented: $showImagePicker, onDismiss: nil){
                                 ImagePicker(image: $image)
                             }
@@ -111,6 +112,7 @@ struct AddRestaurantButton: View {
                 }.navigationBarHidden(true)
             }
         }
+        .shadow(color:Color("Color-black-transparent"), radius: 7)
     }
 }
   
