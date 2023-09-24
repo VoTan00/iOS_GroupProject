@@ -37,8 +37,14 @@ struct ReviewRowView: View {
 //                .cornerRadius(100)
             
             VStack(alignment: .leading, spacing: 8) {
-                Text("Rating: \(review.rating!)")
-                    .font(.headline)
+                HStack{
+                    Text("Rating:")
+                        .font(.headline)
+                    RatingStarsView(rating: .constant(review.rating ?? 0))
+                    Text("\(review.rating!)")
+                        .font(.headline)
+                }
+                
                 Text(review.content ?? "")
                     .font(.body)
                     .lineLimit(nil) // Show full review content
