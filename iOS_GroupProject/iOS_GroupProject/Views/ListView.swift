@@ -12,7 +12,7 @@ struct ListView: View {
     @ObservedObject var restaurantViewModel : RestaurantViewModel
     @State private var gridLayout: [GridItem] = [GridItem(.flexible())]
     @EnvironmentObject var reviewViewModal: ReviewViewModel
-    
+//    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
   
     var body: some View {
         ZStack {
@@ -54,5 +54,6 @@ struct ListView_Previews: PreviewProvider {
         ListView(restaurantViewModel: restaurantViewModel)
             .environmentObject(UserViewModel())
             .environmentObject(ReviewViewModel())
+//            .environmentObject(PreferenceViewModel())
     }
 }

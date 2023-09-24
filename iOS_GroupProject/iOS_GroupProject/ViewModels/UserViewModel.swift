@@ -102,6 +102,7 @@ class UserViewModel: ObservableObject {
 //                print(user.uid)
                 self.fetchUser(uid: user.uid)
                 self.isLogedIn = true
+                self.bioAuthentication()
             }
         }
     }
@@ -115,7 +116,7 @@ class UserViewModel: ObservableObject {
                 if let data = document.data() {
                     let user = User(id: uid, email: data["email"] as! String, profileImageUrl: data["profileImageUrl"] as? String, username: data["username"] as? String, bio: data["bio"] as! String, favList: data["favList"] as? [String])
                     self.currentUser = user
-                    //                    self.bioAuthentication()
+                    
                 }
             } else {
                 print("Document does not exist")

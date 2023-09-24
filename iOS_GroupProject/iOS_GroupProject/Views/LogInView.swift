@@ -11,6 +11,7 @@ import Firebase
 struct LogInView: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var reviewViewModal: ReviewViewModel
+//    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
     
     @State private var email: String = ""
     @State private var password: String = ""
@@ -68,9 +69,14 @@ struct LogInView: View {
                     UserButton(title: "LOG IN", bgColor: "Color1", textColor: "textColor3")
                 })
                 
-                NavigationLink(destination: MainView(), isActive: $userViewModel.isLogedIn) {
-                    EmptyView()
+                if userViewModel.isUnlocked {
+                    NavigationLink(destination: MainView(), isActive: $userViewModel.isLogedIn) {
+                        EmptyView()
+                    }
                 }
+//                else {
+//                    BioUnlock()
+//                }
                 
                 // MARK: SIGN UP BUTTON
                 HStack{
@@ -93,5 +99,6 @@ struct LogInView_Previews: PreviewProvider {
         LogInView()
             .environmentObject(UserViewModel())
             .environmentObject(ReviewViewModel())
+//            .environmentObject(PreferenceViewModel())
     }
 }

@@ -120,41 +120,44 @@ struct ProfileView: View {
                                         .fixedSize(horizontal: false, vertical: true)
                                 }
                             }
-                        }
-                        
-                        // MARK: DARK MODE BUTTON
-                        HStack(alignment: .center) {
-                            Spacer()
-                            
-//                            Button {
-//                                preferenceViewModel.toggleColorScheme()
-//                            } label: {
-//                                Image(systemName: preferenceViewModel.colorScheme == .dark ? "sun.max.fill" : "moon.fill")
-//                                    .font(.system(size: 30))
-//                                    .foregroundColor(preferenceViewModel.colorScheme == .dark ? .yellow : .blue)
-//                            }
-//                            
-//                            Spacer()
-                        }
-                        
-                        HStack(alignment: .center) {
-                            Spacer()
-                            
-                            Button {
-                                userViewModel.logout()
-                            } label: {
-                                Text("LOG OUT")
-                                    .padding()
-                                    .background(Color("Color4"))
-                                    .foregroundColor(.white)
-                                    .clipShape(Capsule())
+                            // MARK: DARK MODE BUTTON
+                            HStack(alignment: .center) {
+                                Spacer()
+                                
+                                Button {
+                                    preferenceViewModel.toggleColorScheme()
+                                } label: {
+                                    Image(systemName: preferenceViewModel.colorScheme == .dark ? "sun.max.fill" : "moon.fill")
+                                        .font(.system(size: 30))
+                                        .foregroundColor(preferenceViewModel.colorScheme == .dark ? .yellow : .blue)
+                                }
+                                
+                                Spacer()
                             }
-                            .shadow(color:Color("Color-black-transparent"), radius: 7)
-    
-                            Spacer()
+                            HStack(alignment: .center) {
+                                Spacer()
+                                
+                                Button {
+                                    userViewModel.logout()
+                                } label: {
+                                    Text("LOG OUT")
+                                        .padding()
+                                        .background(Color("Color4"))
+                                        .foregroundColor(.white)
+                                        .clipShape(Capsule())
+                                }
+                                .shadow(color:Color("Color-black-transparent"), radius: 7)
+
+                                Spacer()
+                            }
                         }
+                        
+                        
+                        
+                        
                     }
-                    .background(Color(red: 242 / 255, green: 242 / 255, blue: 242 / 255))
+                    .background(Color("Color2"))
+                    
                 }
                 .onAppear {
                     // Load values from userViewModel when the view appears

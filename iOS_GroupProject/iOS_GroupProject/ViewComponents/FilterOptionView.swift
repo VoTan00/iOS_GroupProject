@@ -93,46 +93,7 @@ struct FilterOptionView: View {
                     Spacer()
                 }
                 .padding(.vertical)
-                
-                HStack (alignment: .top) {
-                    Spacer()
-                    
-                    Button(action: {
-                        restaurantViewModel.selectedSort = "Least Ratings"
-                        restaurantViewModel.filteredArray = restaurantViewModel.getSortedRestaurants(selectedSort: restaurantViewModel.selectedSort)
-                    }) {
-                        Text("Least Ratings")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .padding()
-                            .padding(.horizontal, 6)
-                            .foregroundColor(restaurantViewModel.selectedSort == "Least Ratings" ? Color.white : Color("Color1"))
-                            .background(restaurantViewModel.selectedSort == "Least Ratings" ? Color("Color5") : Color.white)
-                            .cornerRadius(10.0)
-                    }
-                        
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        restaurantViewModel.selectedSort = "Most Ratings"
-                        restaurantViewModel.filteredArray = restaurantViewModel.getSortedRestaurants(selectedSort: restaurantViewModel.selectedSort)
-                    }) {
-                        Text("Most Ratings")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .padding()
-                            .padding(.horizontal, 6)
-                            .foregroundColor(restaurantViewModel.selectedSort == "Most Ratings" ? Color.white : Color("Color1"))
-                            .background(restaurantViewModel.selectedSort == "Most Ratings" ? Color("Color5") : Color.white)
-                            .cornerRadius(10.0)
-                    }
-                    
-                    Spacer()
-                }
-                .padding(.vertical)
-                
-                Spacer()
+
             }
             .padding()
             

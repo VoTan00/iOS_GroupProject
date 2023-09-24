@@ -11,6 +11,7 @@ import Firebase
 struct SignUpView: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var reviewViewModal: ReviewViewModel
+//    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
     
     @State private var email: String = ""
     @State private var password: String = ""
@@ -125,6 +126,7 @@ struct SignUpView_Previews: PreviewProvider {
         SignUpView()
             .environmentObject(UserViewModel())
             .environmentObject(ReviewViewModel())
+//            .environmentObject(PreferenceViewModel())
     }
 }
 

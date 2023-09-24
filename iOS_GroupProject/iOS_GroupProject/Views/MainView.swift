@@ -14,6 +14,7 @@ struct MainView: View {
     @StateObject var restaurantViewModel = RestaurantViewModel()
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var reviewViewModal: ReviewViewModel
+//    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
     
     init(){
         UITabBar.appearance().isHidden = true
@@ -21,7 +22,7 @@ struct MainView: View {
     
     @Namespace var animation
     var body: some View {
-//        if userViewModel.isUnlocked {
+        
             TabView(selection: $currentTab) {
                 // MARK: HOMEVIEW
                 HomeView(restaurantViewModel : restaurantViewModel)
@@ -65,9 +66,7 @@ struct MainView: View {
             ).ignoresSafeArea(.all, edges: .bottom)
                 .accentColor(Color("Color4"))
 //        }
-//        else {
-//            BioUnlock()
-//        }
+        
     }
         
     
@@ -114,6 +113,7 @@ struct MainView_Previews: PreviewProvider {
         MainView()
             .environmentObject(UserViewModel())
             .environmentObject(ReviewViewModel())
+//            .environmentObject(PreferenceViewModel())
     }
 }
 

@@ -162,9 +162,9 @@ class RestaurantViewModel: ObservableObject {
     }
     
     
-    func updateRestaurant(restaurantID: String, name: String, address: String, hours: String, phone: String, img: String, description: String, category: String, date: Date, author: String) {
+    func updateRestaurant(restaurantID: String, name: String, address: String, hours: String, phone: String, img: UIImage, description: String, category: String, date: Date, author: String) {
         do {
-            let restaurantData: [String: Any] = [
+            var restaurantData: [String: Any] = [
                 "name": name,
                 "address": address,
                 "hours": hours,
@@ -175,7 +175,25 @@ class RestaurantViewModel: ObservableObject {
                 "date": date,
                 "author": author
             ]
+            // create storage reference
+            let storageRef = Storage.storage().reference()
             
+            // turn image into data
+            let imageData = img.jpegData(compressionQuality: 0.8)
+            
+            // specify the file path and name
+            let path = "images/\(UUID().uuidString).jpg"
+            let fileRef = storageRef.child(path)
+            
+            restaurantData["img"] = path
+
+            // upload data
+            fileRef.putData(imageData!, metadata: nil) {metadata, error in
+                if let error = error {
+                    print("Failed to push image: \(error)")
+                    return
+                }
+            }
             db.collection("restaurants").document(restaurantID).setData(restaurantData, merge: true) { error in
                 if let error = error {
                     print("Error updating restaurant in Firestore: \(error)")

@@ -13,6 +13,7 @@ struct PostsView: View {
     @State private var gridLayout: [GridItem] = [GridItem(.flexible())]
     @EnvironmentObject var reviewViewModal: ReviewViewModel
     @EnvironmentObject var userViewModel: UserViewModel
+//    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
     
     var body: some View {
         ZStack {
@@ -65,10 +66,12 @@ struct PostsView_Previews: PreviewProvider {
                 .preferredColorScheme(.dark)
                 .environmentObject(UserViewModel())
                 .environmentObject(ReviewViewModel())
+//                .environmentObject(PreferenceViewModel())
             PostsView(restaurantViewModel: restaurantViewModel)
                 .preferredColorScheme(.light)
                 .environmentObject(UserViewModel())
                 .environmentObject(ReviewViewModel())
+//                .environmentObject(PreferenceViewModel())
         }
     }
 }

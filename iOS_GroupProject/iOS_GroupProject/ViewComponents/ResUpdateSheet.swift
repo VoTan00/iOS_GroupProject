@@ -103,7 +103,7 @@ struct ResUpdateSheet: View {
                             // restaurantViewModel.addRestaurant(name: name, address: address, hours: hours, phone: phone, description: description, category: category, date: Date(), author: author)
                              
                              
-                            restaurantViewModel.updateRestaurant(restaurantID: restaurant.id, name: name, address: address, hours: hours, phone: phone, img: "test", description: description, category: category, date: Calendar.current.startOfDay(for: Date()), author: "tester")
+                            restaurantViewModel.updateRestaurant(restaurantID: restaurant.id, name: name, address: address, hours: hours, phone: phone, img: image ?? UIImage(imageLiteralResourceName: "KFC"), description: description, category: category, date: Calendar.current.startOfDay(for: Date()), author: "tester")
     //                        // Clear the input fields
     //                        name = ""
     //                        address = ""
