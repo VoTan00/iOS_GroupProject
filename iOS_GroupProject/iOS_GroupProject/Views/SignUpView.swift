@@ -16,25 +16,12 @@ import Firebase
 struct SignUpView: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var reviewViewModal: ReviewViewModel
-//    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
     
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var username: String = ""
     @State private var cpassword: String = ""
-    
-    @State var isLinkActive = false
-    @State var signUpSuccess: Bool = false
-    
-    // MARK: SIGN UP FUNC
-    func signUp()  {
-        print("Signup button triggered")
-        userViewModel.signUp(email: email, password: password)
-        print("uvm called")
-        signUpSuccess = true
-        print("success true")
-    }
-    
+        
     var body: some View {
         NavigationView {
             ZStack (alignment: .topLeading){
@@ -77,7 +64,6 @@ struct SignUpView: View {
                             }
                             
                             // MARK: SIGN UP BUTTON
-//                            NavigationLink(destination: MainView(), isActive: $signUpSuccess){
                                 Button(action: {
                                     userViewModel.signUp(email: email, password: password)
                                 }, label: {
@@ -86,7 +72,6 @@ struct SignUpView: View {
                                 .padding(.horizontal, 20)
                                 .disabled(email.isEmpty || password.isEmpty || cpassword != password)
                                 
-//                            }.disabled(email.isEmpty || password.isEmpty || cpassword != password)
                             NavigationLink(destination: LogInView(), isActive: $userViewModel.isSignedUp) {
                                 EmptyView()
                             }
@@ -101,16 +86,16 @@ struct SignUpView: View {
                             .fontWeight(.bold)
                             .foregroundColor(Color("textColor1"))
                             .font(.system(size: 18))
-                        NavigationLink(destination: LogInView(), isActive: $isLinkActive){
-                            Button(action: {
-                                self.isLinkActive = true
-                            }, label: {
-                                Text("LOG IN")
-                                    .font(.system(size:18))
-                                    .foregroundColor(Color("textColor4"))
-                                    .fontWeight(.bold)
-                            })
+                        
+                        NavigationLink {
+                            LogInView()
+                        } label: {
+                            Text("LOG IN")
+                                .font(.system(size:18))
+                                .foregroundColor(Color("textColor4"))
+                                .fontWeight(.bold)
                         }
+
                     }
                     .frame(height: 63)
                     .frame(minWidth: 0, maxWidth: .infinity)
@@ -131,7 +116,6 @@ struct SignUpView_Previews: PreviewProvider {
         SignUpView()
             .environmentObject(UserViewModel())
             .environmentObject(ReviewViewModel())
-//            .environmentObject(PreferenceViewModel())
     }
 }
 

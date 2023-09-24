@@ -19,7 +19,6 @@ struct SplashScreenView: View {
     @State var isFinished = false
     @EnvironmentObject var reviewViewModal: ReviewViewModel
     @EnvironmentObject var userViewModel: UserViewModel
-//    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
     
     var body: some View {
         HStack {
@@ -115,6 +114,5 @@ struct SplashScreenView_Previews: PreviewProvider {
         ContentView()
             .environmentObject(UserViewModel())
             .environmentObject(ReviewViewModel())
-//            .environmentObject(PreferenceViewModel())
     }
 }

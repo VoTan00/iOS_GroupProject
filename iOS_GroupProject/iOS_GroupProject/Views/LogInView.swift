@@ -16,24 +16,10 @@ import Firebase
 struct LogInView: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var reviewViewModal: ReviewViewModel
-//    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
     
     @State private var email: String = ""
     @State private var password: String = ""
-    
-    @State private var error: String = ""
-    @State private var showingAlert = false
-    @State private var alertTitle: String = "Oh No 😭"
-    
-    @State var isLinkActive = false
-    @State var loginSuccess = false
-    
-    //     MARK: LOG IN FUNC
-    func login()  {
-        userViewModel.login(email: email, password: password)
-        loginSuccess = true
-    }
-    
+        
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
@@ -79,9 +65,6 @@ struct LogInView: View {
                         EmptyView()
                     }
                 }
-//                else {
-//                    BioUnlock()
-//                }
                 
                 // MARK: SIGN UP BUTTON
                 HStack{
@@ -104,6 +87,5 @@ struct LogInView_Previews: PreviewProvider {
         LogInView()
             .environmentObject(UserViewModel())
             .environmentObject(ReviewViewModel())
-//            .environmentObject(PreferenceViewModel())
     }
 }

@@ -31,11 +31,6 @@ struct RestaurantPostCardView: View {
                 Text(restaurant.name!)
                     .bold()
                     .foregroundColor(Color("textColor2"))
-//                Text(restaurant.hours!)
-//                    .bold()
-//                Text(restaurant.phone!)
-//                    .bold()
-//                RatingStarsView(rating: .constant(4))
             }
             .padding()
             

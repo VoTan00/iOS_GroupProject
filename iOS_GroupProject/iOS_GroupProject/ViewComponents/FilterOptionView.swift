@@ -83,23 +83,9 @@ struct FilterOptionView: View {
                         .background(Color("Color5"))
                         .cornerRadius(10.0)
                 }
-                
-//                Button {
-//                    restaurantViewModel.filteredArray = restaurantViewModel.getSortedRestaurants(selectedSort: restaurantViewModel.selectedSort)
-//                } label: {
-//                    Text("Apply")
-//                        .font(.title3)
-//                        .fontWeight(.semibold)
-//                        .foregroundColor(Color.white)
-//                        .padding()
-//                        .padding(.horizontal, 8)
-//                        .background(Color("Color1"))
-//                        .cornerRadius(10.0)
-//                }
             }
             .padding()
             .padding(.horizontal)
-//            .background(Color("Primary"))
             .frame(maxHeight: .infinity, alignment: .bottom)
             .edgesIgnoringSafeArea(.bottom)
         }

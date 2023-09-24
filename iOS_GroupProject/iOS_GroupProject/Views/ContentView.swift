@@ -15,7 +15,6 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var reviewViewModal: ReviewViewModel
-//    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
         
     var body: some View {
         LogInView()
@@ -23,7 +22,6 @@ struct ContentView: View {
                 SplashScreenView()
             )
             .environment(\.colorScheme, userViewModel.isDark ? .dark : .light)
-//        ProfileView()
     }
 }
 
@@ -32,7 +30,6 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .environmentObject(UserViewModel())
             .environmentObject(ReviewViewModel())
-//            .environmentObject(PreferenceViewModel())
     }
 }
 

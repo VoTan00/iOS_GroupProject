@@ -24,5 +24,4 @@ struct Restaurant: Codable, Identifiable {
     var date: Date = Date()
     var author: String?
     var rating: Double = 0
-//    var reviews: [Review]()
 }

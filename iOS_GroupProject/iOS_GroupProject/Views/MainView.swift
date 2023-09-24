@@ -19,7 +19,6 @@ struct MainView: View {
     @StateObject var restaurantViewModel = RestaurantViewModel()
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var reviewViewModal: ReviewViewModel
-//    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
     
     init(){
         UITabBar.appearance().isHidden = true
@@ -118,7 +117,6 @@ struct MainView_Previews: PreviewProvider {
         MainView()
             .environmentObject(UserViewModel())
             .environmentObject(ReviewViewModel())
-//            .environmentObject(PreferenceViewModel())
     }
 }
 

@@ -1,13 +1,13 @@
 /*
-  RMIT University Vietnam
-  Course: COSC2659 iOS Development
-  Semester: 2023B
-  Assessment: Assignment 3
-  Author: Group 27
-  Created  date: 04/09/2023
-  Last modified: 24/09/2023
-  Acknowledgement: none
-*/
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2023B
+ Assessment: Assignment 3
+ Author: Group 27
+ Created  date: 04/09/2023
+ Last modified: 24/09/2023
+ Acknowledgement: none
+ */
 
 
 import SwiftUI
@@ -18,7 +18,6 @@ struct PostsView: View {
     @State private var gridLayout: [GridItem] = [GridItem(.flexible())]
     @EnvironmentObject var reviewViewModal: ReviewViewModel
     @EnvironmentObject var userViewModel: UserViewModel
-//    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
     
     var body: some View {
         ZStack {
@@ -50,17 +49,9 @@ struct PostsView: View {
                     
                 }
             }.navigationBarHidden(true)
-            
-            // AddRestaurantButton()
         }
     }
 }
-
-//struct PostsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PostsView()
-//    }
-//}
 
 struct PostsView_Previews: PreviewProvider {
     static var previews: some View {
@@ -71,12 +62,10 @@ struct PostsView_Previews: PreviewProvider {
                 .preferredColorScheme(.dark)
                 .environmentObject(UserViewModel())
                 .environmentObject(ReviewViewModel())
-//                .environmentObject(PreferenceViewModel())
             PostsView(restaurantViewModel: restaurantViewModel)
                 .preferredColorScheme(.light)
                 .environmentObject(UserViewModel())
                 .environmentObject(ReviewViewModel())
-//                .environmentObject(PreferenceViewModel())
         }
     }
 }

@@ -105,17 +105,8 @@ struct ResUpdateSheet: View {
                         Button(action: {
                             // Perform some action with the entered restaurant details
                             // For example, add the restaurant to your data source
-                            // restaurantViewModel.addRestaurant(name: name, address: address, hours: hours, phone: phone, description: description, category: category, date: Date(), author: author)
-                             
                              
                             restaurantViewModel.updateRestaurant(restaurantID: restaurant.id, name: name, address: address, hours: hours, phone: phone, img: image ?? UIImage(imageLiteralResourceName: "KFC"), description: description, category: category, date: Calendar.current.startOfDay(for: Date()), author: "tester")
-    //                        // Clear the input fields
-    //                        name = ""
-    //                        address = ""
-    //                        hours = ""
-    //                        phone = ""
-    //                        description = ""
-    //                        category = ""
                             isFormPresented.toggle()
                         }) {
                             Text("Update")

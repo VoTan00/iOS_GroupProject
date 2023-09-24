@@ -59,11 +59,9 @@ class ReviewViewModel: ObservableObject {
             ]
             
             print(reviewData)
-            // create storage reference
-//            let storageRef = Storage.storage().reference()
             
             db.collection("reviews").addDocument(data: reviewData) { error in
-                if let error = error {
+                if error != nil {
                     print("Error adding review to Firestore")
                     return
                 }

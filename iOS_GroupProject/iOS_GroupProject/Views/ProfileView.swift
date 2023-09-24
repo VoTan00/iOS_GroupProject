@@ -17,7 +17,6 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var userViewModel: UserViewModel
-    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
     
     @State private var isEditingName = false
     @State private var isEditingEmail = false
@@ -65,28 +64,6 @@ struct ProfileView: View {
                         .shadow(color:Color("Color-black-transparent"), radius: 7)
                         .disabled(!isEditingName)
                         
-                        // MARK: UPLOAD IMAGE BUTTON
-//                        if image != nil {
-//                            Button{
-//                                userViewModel.uploadImage(image: image)
-//                            } label: {
-//                                Text(isUploadingImage ? "Upload" : "")
-//                            }
-//                        }
-                        
-//                        if image != nil && !isUploadingImage { // Check if an image is selected and not currently uploading
-//                            Button(action: {
-//                                isUploadingImage.toggle()
-//                                userViewModel.uploadImage(image: image) { success in
-//                                    // Handle upload completion here if needed
-//                                    if success {
-//                                        // Image uploaded successfully, you can handle any additional logic here
-//                                    }
-//                                }
-//                            }) {
-//                                Text("Upload")
-//                            }
-//                        }
                         
                         Text(name)
                             .font(.system(size: 20))
@@ -195,7 +172,6 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(user: User(id: "JkJacUS1vkV5sQbagw5jQhvfNhD3", email: "Thang2@gmail.com", profileImageUrl: "profile/0C0FE48D-51EE-43B5-8119-170F458CFCB1.jpg", username: "zet", bio: "Love Sleeping"))
             .environmentObject(UserViewModel())
-            .environmentObject(PreferenceViewModel())
             .environmentObject(ReviewViewModel())
     }
     

@@ -15,7 +15,6 @@ struct HomeView: View {
     @ObservedObject var restaurantViewModel : RestaurantViewModel
     @EnvironmentObject var reviewViewModal: ReviewViewModel
     @EnvironmentObject var userViewModel: UserViewModel
-//    @EnvironmentObject var preferenceViewModel: PreferenceViewModel
     
     @State private var search: String = ""
     @State private var selectedIndex: Int = 1
@@ -96,6 +95,5 @@ struct HomeView_Previews: PreviewProvider {
         HomeView(restaurantViewModel: restaurantViewModel)
             .environmentObject(UserViewModel())
             .environmentObject(ReviewViewModel())
-//            .environmentObject(PreferenceViewModel())
     }
 }

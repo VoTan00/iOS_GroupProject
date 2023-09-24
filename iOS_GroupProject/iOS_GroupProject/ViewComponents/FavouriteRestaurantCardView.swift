@@ -33,7 +33,6 @@ struct FavouriteRestaurantCardView: View {
                     .bold()
                 Text(restaurant.phone!)
                     .bold()
-//                RatingStarsView(rating: .constant(4))
             }
             .padding()
             

@@ -105,7 +105,6 @@ class UserViewModel: ObservableObject {
             if error != nil {
                 print(error?.localizedDescription ?? "")
             } else if let user = result?.user {
-//                print(user.uid)
                 self.fetchUser(uid: user.uid)
                 self.isLogedIn = true
                 self.bioAuthentication()
@@ -191,46 +190,6 @@ class UserViewModel: ObservableObject {
             }
         }
     }
-    
-    // MARK: UPLOAD IMAGE FUNC
-//    func uploadImage(image: UIImage?,  completion: @escaping (Bool) -> Void) {
-//        guard let image = image else {
-//            completion(false)
-//            return
-//        }
-//        // Create storage reference
-//        let storageRef = Storage.storage().reference()
-//        // Turn image into data
-//        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
-//            return
-//        }
-//        // Specify the file path and name
-//        let path = "profile/\(UUID().uuidString).jpg"
-//        let fileRef = storageRef.child(path)
-//        // Upload data
-//        fileRef.putData(imageData, metadata: nil) { metadata, error in
-//            if error == nil && metadata != nil {
-//                // Image uploaded successfully
-//                let db = Firestore.firestore()
-//                let currentUserID = self.currentUser?.id ?? "i70k5v1IZoUpqEz41YfiaNtfrk32"
-//                // Update the profileImageUrl field without affecting other fields
-//                let userRef = db.collection("users").document(currentUserID)
-//                userRef.updateData(["profileImageUrl": path]) { error in
-//                    if error == nil {
-//                        DispatchQueue.main.async {
-//                            // Add uploaded images to the list of images for display if needed
-//                        }
-//                    } else {
-//                        // Handle the error, e.g., show an error message
-//                        print("Error updating profile image URL in Firestore: \(error!.localizedDescription)")
-//                    }
-//                }
-//            } else {
-//                // Handle the error, e.g., show an error message
-//                print("Error uploading image to Storage: \(error!.localizedDescription)")
-//            }
-//        }
-//    }
 
     // MARK: RETRIEVE IMAGE FUNC for a user
     func retrieveImage(userId: String) {

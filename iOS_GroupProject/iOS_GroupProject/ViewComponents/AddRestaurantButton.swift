@@ -91,8 +91,6 @@ struct AddRestaurantButton: View {
                             Button(action: {
                                 // Perform some action with the entered restaurant details
                                 // For example, add the restaurant to your data source
-                                // restaurantViewModel.addRestaurant(name: name, address: address, hours: hours, phone: phone, description: description, category: category, date: Date(), author: author)
-                                 
                                 // Close the sheet
                                 isShowingAddRestaurantSheet.toggle()
                                  
